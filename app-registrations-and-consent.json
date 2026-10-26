@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "In Microsoft Entra ID, which object is the single global definition of an application, living in the tenant where the app was registered?",
+      "options": [
+        "The application object (app registration)",
+        "The service principal (enterprise application)",
+        "The OAuth2 permission grant",
+        "The managed identity"
+      ],
+      "answer": 0,
+      "explanation": "An app has one application object in its home tenant. Each tenant that uses the app gets its own service principal (enterprise application), which the local admins control."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Contoso registers a multitenant app. When the first user from Fabrikam signs in and consent is granted, what is created in Fabrikam's tenant?",
+      "options": [
+        "A copy of the app registration that Fabrikam can edit independently",
+        "A new app registration owned by Fabrikam",
+        "A service principal (enterprise application) that Fabrikam's administrators can manage",
+        "A managed identity for the app"
+      ],
+      "answer": 2,
+      "explanation": "There is only one application object, in Contoso's tenant. A service principal is created in every tenant that uses the app so that tenant's admins can control how it works there."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A line-of-business app will be used only by employees and invited guests of your own tenant. Which supported account type should you choose?",
+      "options": [
+        "Accounts in any organizational directory (multitenant)",
+        "Accounts in any organizational directory and personal Microsoft accounts",
+        "Personal Microsoft accounts only",
+        "Accounts in this organizational directory only (single tenant)"
+      ],
+      "answer": 3,
+      "explanation": "Single tenant allows only users and guests from the tenant where the app is registered, which is the most common choice for line-of-business apps."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A SaaS app must let users from any customer's Microsoft Entra tenant sign in with work or school accounts, but not personal Microsoft accounts. Which supported account type fits?",
+      "options": [
+        "Accounts in this organizational directory only (single tenant)",
+        "Accounts in any organizational directory (multitenant)",
+        "Accounts in any organizational directory and personal Microsoft accounts",
+        "Personal Microsoft accounts only"
+      ],
+      "answer": 1,
+      "explanation": "The multitenant option lets users from any Entra tenant sign in with their native identity. The other multitenant option additionally allows personal Microsoft accounts."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A multitenant app must sign users in at their home tenants without an invitation process. Which endpoint should the app use?",
+      "options": [
+        "The common or organizations endpoint",
+        "The tenant-specific endpoint of the developer's tenant",
+        "The Azure AD B2C endpoint",
+        "The device code endpoint only"
+      ],
+      "answer": 0,
+      "explanation": "Using the common or organizations endpoint lets users sign in natively at their own tenants. A tenant-specific endpoint is used when signing in guests of a particular tenant."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which credential type does Microsoft recommend for production confidential client apps instead of client secrets?",
+      "options": [
+        "Longer-lived client secrets that are rotated every 24 months",
+        "Passwords stored in app settings",
+        "Certificates, or federated identity credentials",
+        "Personal access tokens"
+      ],
+      "answer": 2,
+      "explanation": "Microsoft says client secrets are less secure and shouldn't be used in production. Certificates are recommended, and federated credentials remove the need to manage secrets."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A GitHub Actions workflow must authenticate to Microsoft Entra ID as an app without storing a secret or certificate. What should you configure?",
+      "options": [
+        "A client secret with a long lifetime stored in the repository's encrypted secrets",
+        "A certificate stored in repository variables",
+        "A guest account for the workflow",
+        "A federated identity credential on the app registration"
+      ],
+      "answer": 3,
+      "explanation": "Workload identity federation lets an external identity provider's token, such as GitHub's, be exchanged for an Entra token, so no secret has to be stored."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A developer created a client secret but didn't save its value and can't find it. What should the developer do?",
+      "options": [
+        "View the value again under Certificates & secrets",
+        "Create a new client secret, because the value is shown only once",
+        "Ask a Global Administrator to reveal the value from the app registration's audit log",
+        "Use the secret ID instead of the value"
+      ],
+      "answer": 1,
+      "explanation": "The secret value is displayed only at creation. If it's lost, create a new secret, update the app and delete the old one. The secret ID isn't a usable credential."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "An administrator uploads a public key to an app registration under Certificates & secrets. Which file types are accepted?",
+      "options": [
+        ".cer, .pem or .crt",
+        ".pfx only, because the private key must be uploaded to Microsoft Entra ID",
+        ".p12 or .pfx",
+        ".key or .jks"
+      ],
+      "answer": 0,
+      "explanation": "You upload the public part of the certificate as .cer, .pem or .crt. The private key stays with the application."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "An app defines the roles Admin and Reader. How should you give users those roles?",
+      "options": [
+        "Assign Microsoft Entra directory roles named Admin and Reader through Privileged Identity Management",
+        "Add the users as owners of the app registration",
+        "Define app roles on the app registration, then assign users or groups to them in the enterprise application's Users and groups",
+        "Grant delegated permissions named Admin and Reader"
+      ],
+      "answer": 2,
+      "explanation": "App roles are defined on the application object and assigned to users, groups or applications through the service principal's Users and groups blade. They're unrelated to directory roles."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A background service must read all mailboxes nightly with no signed-in user. Which permission type should it use?",
+      "options": [
+        "Delegated permissions, consented to by each mailbox owner before the nightly job runs",
+        "Application permissions (app roles), granted by an administrator",
+        "Delegated permissions with user consent",
+        "Delegated permissions that a guest user grants"
+      ],
+      "answer": 1,
+      "explanation": "App-only access uses application permissions that act without a user, and they always require admin consent. Delegated permissions need a signed-in user."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which type of permission always requires admin consent?",
+      "options": [
+        "All delegated permissions",
+        "Delegated permissions for custom app scopes",
+        "The delegated User.Read permission",
+        "Application permissions (app roles)"
+      ],
+      "answer": 3,
+      "explanation": "Application permissions have no user context, so only an administrator can consent to them. Many delegated permissions can be consented to by users."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A non-administrator tries to consent to an app that requests the delegated permission User.Read.All and gets an error. What is the likely cause?",
+      "options": [
+        "It is a high-privilege permission that requires admin consent",
+        "Delegated permissions never allow user consent, so every permission needs an administrator",
+        "The app isn't registered as multitenant",
+        "User.Read.All requires a user license"
+      ],
+      "answer": 0,
+      "explanation": "Some high-privilege delegated permissions, such as User.Read.All, can only be consented to by an administrator. Users see a need admin approval prompt."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "What does a consent grant create for delegated permissions versus application permissions?",
+      "options": [
+        "An app role assignment for delegated permissions, and an OAuth2 permission grant for application permissions",
+        "A service principal for both",
+        "An OAuth2 permission grant for delegated permissions, and an app role assignment for application permissions",
+        "A Conditional Access exclusion for both"
+      ],
+      "answer": 2,
+      "explanation": "Delegated consent is recorded as an oAuth2PermissionGrant, while application permissions are recorded as an appRoleAssignment on the client's service principal."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A developer wants to ask for extra permissions only when a feature is used, prompting just for the new permissions. Which consent model applies, and to which permissions?",
+      "options": [
+        "Static consent, for both delegated and application permissions at sign-in time",
+        "Incremental (dynamic) consent, only for delegated permissions",
+        "Incremental consent, for application permissions only",
+        "Admin consent, for delegated permissions only"
+      ],
+      "answer": 1,
+      "explanation": "Incremental or dynamic consent works only for delegated permissions. Application permissions are static and must be configured on the app registration."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A consent request omits the resource in the scope parameter, for example scope=User.Read. Which API does the request target?",
+      "options": [
+        "Azure Service Management",
+        "SharePoint Online",
+        "Azure AD Graph",
+        "Microsoft Graph"
+      ],
+      "answer": 3,
+      "explanation": "When the resource identifier is omitted from the scope, the Microsoft identity platform defaults to Microsoft Graph, so User.Read means https://graph.microsoft.com/User.Read."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which delegated permissions are automatically included in the initial consent to an app because they're needed for basic functionality?",
+      "options": [
+        "Signing in and reading the user's profile (User.Read), plus offline_access",
+        "Mail.Read and Calendars.Read",
+        "Directory.Read.All and Group.Read.All, which every app receives by default",
+        "Files.Read.All and Sites.Read.All"
+      ],
+      "answer": 0,
+      "explanation": "The Sign you in and read your profile permission and offline_access are included automatically. Offline access provides refresh tokens, and the rest must be requested explicitly."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "An app requests a permission that needs admin consent dynamically through the scope parameter, but the permission isn't registered on the app registration. An admin tries to grant tenant-wide consent in the portal. What is the problem?",
+      "options": [
+        "Dynamic consent can't be used with Microsoft Graph, so the portal rejects the grant",
+        "Admin consent is limited to application permissions",
+        "The portal's admin consent covers only permissions registered statically on the app registration",
+        "Tenant-wide consent requires the app to be publisher verified"
+      ],
+      "answer": 2,
+      "explanation": "Admin consent on behalf of the organization uses the statically registered permissions, so the portal doesn't know about permissions requested dynamically. Configure them on the registration first."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which user consent setting does Microsoft recommend?",
+      "options": [
+        "Allow user consent for apps",
+        "Allow user consent for apps from verified publishers, for selected permissions",
+        "Do not allow user consent and offer no admin consent workflow",
+        "Allow user consent for apps from any publisher after the user completes MFA"
+      ],
+      "answer": 1,
+      "explanation": "Microsoft recommends letting users consent only to selected, lower-risk permissions for apps from verified publishers or apps registered in your tenant. Allowing all apps is the legacy behavior."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Users see Need admin approval when they try to use a new app, and tenant administrators want users to be able to ask for approval. What should you enable?",
+      "options": [
+        "A Conditional Access policy requiring terms of use",
+        "Access reviews on the enterprise application",
+        "Entitlement management access packages",
+        "The admin consent workflow"
+      ],
+      "answer": 3,
+      "explanation": "The admin consent workflow lets users request consent for apps they can't consent to themselves, and designated reviewers handle the requests."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "You select Allow user consent for apps from verified publishers, for selected permissions. How do you define which permissions users may consent to?",
+      "options": [
+        "Add delegated permissions to the Low permission classification",
+        "Add the permissions to a Conditional Access policy",
+        "Create an app role assignment for each user",
+        "Mark the permissions as admin-restricted in each app registration"
+      ],
+      "answer": 0,
+      "explanation": "Permission classifications define which delegated permissions are low impact. Users can consent to those for apps from verified publishers or apps registered in the tenant."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Under the verified publishers consent setting, an app from an unverified publisher outside your tenant requests only low-impact classified permissions. What happens?",
+      "options": [
+        "Users can consent, because the permissions are low impact",
+        "The app is blocked automatically for administrators as well",
+        "Users can't consent, and administrator approval is required",
+        "Users can consent after completing MFA"
+      ],
+      "answer": 2,
+      "explanation": "The setting requires both a qualifying app, meaning a verified publisher or an app registered in your tenant, and low-impact permissions. A non-qualifying app needs admin consent."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "You designate a user as a reviewer in the admin consent workflow, but the reviewer can't approve a request. What is the likely reason?",
+      "options": [
+        "Reviewers can only be groups",
+        "Designating a reviewer doesn't elevate privileges, so the reviewer must also hold a role that can grant that consent",
+        "Reviewers need Entra ID P2 licenses and must be assigned the Security Reader role",
+        "Reviewers must be owners of the app"
+      ],
+      "answer": 1,
+      "explanation": "A reviewer can only approve requests that their directory role permits. For example, granting some permissions requires Privileged Role Administrator."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "By default, after how many days does an admin consent request expire?",
+      "options": [
+        "7 days",
+        "14 days",
+        "90 days",
+        "30 days"
+      ],
+      "answer": 3,
+      "explanation": "Consent requests expire after 30 days by default, and reviewers can receive reminders before expiry."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "An app requests Microsoft Graph application permissions. Which role is required to grant tenant-wide admin consent for them?",
+      "options": [
+        "Privileged Role Administrator",
+        "Cloud Application Administrator",
+        "Application Administrator",
+        "Authentication Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Privileged Role Administrator can grant consent for any permission on any API. Cloud Application Administrator and Application Administrator can't grant Microsoft Graph application permissions."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which role is the least-privileged option in the list for granting tenant-wide admin consent to a third-party app that requests only delegated permissions?",
+      "options": [
+        "Application Developer assigned at tenant scope",
+        "Cloud Application Administrator",
+        "Groups Administrator",
+        "Security Reader"
+      ],
+      "answer": 1,
+      "explanation": "Cloud Application Administrator, Application Administrator and Privileged Role Administrator can grant tenant-wide consent for delegated permissions. Application Developer can register apps but not consent."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "What can happen when you grant tenant-wide admin consent to an application that already has tenant-wide grants?",
+      "options": [
+        "Individual user grants are deleted, but tenant-wide grants are kept",
+        "All existing grants are merged without change",
+        "Previously granted tenant-wide permissions may be revoked, while permissions users granted for themselves aren't affected",
+        "The app's publisher verification is reset"
+      ],
+      "answer": 2,
+      "explanation": "Granting tenant-wide consent can replace permissions that were already granted tenant-wide for the app. Permissions that users granted on their own behalf aren't affected."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Finance needs an app, and an administrator grants tenant-wide consent. How do you ensure only the Finance group can use it?",
+      "options": [
+        "Remove the admin consent and ask each user to consent individually",
+        "Set Visible to users to No",
+        "Add the Finance group as owners of the app",
+        "Set Assignment required to Yes and assign only the Finance group"
+      ],
+      "answer": 3,
+      "explanation": "Consent is tenant-wide, but access isn't. With Assignment required enabled, only assigned users and groups can sign in. Hiding the app from My Apps doesn't block sign-in."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Besides users, what does enabling Assignment required also restrict?",
+      "options": [
+        "Service principals that use application permissions to get tokens for the app",
+        "Only guest users who were invited from other tenants",
+        "Access to the app registration blade",
+        "Reading the app's metadata"
+      ],
+      "answer": 0,
+      "explanation": "The setting controls who or what can get a token for the application, so it also restricts apps that call it with application permissions unless they're assigned."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "You want an enterprise app to keep working but not appear in users' My Apps portal and Microsoft 365 launcher. What should you do?",
+      "options": [
+        "Set Assignment required to Yes",
+        "Remove the app's logo",
+        "Set Visible to users to No",
+        "Disable Enabled for users to sign in"
+      ],
+      "answer": 2,
+      "explanation": "Visible to users controls whether the app shows in My Apps and the launcher. It doesn't change who can sign in."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which user can sign in to an application regardless of its Assignment required setting?",
+      "options": [
+        "A User Administrator",
+        "A Global Administrator",
+        "An application owner",
+        "A Cloud Application Administrator"
+      ],
+      "answer": 1,
+      "explanation": "Users with the Global Administrator role can sign in to applications regardless of the assignment required setting."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A suspicious app was granted consent by several users. You want to stop users from signing in to it immediately without deleting it. What should you do?",
+      "options": [
+        "Delete the app registration, which removes the app from every tenant",
+        "Remove the app's owners",
+        "Grant tenant-wide admin consent",
+        "Set Enabled for users to sign in to No on the enterprise application"
+      ],
+      "answer": 3,
+      "explanation": "Disabling sign-in on the enterprise application blocks users while keeping the object for investigation. Existing consent grants remain until revoked."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "After an OAuth consent phishing incident, you set user consent to Do not allow user consent. What happens to the grants users already gave?",
+      "options": [
+        "They are removed automatically within 24 hours after the setting is saved",
+        "They remain in place, and you must revoke the existing grants explicitly",
+        "They are converted into admin consent",
+        "They stop working until users consent again"
+      ],
+      "answer": 1,
+      "explanation": "Changing consent settings affects future consent only. Existing grants stay until revoked, so remove the malicious app's OAuth2 permission grants and disable the app."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Which requirement is necessary for publisher verification?",
+      "options": [
+        "A verified Cloud Partner Program (formerly Microsoft Partner Network) account whose Partner One ID is associated with the app",
+        "An Entra ID P2 license for the developer and a verified custom domain",
+        "A paid Microsoft support plan",
+        "Admin consent granted in every customer tenant"
+      ],
+      "answer": 0,
+      "explanation": "Publisher verification uses a verified Cloud Partner Program account that is the partner global account, plus a matching publisher domain. No license is needed."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A developer registered an app by using a personal Microsoft account and wants the blue verified badge. What is the outcome?",
+      "options": [
+        "Possible after adding a verified domain to the app's publisher settings",
+        "Possible with an Entra ID P1 license",
+        "Not possible; apps registered with a Microsoft account can't be publisher verified",
+        "Possible only for single-tenant apps"
+      ],
+      "answer": 2,
+      "explanation": "The app must be registered by using a Microsoft Entra work or school account to be publisher verified."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "What does publisher verification cost a developer?",
+      "options": [
+        "An annual fee per app registration, billed through Azure",
+        "An Entra ID P2 license",
+        "A Microsoft 365 E5 license",
+        "Nothing; there is no charge and no license is required"
+      ],
+      "answer": 3,
+      "explanation": "Microsoft doesn't charge for publisher verification, and developers who meet the prerequisites can be verified within minutes."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "What does the blue verified publisher badge indicate?",
+      "options": [
+        "The app passed a Microsoft security audit and is certified for compliance",
+        "The publisher's identity was verified through its partner account, not the app's quality or security certification",
+        "The app complies with industry standards such as ISO 27001",
+        "The app requests only low-impact permissions"
+      ],
+      "answer": 1,
+      "explanation": "The badge shows that the publisher verified its identity with Microsoft. It doesn't say anything about quality, certifications or the permissions requested."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "Developers in your tenant can't register applications, and you want to give a few users that ability with minimal privilege. Which role fits?",
+      "options": [
+        "Application Developer",
+        "Application Administrator",
+        "Cloud Application Administrator",
+        "Privileged Role Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Application Developer is the least-privileged role that can create app registrations when the tenant setting restricts registration. The other roles are broader."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A vendor's multitenant app isn't in your tenant yet, and you want to grant tenant-wide consent before any user signs in. What should you do?",
+      "options": [
+        "Create an app registration with the same name and copy its client ID",
+        "Invite the vendor's developers as guests",
+        "Enable the admin consent workflow",
+        "Use the admin consent URL with the app's client ID, signed in as an authorized administrator"
+      ],
+      "answer": 3,
+      "explanation": "If the client ID is known, you can build the tenant-wide admin consent URL. Signing in as an authorized admin provisions the service principal and grants consent."
+    },
+    {
+      "topic": "app-registrations-and-consent",
+      "q": "A user with limited access uses an app that holds the delegated permission Files.Read.All. What can the app read?",
+      "options": [
+        "All files in the organization",
+        "No files unless the signed-in user is also an administrator",
+        "Only the files that the signed-in user can access",
+        "Only files the app created"
+      ],
+      "answer": 2,
+      "explanation": "Delegated permissions let the app act as the signed-in user, so its effective access is limited to what both the app was granted and the user can do."
+    }
+  ]
+}

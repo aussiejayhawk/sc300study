@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A company is deploying hybrid identity for the first time with a single Active Directory forest of 20,000 users. They want the synchronization configuration managed from the Microsoft Entra admin center, no on-premises sync database to maintain, and several active agents for resilience. Which solution should you recommend?",
+      "options": [
+        "Microsoft Entra Connect Sync with a second server in staging mode",
+        "Microsoft Entra Connect Health",
+        "Microsoft Entra Cloud Sync",
+        "Microsoft Entra Domain Services"
+      ],
+      "answer": 2,
+      "explanation": "Cloud Sync stores its configuration in Microsoft Entra ID and uses lightweight provisioning agents, and you can run several agents at once. Connect Sync keeps its engine and SQL database on-premises, and a staging-mode server is only a passive standby."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "After an acquisition, a company has two Active Directory forests with no network trust or connectivity between them. Both forests must synchronize users to one Microsoft Entra tenant, and the team wants to avoid complicated workarounds and forest consolidation. What should you do?",
+      "options": [
+        "Install Cloud Sync provisioning agents in each forest and create a Cloud Sync configuration for each forest",
+        "Install one Entra Connect Sync server and add both forests as connectors",
+        "Install an Entra Connect Sync server in each forest, all synchronizing to the same tenant",
+        "Deploy AD FS in each forest and federate both with the tenant"
+      ],
+      "answer": 0,
+      "explanation": "Cloud Sync natively supports disconnected forests: each forest gets its own agents while configuration is managed centrally in the cloud. Connect Sync is built around one server that must reach every connected forest, so disconnected forests need complicated workarounds."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An enterprise has a single Active Directory domain with about 400,000 objects and several security groups with more than 100,000 members each. Which synchronization solution should you select?",
+      "options": [
+        "Microsoft Entra Cloud Sync, because it scales by adding agents",
+        "Microsoft Entra Cloud Sync with three agents in the domain",
+        "Microsoft Entra Domain Services",
+        "Microsoft Entra Connect Sync"
+      ],
+      "answer": 3,
+      "explanation": "Per Microsoft's current comparison, Cloud Sync supports up to 150,000 objects per domain and groups up to 50,000 members. Connect Sync has no per-domain object limit and handles groups up to 250,000 members, so it fits this scale."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A company uses Microsoft Entra hybrid join and needs computer objects from Active Directory synchronized to Microsoft Entra ID. They want to move to Cloud Sync to reduce on-premises infrastructure. What is the main obstacle?",
+      "options": [
+        "Cloud Sync can synchronize devices only with Microsoft Entra ID P2",
+        "Cloud Sync does not synchronize device objects, so Entra Connect Sync is still required",
+        "Microsoft Entra hybrid join is only supported with AD FS",
+        "Cloud Sync can synchronize devices only from a single forest"
+      ],
+      "answer": 1,
+      "explanation": "Device synchronization for hybrid join is a Connect Sync capability and is not currently supported in Cloud Sync. Licensing is not the issue, because both sync tools are free, and hybrid join does not depend on AD FS."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A company authenticates users with pass-through authentication that was deployed through Microsoft Entra Connect Sync. An architect proposes replacing it with Cloud Sync to remove the sync server. What is the main concern?",
+      "options": [
+        "Cloud Sync cannot synchronize user objects from a single forest",
+        "Cloud Sync requires AD FS for all user sign-ins",
+        "Cloud Sync does not support pass-through authentication, so users would need password hash synchronization instead",
+        "Cloud Sync cannot run alongside password hash synchronization"
+      ],
+      "answer": 2,
+      "explanation": "Pass-through authentication is deployed through Entra Connect, and Cloud Sync supports password hash synchronization rather than PTA. A PTA requirement therefore keeps you on Connect Sync, and Cloud Sync has full parity for password hash sync."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Which built-in Microsoft Entra role is the least-privileged option for an administrator who must configure Microsoft Entra Cloud Sync in the Microsoft Entra admin center?",
+      "options": [
+        "Hybrid Identity Administrator",
+        "Global Administrator",
+        "Directory Synchronization Accounts",
+        "Application Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Microsoft documents Hybrid Identity Administrator (a non-guest account) for configuring Cloud Sync. Global Administrator would work but violates least privilege, and Directory Synchronization Accounts is meant for the sync service account, not for people."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator installs the Cloud Sync provisioning agent and lets the setup wizard create the group managed service account that runs the agent service. Which Active Directory credentials does the wizard require?",
+      "options": [
+        "Hybrid Identity Administrator credentials only",
+        "Domain Administrator or Enterprise Administrator credentials",
+        "Membership in the Account Operators group",
+        "Local Administrator on the agent server only"
+      ],
+      "answer": 1,
+      "explanation": "Creating the gMSA needs Domain Administrator or Enterprise Administrator rights in Active Directory. The Hybrid Identity Administrator role is also needed, but it is a Microsoft Entra role used to register the agent and configure sync, not an AD permission."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator wants to install the Cloud Sync provisioning agent on a Windows Server 2022 Server Core installation to reduce the attack surface of the server. What should the administrator do?",
+      "options": [
+        "Proceed, because Server Core is the recommended installation for Tier 0 hosts",
+        "Proceed, but create the gMSA manually before installing",
+        "Proceed after enabling TLS 1.2 and installing .NET 4.7.1",
+        "Use a domain-joined server with the Desktop Experience, because installing the agent on Server Core is not supported"
+      ],
+      "answer": 3,
+      "explanation": "Microsoft states that installing the cloud provisioning agent on Windows Server Core is not supported. The agent host must be domain-joined, have at least 4 GB of RAM, TLS 1.2 enabled and .NET 4.7.1 or later, and should be hardened as a Tier 0 asset."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "How many active Cloud Sync provisioning agents does Microsoft recommend installing to achieve high availability?",
+      "options": [
+        "One per domain controller",
+        "Two, in an active/passive pair",
+        "Three",
+        "Five"
+      ],
+      "answer": 2,
+      "explanation": "Cloud Sync supports multiple active agents that fail over automatically, and Microsoft recommends three. This differs from Connect Sync, where the single sync server is a point of failure."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "You are preparing to deploy Cloud Sync in a forest whose Active Directory schema is at the Windows Server 2012 R2 level. Which prerequisite is not met?",
+      "options": [
+        "The schema must contain the msDS-ExternalDirectoryObjectId attribute, which is available in the Windows Server 2016 and later schema",
+        "The forest functional level must be Windows Server 2019",
+        "The ms-DS-ConsistencyGuid attribute must be added to the schema manually",
+        "The domain must have an Active Directory Certificate Services enterprise CA"
+      ],
+      "answer": 0,
+      "explanation": "Cloud Sync requires the msDS-ExternalDirectoryObjectId schema attribute, introduced with Windows Server 2016. A schema upgrade is needed, while a Windows Server 2019 forest functional level and an enterprise CA are not prerequisites."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Which Cloud Sync capability lets an administrator test whether one specific Active Directory user will provision correctly without waiting for the next synchronization cycle?",
+      "options": [
+        "Start-ADSyncSyncCycle -PolicyType Initial",
+        "Provision on demand",
+        "Staging mode",
+        "Microsoft Entra Connect Health"
+      ],
+      "answer": 1,
+      "explanation": "Provision on demand in the Cloud Sync configuration lets you enter an object's distinguished name and provision it immediately, and Connect Sync has no equivalent. The cmdlet and staging mode belong to Connect Sync, and Connect Health only monitors."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator mistakenly changes an OU filter in Entra Connect Sync. At the next export, about 2,300 users are queued for deletion and synchronization stops with the status stopped-deletion-threshold-exceeded. The administrator has confirmed the deletions are intended. What should be done?",
+      "options": [
+        "Restart the Microsoft Entra ID Sync service, which resets the threshold counter",
+        "Run Start-ADSyncSyncCycle -PolicyType Initial, which bypasses the threshold",
+        "Edit the outbound synchronization rule to raise the object limit",
+        "Run Disable-ADSyncExportDeletionThreshold, run an export on the Microsoft Entra connector, then re-enable the protection with Enable-ADSyncExportDeletionThreshold"
+      ],
+      "answer": 3,
+      "explanation": "Accidental delete prevention blocks exports with more than 500 deletions by default. When the deletions are intended, temporarily disable the threshold, run the export, then re-enable it with the original value."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A help desk updates a user's department in Active Directory, and the administrator needs the change in Microsoft Entra ID without waiting up to 30 minutes for the scheduler. Which command is the most appropriate?",
+      "options": [
+        "Start-ADSyncSyncCycle -PolicyType Initial",
+        "Set-ADSyncScheduler -SyncCycleEnabled $true",
+        "Start-ADSyncSyncCycle -PolicyType Delta",
+        "Stop-ADSyncSyncCycle"
+      ],
+      "answer": 2,
+      "explanation": "The scheduler runs every 30 minutes by default, and a delta cycle processes only changes. An Initial (full) cycle also works but is heavier than needed, and the other two commands only toggle or stop the scheduler."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator changes the OU filtering in Entra Connect Sync so that a different set of objects is in scope. Which command ensures all objects are re-evaluated against the new configuration?",
+      "options": [
+        "Start-ADSyncSyncCycle -PolicyType Initial",
+        "Start-ADSyncSyncCycle -PolicyType Delta",
+        "Stop-ADSyncSyncCycle",
+        "Set-ADSyncScheduler -CustomizedSyncCycleInterval 00:30:00"
+      ],
+      "answer": 0,
+      "explanation": "A change to filtering or sync rules requires a full synchronization, which is started with the Initial policy type. A delta cycle only processes objects that changed since the last run."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "You build a replacement Entra Connect Sync server with the same configuration. Before it takes over, you want to review the pending exports without changing anything in Microsoft Entra ID or Active Directory. What should you do?",
+      "options": [
+        "Disable the sync scheduler on the new server after installation",
+        "Install the server in staging mode",
+        "Install the server with password hash synchronization turned off",
+        "Install the server with express settings"
+      ],
+      "answer": 1,
+      "explanation": "A server in staging mode imports and synchronizes but suppresses exports, so you can inspect what would be exported. When ready, you disable staging mode on the new server and enable it on the old one."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator disabled the Entra Connect Sync scheduler for maintenance and forgot to re-enable it. Three weeks later, synchronization problems appear. Which requirement was violated, and what is the likely remediation?",
+      "options": [
+        "The scheduler must be re-enabled within 24 hours, or the server is deregistered from the tenant",
+        "Password hash synchronization pauses and must be re-enabled with Set-ADSyncAADPasswordSyncConfiguration",
+        "The ADSync database must be recreated from a backup",
+        "A synchronization cycle must run at least once every 7 days, and a full synchronization may be needed to recover"
+      ],
+      "answer": 3,
+      "explanation": "Microsoft states that if you modify or disable the cycle you must still ensure a sync cycle runs at least once every 7 days, otherwise a full synchronization may be needed. The password hash sync scheduler is a separate process from the object scheduler."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "You are planning an Entra Connect Sync deployment for about 150,000 objects. What should you do about the ADSync database?",
+      "options": [
+        "Keep the default SQL Server Express LocalDB, because its 10 GB limit covers 150,000 objects",
+        "Use Azure SQL Database as the ADSync database",
+        "Use a full SQL Server instance, because the default LocalDB supports roughly 100,000 objects",
+        "Install a second Entra Connect server so each handles about 75,000 objects"
+      ],
+      "answer": 2,
+      "explanation": "The default SQL Server Express LocalDB has a 10 GB limit that supports about 100,000 objects. Connect Sync does not support Azure SQL Database or Azure SQL Managed Instance, and a second active Connect server is not a scaling option."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Which Active Directory account is required to complete an Entra Connect Sync installation that uses express settings?",
+      "options": [
+        "A Domain Administrator account in the root domain only",
+        "A Schema Administrator account",
+        "A member of the Account Operators group",
+        "An Enterprise Administrator account"
+      ],
+      "answer": 3,
+      "explanation": "Express settings (and upgrades from DirSync) need an Enterprise Administrator account so the installer can create the AD DS connector account. With custom settings you can supply a pre-created connector account instead."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "How often does the password hash synchronization process of Entra Connect Sync run, and can the frequency be changed?",
+      "options": [
+        "Every 2 minutes, and the frequency cannot be changed",
+        "Every 30 minutes, matching the sync scheduler, and it can be changed with Set-ADSyncScheduler",
+        "Every 60 minutes, and it can be changed in the Synchronization Service Manager",
+        "Only when a user changes a password, with no polling"
+      ],
+      "answer": 0,
+      "explanation": "Password hash sync is separate from the 30-minute object sync scheduler. The agent requests hashes from a domain controller every 2 minutes, and this interval is fixed."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Why can the password hash stored in Microsoft Entra ID not be reused in a pass-the-hash attack against on-premises Active Directory?",
+      "options": [
+        "The MD4 hash is sent to Entra ID but encrypted with a tenant-specific certificate",
+        "Entra ID stores a salted SHA256-based hash derived from the original MD4 hash, and the MD4 hash itself is never sent",
+        "Hashes expire in Entra ID after 24 hours",
+        "Only users with reversible encryption enabled are synchronized"
+      ],
+      "answer": 1,
+      "explanation": "The sync agent runs the MD4 hash plus a per-user salt through PBKDF2 with HMAC-SHA256 and sends only that result over TLS. The result cannot be reversed to the value Active Directory accepts."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Password hash synchronization stopped working after an administrator replaced the AD DS connector account with a custom least-privilege account. Which permissions are missing?",
+      "options": [
+        "Replicate Directory Changes and Replicate Directory Changes All",
+        "Reset Password on all user objects",
+        "Replicating Directory Changes In Filtered Set only",
+        "Write permission on the userPrincipalName attribute"
+      ],
+      "answer": 0,
+      "explanation": "The connector account must hold both replication permissions to read password hashes from domain controllers, and they are granted by default during installation. Reset Password is a password writeback permission, not a requirement for password hash sync."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A company uses password hash synchronization. Synced users who only use Microsoft Entra integrated services never have passwords expire in the cloud, even though the tenant policy sets expiration. How can you make Entra ID enforce its password expiration policy for these users?",
+      "options": [
+        "Remove DisablePasswordExpiration from each user's PasswordPolicies attribute using PowerShell",
+        "Convert the domain to federated authentication",
+        "Enable the CloudPasswordPolicyForPasswordSyncedUsersEnabled feature in Entra Connect",
+        "Enable password writeback in Entra Connect"
+      ],
+      "answer": 2,
+      "explanation": "By default Connect sets PasswordPolicies to DisablePasswordExpiration on each password sync, so Entra ID ignores cloud expiration. Manual changes are overwritten at the next password sync, while enabling the cloud password policy feature makes Entra ID apply its native expiration and lockout policies."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Users in Active Directory are stored as inetOrgPerson objects. Entra Connect Sync synchronizes the objects, but their passwords do not synchronize. What is the cause?",
+      "options": [
+        "Password hash synchronization requires each user to have an Exchange mailbox",
+        "Password hash synchronization is supported only for the user object type, not for inetOrgPerson",
+        "inetOrgPerson objects must use pass-through authentication",
+        "Password hashes are synchronized only for accounts with administrative roles"
+      ],
+      "answer": 1,
+      "explanation": "Microsoft documents that password sync supports the AD user object type and does not support iNetOrgPerson. Cloud Sync has the same limitation for password hash sync."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A regulated company requires passwords to be validated against on-premises Active Directory and prohibits storing any password hash in the cloud. They want cloud sign-in with minimal on-premises infrastructure. Which sign-in method fits?",
+      "options": [
+        "Pass-through authentication",
+        "Password hash synchronization",
+        "Seamless single sign-on only",
+        "Microsoft Entra Domain Services"
+      ],
+      "answer": 0,
+      "explanation": "Pass-through authentication validates passwords on-premises through lightweight agents, so no password hash is stored in the cloud. Seamless SSO only adds automatic sign-in on top of PHS or PTA and is not a sign-in method on its own."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An organization runs pass-through authentication with a single agent on the Entra Connect server. Management wants sign-in to remain available if that server fails. What should you do?",
+      "options": [
+        "Install a second authentication agent on the same server",
+        "Enable seamless SSO, which keeps sign-ins working when the agent is down",
+        "Enable password hash synchronization, which automatically takes over when the agent is down",
+        "Install additional standalone authentication agents on other servers"
+      ],
+      "answer": 3,
+      "explanation": "Additional agents on separate servers provide high availability, and only one agent can run per server. PTA does not automatically fail over to password hash sync, and seamless SSO does not replace the agent."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A security team will not open inbound firewall ports or place servers in a perimeter network. Which statement about pass-through authentication agent networking is correct?",
+      "options": [
+        "Agents require inbound port 443 from the internet",
+        "Agents must be deployed in a perimeter network to reach Entra ID",
+        "Agents only make outbound requests, over ports 80 and 443, so no inbound ports or perimeter network are needed",
+        "Agents require a site-to-site VPN to Azure"
+      ],
+      "answer": 2,
+      "explanation": "PTA agents initiate all communication outbound, and port 80 is used for certificate revocation list downloads while 443 carries the service traffic. Inbound rules and a perimeter network are not needed."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A domain uses pass-through authentication, and password hash synchronization is also enabled in Entra Connect as a backup. A network outage prevents every authentication agent from reaching Microsoft Entra ID. What happens to cloud sign-ins?",
+      "options": [
+        "Entra ID automatically authenticates users with the synchronized hashes",
+        "Sign-ins fail, because PTA does not automatically fail over to password hash synchronization",
+        "Sign-ins continue only for devices that use seamless SSO",
+        "Only users who signed in within the last 24 hours can still authenticate"
+      ],
+      "answer": 1,
+      "explanation": "Pass-through authentication does not fail over to PHS on its own, even when hashes are synced. An administrator must change the sign-in method to PHS, which is why multiple agents and a documented recovery plan matter."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A security review finds that the Kerberos decryption key of the AZUREADSSOACC computer account has not changed in 18 months. What should the administrator do?",
+      "options": [
+        "Roll over the key with Update-AzureADSSOForest and repeat it at least every 30 days",
+        "Reset the computer account password in Active Directory Users and Computers",
+        "Delete the AZUREADSSOACC account so Entra Connect recreates it at the next sync cycle",
+        "Run Start-ADSyncSyncCycle -PolicyType Initial"
+      ],
+      "answer": 0,
+      "explanation": "Seamless SSO shares the computer account's Kerberos decryption key with Entra ID, so the key must be rolled over with the documented cmdlet, which Microsoft recommends at least every 30 days. Resetting the password manually or deleting the account breaks the shared key."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "With which sign-in methods can seamless single sign-on be used?",
+      "options": [
+        "AD FS only",
+        "Pass-through authentication only",
+        "Password hash synchronization only",
+        "Password hash synchronization or pass-through authentication, but not AD FS"
+      ],
+      "answer": 3,
+      "explanation": "Seamless SSO is enabled in Entra Connect alongside PHS or PTA. It does not apply to federated domains because AD FS provides its own single sign-on."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator runs Update-AzureADSSOForest to roll over the Kerberos decryption key and the operation fails. The domain administrator account being used is a member of the Protected Users group. What should the administrator do?",
+      "options": [
+        "Run the cmdlet from a domain controller instead",
+        "Disable the AZUREADSSOACC account before running the cmdlet",
+        "Use a domain administrator account that is not a member of Protected Users",
+        "Add the account to Schema Admins"
+      ],
+      "answer": 2,
+      "explanation": "Microsoft notes that the domain administrator credentials used for the rollover must not belong to Protected Users, or the operation fails. The cmdlet can be run from the Entra Connect server and does not require a domain controller."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Seamless SSO is enabled, but domain-joined users still get a password prompt when they browse to Microsoft 365. Which configuration step is most likely missing?",
+      "options": [
+        "Adding https://autologon.microsoftazuread-sso.com to the users' Intranet zone with Group Policy",
+        "Adding the sign-in URL to the Restricted sites zone",
+        "Microsoft Entra joining every device",
+        "Installing pass-through authentication agents on each workstation"
+      ],
+      "answer": 0,
+      "explanation": "Seamless SSO relies on the browser sending a Kerberos ticket, which happens only when the Entra autologon URL is in the Intranet zone. Domain-joined devices do not need to be Entra joined, and PTA agents run on servers, not workstations."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "Which Microsoft Entra ID license level is required to use Microsoft Entra Connect Health?",
+      "options": [
+        "Microsoft Entra ID Free",
+        "Microsoft Entra ID P1 or P2",
+        "Microsoft Entra ID Governance only",
+        "Microsoft 365 Business Basic"
+      ],
+      "answer": 1,
+      "explanation": "Connect Health is a Premium feature, so it needs Entra ID P1 or P2. The sync tools themselves, Connect Sync and Cloud Sync, are free."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "You will use Microsoft Entra Connect Health to monitor one Entra Connect Sync server and two domain controllers. What is the minimum number of Microsoft Entra ID P1 or P2 licenses required?",
+      "options": [
+        "3",
+        "26",
+        "75",
+        "51"
+      ],
+      "answer": 3,
+      "explanation": "The first registered Connect Health agent needs at least one P1 or P2 license, and each additional registered agent requires 25 more. Three agents therefore need 1 + 25 + 25 = 51 licenses."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator wants to use a dynamic membership group containing all Sales users to enable password hash synchronization through staged rollout. What is the outcome?",
+      "options": [
+        "It works, and users who join the group later are enabled automatically",
+        "It works only if the group is synchronized from on-premises Active Directory",
+        "It is not supported, because staged rollout does not support dynamic or nested groups; use a security group with direct members",
+        "It works only for the first 200 members of the group"
+      ],
+      "answer": 2,
+      "explanation": "Staged rollout does not support nested or dynamic membership groups, and Microsoft recommends a cloud-only security group with direct members. Group members are enabled automatically when added to the group."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "How many groups can you add to staged rollout for each feature (password hash sync, pass-through authentication, or seamless SSO)?",
+      "options": [
+        "5",
+        "10",
+        "25",
+        "50"
+      ],
+      "answer": 1,
+      "explanation": "Staged rollout supports up to 10 groups per feature. Plan the rollout in waves using these groups."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A company uses AD FS and wants to test cloud authentication features such as Conditional Access and multifactor authentication with a pilot group before converting its federated domain to managed. What should you do?",
+      "options": [
+        "Enable password hash synchronization and add the pilot group to staged rollout",
+        "Convert the whole domain to managed authentication and roll back if problems occur",
+        "Create a second tenant and federate it differently",
+        "Enable seamless SSO only, which moves pilot users to cloud authentication"
+      ],
+      "answer": 0,
+      "explanation": "Staged rollout moves selected groups to cloud authentication while the rest of the domain stays federated. Microsoft recommends PHS for cloud authentication, and seamless SSO alone does not change where passwords are validated."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A cloud-only user alice@contoso.com was created and licensed manually with no ImmutableId. An on-premises user with the same userPrincipalName is then brought into scope of Entra Connect Sync. What happens?",
+      "options": [
+        "A duplicate cloud user with a numeric suffix is created",
+        "The export fails with an AttributeValueMustBeUnique error",
+        "The cloud user is deleted and recreated, losing its license",
+        "Entra ID soft-matches the objects on UPN or primary SMTP address, converts the cloud user into a synced object and sets the sourceAnchor"
+      ],
+      "answer": 3,
+      "explanation": "When no ImmutableId match exists, Entra ID tries to soft match on userPrincipalName or primary SMTP address. A successful soft match takes over the object and stores the sourceAnchor so later matches are hard matches."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An on-premises user was recreated with a new objectGUID but the same UPN. Entra Connect exports fail with AttributeValueMustBeUnique because the existing synced cloud user has a different ImmutableId. How should you resolve the conflict?",
+      "options": [
+        "Run a full synchronization so Entra ID reconciles the two objects automatically",
+        "Disable soft matching for the tenant",
+        "Rename the on-premises UPN to a unique value",
+        "Set the on-premises user's mS-DS-ConsistencyGuid to match the existing cloud user's ImmutableId so a hard match occurs"
+      ],
+      "answer": 3,
+      "explanation": "The conflict means the incoming sourceAnchor does not match the existing object. Updating mS-DS-ConsistencyGuid to the cloud user's ImmutableId lets Entra ID make the correct hard match, while renaming the UPN would create a different user."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "An administrator sets the ImmutableId on a cloud-managed user who is assigned a privileged Microsoft Entra role, then tries to hard match an on-premises AD account to it with Connect Sync. What happens?",
+      "options": [
+        "The hard match succeeds like for any other user",
+        "Entra ID blocks the hard match as a protection against account takeover",
+        "The hard match succeeds but the role assignment is removed",
+        "The hard match is blocked only when the account has no MFA registered"
+      ],
+      "answer": 1,
+      "explanation": "Entra ID now blocks hard matches to cloud accounts that hold or are eligible for privileged roles, to stop an on-premises attacker taking over a cloud admin. Keep cloud administrators as separate cloud-only accounts rather than syncing them."
+    },
+    {
+      "topic": "hybrid-identity-sync",
+      "q": "A company wants existing mail-enabled groups in Entra ID matched to on-premises groups during the first synchronization. Which statement is correct?",
+      "options": [
+        "Groups can be hard-matched by setting the ImmutableId with PowerShell, as with users",
+        "Groups can only be matched by display name",
+        "Groups can only be soft-matched on proxyAddresses, because hard match by sourceAnchor applies only to user objects",
+        "Existing groups cannot be matched and must be deleted first"
+      ],
+      "answer": 2,
+      "explanation": "You can only set the sourceAnchor or ImmutableId for users, so hard match does not apply to groups. Mail-enabled groups and contacts are soft-matched on proxyAddresses."
+    }
+  ]
+}

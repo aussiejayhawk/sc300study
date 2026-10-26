@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which Microsoft Entra object types can be members of an administrative unit?",
+      "options": [
+        "Users and groups only",
+        "Users, groups, and devices",
+        "Users, groups, devices, and application registrations",
+        "Users and devices only"
+      ],
+      "answer": 1,
+      "explanation": "An administrative unit is a container that can hold only users, groups, or devices. Applications can't be members, and administrative units can't be nested."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which license combination is required to delegate administration by using administrative units?",
+      "options": [
+        "Entra ID P2 for each scoped administrator and Entra ID P1 for each member of the unit",
+        "Entra ID P1 for every member of the administrative unit",
+        "Entra ID Governance for each scoped administrator",
+        "Entra ID P1 for each scoped administrator and Entra ID Free for each member"
+      ],
+      "answer": 3,
+      "explanation": "Each administrator assigned a role over the unit needs Entra ID P1, and each member needs only Free. Creating administrative units is available with Free."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A company has regional support teams. Each team must reset passwords only for users in its own region, while central IT keeps its tenant-wide roles. What should you do?",
+      "options": [
+        "Create an administrative unit per region, add the regional users, and assign Helpdesk Administrator to each team scoped to its unit",
+        "Assign Helpdesk Administrator to each team at tenant scope and restrict them to their own region with a Conditional Access policy that targets the regional users",
+        "Create a security group per region and assign Password Administrator to each group's owners",
+        "Create a custom role per region and assign it at tenant scope"
+      ],
+      "answer": 0,
+      "explanation": "An administrative-unit-scoped role applies only to the unit's members. A scoped Helpdesk Administrator can reset passwords for non-administrators in that unit only."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A User Administrator scoped to an administrative unit that contains the security group Sales-Team cannot reset passwords for the group's members. What should you do?",
+      "options": [
+        "Assign the User Administrator role at tenant scope",
+        "Make Sales-Team a role-assignable group",
+        "Add the member user accounts directly to the administrative unit",
+        "Add Sales-Team to a second administrative unit"
+      ],
+      "answer": 2,
+      "explanation": "Adding a group to an administrative unit brings the group itself into scope, so its name and membership can be managed, but not the users inside it. The users must be added to the unit directly."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A company will populate administrative units by using dynamic membership rules based on user attributes. Which license do the administrative unit members need?",
+      "options": [
+        "Microsoft Entra ID Free is enough for members",
+        "Microsoft Entra ID P1 for each member",
+        "Microsoft Entra ID P2 for each member",
+        "Microsoft Entra ID Governance for each member"
+      ],
+      "answer": 1,
+      "explanation": "Members normally need only Free licenses, but when you use dynamic membership rules for an administrative unit, each member requires Entra ID P1."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which object types can be added to an administrative unit automatically by using dynamic membership rules?",
+      "options": [
+        "Users only",
+        "Users, devices, and groups, when the unit is managed from the Microsoft Entra admin center or Graph",
+        "Groups only",
+        "Users and devices, but not groups"
+      ],
+      "answer": 3,
+      "explanation": "Rule-based membership in administrative units works for users and devices. Groups can't be added dynamically, and dynamic rules can be managed in the Entra admin center and Graph, but not the Microsoft 365 admin center."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A Groups Administrator assigned at the scope of an administrative unit tries to change the tenant's Microsoft 365 group naming policy and expiration policy. What happens?",
+      "options": [
+        "It fails, because the scoped role applies only to the unit's members and not to tenant-wide group settings",
+        "It succeeds, because group policies apply to every group that the administrator can see inside the administrative unit and to the unit's members",
+        "It succeeds only for groups that are members of the unit",
+        "It fails only if the tenant lacks Entra ID P1 licenses"
+      ],
+      "answer": 0,
+      "explanation": "A role assigned at administrative unit scope applies only when managing the unit's members. Tenant-level settings such as expiration and naming policies need a tenant-scoped role."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which statement about administrative units is correct?",
+      "options": [
+        "An administrative unit can contain other administrative units",
+        "A user can belong to only one administrative unit",
+        "Administrative units cannot be nested",
+        "Administrative units can scope Exchange mailbox policies"
+      ],
+      "answer": 2,
+      "explanation": "Administrative units can't be nested, but a resource can be a member of several (up to 30). They scope Entra management of users, groups and devices, not workload settings such as Exchange policies."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Company policy says no tenant-level Helpdesk Administrator may reset passwords or change properties for the CEO's account and devices. Only a small executive support team may manage them, and tenant-level role assignments must stay in place. What should you use?",
+      "options": [
+        "A standard administrative unit that contains the executive accounts",
+        "A Conditional Access policy that blocks Helpdesk Administrators",
+        "A role-assignable group that contains the executive accounts",
+        "A restricted management administrative unit that contains the executive accounts, with a scoped role for the support team"
+      ],
+      "answer": 3,
+      "explanation": "Tenant-scoped roles still apply to members of a standard administrative unit. A restricted management unit blocks modifications by anyone who isn't explicitly scoped to it, without removing existing tenant role assignments."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "When can the restricted management setting be applied to an administrative unit?",
+      "options": [
+        "At any time by a Global Administrator",
+        "Only when the administrative unit is created",
+        "At any time by a Privileged Role Administrator",
+        "Only after all members are removed from the unit"
+      ],
+      "answer": 1,
+      "explanation": "The restricted management setting must be chosen at creation and can't be changed afterward, so you can't convert a standard unit or the reverse."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "An administrator tries to add a Microsoft 365 group that contains the executive team to a restricted management administrative unit. What should the administrator expect?",
+      "options": [
+        "It isn't supported, because only security groups can be added to a restricted management unit",
+        "It works, and from then on only the group's owners can manage both the group and the group's members",
+        "It works, and the group's members are protected automatically",
+        "It works only if the group is role-assignable"
+      ],
+      "answer": 0,
+      "explanation": "Restricted management units accept users, devices and security groups. Microsoft 365, mail-enabled security and distribution groups can be members of standard units only."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A Global Administrator must reset the password of a user in a restricted management administrative unit, but has no role scoped to that unit. What must the administrator do?",
+      "options": [
+        "Reset the password directly, because Global Administrator is exempt from the restriction and every action is recorded in the audit log",
+        "Delete the administrative unit and recreate it",
+        "Assign themselves a role scoped to the restricted unit, which is an auditable action, and then make the change",
+        "Use a Microsoft Graph application permission with admin consent"
+      ],
+      "answer": 2,
+      "explanation": "Global Administrators and Privileged Role Administrators can manage the restricted unit itself, but they can't modify its objects until they assign themselves a role at the unit's scope. The assignment is recorded in the audit logs."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "An automation app uses the Microsoft Graph application permission User.ReadWrite.All to update user attributes. Updates for users in a restricted management administrative unit fail. How should you fix this?",
+      "options": [
+        "Grant admin consent for User.ReadWrite.All again",
+        "Assign a Microsoft Entra role to the app's service principal at the scope of the restricted unit",
+        "Add the app's service principal as a member of the administrative unit",
+        "Assign the app's service principal the Global Administrator role"
+      ],
+      "answer": 1,
+      "explanation": "Applications can't modify objects in a restricted management unit by default, and Graph application permissions don't apply to those objects. The app needs a role assignment at the unit's scope."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A security team wants to run quarterly access reviews on a security group that was added to a restricted management administrative unit. What is the outcome?",
+      "options": [
+        "Supported, with reviewers assigned at the scope of the administrative unit and decisions applied automatically at the end of each review",
+        "Supported, but only for guest members",
+        "Supported, but only with Entra ID P2",
+        "Not supported, because objects in restricted units can't be managed with governance features such as access reviews"
+      ],
+      "answer": 3,
+      "explanation": "Groups and users in a restricted management unit can't be managed with Privileged Identity Management, entitlement management, lifecycle workflows or access reviews. Plan governance before placing objects in one."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which group type can contain devices as members?",
+      "options": [
+        "Microsoft 365 groups",
+        "Distribution groups",
+        "Microsoft Entra security groups",
+        "Dynamic distribution groups"
+      ],
+      "answer": 2,
+      "explanation": "Security groups can contain users or devices. Microsoft 365 groups can contain only users as members."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A project team needs a shared mailbox, a SharePoint site, and a Teams team that all use one membership list. Which group type should you create?",
+      "options": [
+        "Microsoft 365 group",
+        "Security group",
+        "Mail-enabled security group",
+        "Distribution group"
+      ],
+      "answer": 0,
+      "explanation": "Microsoft 365 groups are the membership service for Microsoft 365 workloads such as Teams, SharePoint and Outlook. Security groups are used mainly for controlling access to resources."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which built-in role is the least-privileged choice for an administrator who only needs to create and manage groups?",
+      "options": [
+        "Global Administrator",
+        "Privileged Role Administrator",
+        "Directory Readers",
+        "Groups Administrator"
+      ],
+      "answer": 3,
+      "explanation": "Groups Administrator can manage groups and group settings without broader user administration. Directory Readers is read-only, and the other two are far more privileged than needed."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "An automation account that creates groups holds no Microsoft Entra roles and fails after creating its 250th group. What is the least-privileged way to remove the limit?",
+      "options": [
+        "Assign the Global Administrator role",
+        "Assign the Groups Administrator role",
+        "Assign the Directory Readers role",
+        "Make the account the owner of all existing groups"
+      ],
+      "answer": 1,
+      "explanation": "Non-admin users can create at most 250 groups, a quota shared with other Entra resources. Administrators who can manage groups aren't limited, and Microsoft recommends a less privileged built-in role such as Groups Administrator."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which license is required to use dynamic membership groups?",
+      "options": [
+        "Entra ID Free",
+        "Entra ID P2 for each unique user who is a member of one or more dynamic groups",
+        "Entra ID P1 for each unique user who is a member of a dynamic group",
+        "Entra ID Governance for each group owner"
+      ],
+      "answer": 2,
+      "explanation": "Dynamic membership requires an Entra ID P1 license (or Intune for Education) for each unique user who is a member of one or more dynamic groups."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A tenant has 3,000 users. Of these, 800 unique users are members of at least one dynamic membership group, and no user has been assigned an Entra ID P1 license yet. What is the minimum number of Entra ID P1 licenses the tenant must own?",
+      "options": [
+        "800",
+        "3,000",
+        "1,600",
+        "1"
+      ],
+      "answer": 0,
+      "explanation": "You don't have to assign the licenses to the members, but the tenant must own enough to cover every unique user in dynamic groups. Memberships in multiple dynamic groups don't count twice."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "An administrator wants one dynamic group that automatically contains every Sales user and each user's company laptop. What should the administrator do?",
+      "options": [
+        "Create a dynamic Microsoft 365 group with a single membership rule that references both user attributes and device attributes",
+        "Create a dynamic security group and combine user and device expressions in the rule builder",
+        "Create an assigned group and let Entra ID add the devices automatically",
+        "Create a dynamic user group and a separate dynamic device group, because one rule can't contain both"
+      ],
+      "answer": 3,
+      "explanation": "A dynamic rule can target users or devices, but not both in the same rule. Use separate dynamic groups for each object type."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which statement about dynamic membership groups is correct?",
+      "options": [
+        "Microsoft 365 groups can be dynamic device groups",
+        "A Microsoft 365 group can be dynamic only for users, while a security group can be dynamic for users or devices",
+        "Device-based dynamic groups can be created only with the rule builder",
+        "A security group's rule can mix user and device properties as long as the group has assigned owners and Entra ID P1 licensing"
+      ],
+      "answer": 1,
+      "explanation": "Microsoft 365 groups hold only users. Device-based rules must be written in the text box because the rule builder is available only for user-based groups."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A dynamic security group uses the rule user.jobTitle -eq 'Finance Manager' to grant access to a sensitive app. Users can edit their own job title through an HR self-service tool synced to Entra ID. What should you do first to reduce the risk of unauthorized membership?",
+      "options": [
+        "Convert the group to a Microsoft 365 group and enable the naming policy for stricter control",
+        "Enable the expiration policy on the group",
+        "Audit and restrict who can write the attributes used in the rule, including at the source",
+        "Change the rule to use user.displayName"
+      ],
+      "answer": 2,
+      "explanation": "A dynamic group's security depends on who can modify the attributes its rule references, so restrict self-service writes to those attributes. Role-assignable groups avoid this risk for role assignment by requiring assigned membership."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "An administrator tries to create a dynamic membership group with the option 'Microsoft Entra roles can be assigned to the group' set to Yes. What happens?",
+      "options": [
+        "It isn't allowed; role-assignable groups must use assigned membership",
+        "It works, and role assignments follow dynamic membership changes",
+        "It works only with Entra ID P2",
+        "It works only for the Microsoft 365 group type"
+      ],
+      "answer": 0,
+      "explanation": "Role-assignable groups can't be dynamic, because someone who can change a rule or attribute could otherwise add themselves and gain the role indirectly."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which statement about role-assignable groups is correct?",
+      "options": [
+        "A Privileged Role Administrator can convert any existing security group at any time",
+        "The setting can be turned off later if the group has no role assignments",
+        "They can use dynamic membership when Entra ID P2 is available",
+        "The role-assignable setting must be chosen at creation and can't be changed later"
+      ],
+      "answer": 3,
+      "explanation": "A group must be created as role-assignable from the start, and the setting is permanent. Existing groups can't be converted, and membership must be assigned."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "What is the maximum number of role-assignable groups that a single tenant can have?",
+      "options": [
+        "250",
+        "500",
+        "1,000",
+        "5,000"
+      ],
+      "answer": 1,
+      "explanation": "A tenant can have at most 500 role-assignable groups. Do not confuse this with the 250-group quota for non-admin users."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A Groups Administrator tries to create a security group with 'Microsoft Entra roles can be assigned to the group' set to Yes and is blocked. Which is the minimum role required?",
+      "options": [
+        "User Administrator",
+        "Security Administrator",
+        "Privileged Role Administrator",
+        "Application Administrator"
+      ],
+      "answer": 2,
+      "explanation": "Creating a role-assignable group requires at least the Privileged Role Administrator role (and an Entra ID P1 or P2 license). Groups Administrator can manage normal groups only."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A Helpdesk Administrator's attempt to reset the password of a user who belongs to a role-assignable group is denied. Which is the least-privileged built-in role that could perform the reset?",
+      "options": [
+        "Privileged Authentication Administrator",
+        "Authentication Administrator",
+        "Security Administrator",
+        "User Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Members and owners of role-assignable groups are protected to prevent privilege escalation, so credential changes require at least Privileged Authentication Administrator."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A group-based license is assigned to a security group that contains several other security groups. Only some users receive the license. Why?",
+      "options": [
+        "Licenses are applied only to users who already hold Entra ID P1",
+        "Group-based licensing doesn't support nested groups, so only first-level members are licensed",
+        "Group-based licensing applies only to dynamic groups",
+        "Nested groups must be Microsoft 365 groups to inherit licenses"
+      ],
+      "answer": 1,
+      "explanation": "Group-based licensing is not supported for nested groups. Only users who are direct members of the licensed group receive the license."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Group-based assignment of Microsoft 365 E3 fails for a user who already receives E1 through another licensed group, and the portal reports a conflicting service plans error. What should you do?",
+      "options": [
+        "Purchase additional E3 licenses",
+        "Set a usage location for the user and purchase additional E3 licenses before reprocessing",
+        "Convert the E3 group to a dynamic group",
+        "Remove the conflict, such as the user's membership in the E1 group, and then reprocess the license assignment"
+      ],
+      "answer": 3,
+      "explanation": "A conflicting service plans error means two products can't be assigned to the same user together, which is different from running out of licenses. The administrator resolves the conflict and then selects Reprocess."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "The security group Sales-All contains the security group Sales-West as a member, and Sales-All is assigned to an enterprise application. What access do Sales-West's members get?",
+      "options": [
+        "Access, because nested group membership is evaluated for app role assignments in the same way as direct membership",
+        "Access only if the application uses SAML",
+        "None through that assignment, because app role assignment doesn't extend to nested group members",
+        "Access after the group owner approves each user"
+      ],
+      "answer": 2,
+      "explanation": "Assigning a group to an app is supported, but groups nested inside it don't get access. Nesting is supported for Conditional Access, group claims and some other scenarios, but not for app role assignment or group-based licensing."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which user attribute can't be used as a prefix or suffix in a Microsoft 365 group naming policy?",
+      "options": [
+        "extensionAttribute1",
+        "Department",
+        "Office",
+        "CountryOrRegion"
+      ],
+      "answer": 0,
+      "explanation": "Supported attributes are Department, Company, Office, StateOrProvince, CountryOrRegion and Title. Extension and custom attributes aren't supported, and unsupported attributes are treated as fixed strings."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A group naming policy blocks the word Payroll. A Global Administrator creates a Microsoft 365 group named Payroll Review. What happens?",
+      "options": [
+        "Creation fails with an error that shows the blocked word",
+        "The group is created, because Global Administrators and User Administrators are exempt from the policy",
+        "The group is created with the blocked word removed",
+        "The group is created and flagged for owner review"
+      ],
+      "answer": 1,
+      "explanation": "Global Administrators and User Administrators are exempt from the naming policy across workloads so they can use blocked words and their own naming conventions."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A prefix naming policy is enabled for Microsoft 365 groups. What happens to groups that already exist?",
+      "options": [
+        "All existing groups are renamed automatically within 24 hours of an administrator saving the policy",
+        "Existing groups are permanently exempt",
+        "Existing groups are renamed only when their expiration is renewed",
+        "The policy isn't applied immediately; it is enforced the next time an owner edits the group name, even if nothing changes"
+      ],
+      "answer": 3,
+      "explanation": "The naming policy applies to new groups and to edits. For existing groups it takes effect when an owner edits the name."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which groups can be covered by the Microsoft Entra group expiration policy?",
+      "options": [
+        "Microsoft 365 groups only",
+        "Security groups and Microsoft 365 groups",
+        "Only dynamic membership groups",
+        "Only groups that hold Entra role assignments"
+      ],
+      "answer": 0,
+      "explanation": "Expiration can be set only for Microsoft 365 groups, and a tenant can have only one expiration policy. It can apply to all, selected, or no groups."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A Microsoft 365 group was deleted by the expiration policy. The owner needs it back three weeks later. What can be done?",
+      "options": [
+        "Nothing, because expired groups are permanently deleted at once",
+        "Only Microsoft Support can restore it",
+        "Restore the group, because owners or administrators can restore it within 30 days",
+        "Restore it only after the expiration policy is removed"
+      ],
+      "answer": 2,
+      "explanation": "A group that isn't renewed is deleted, but it can be restored within 30 days by its owners or an administrator. The 30-day window isn't customizable."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "An expiration policy is set to apply to Selected groups, and the company needs it to cover 800 Microsoft 365 groups. What should you do?",
+      "options": [
+        "Create a second expiration policy that targets the remaining 300 groups and keep the first policy as it is",
+        "Apply the policy to All Microsoft 365 groups, because the 500-group limit applies only to the Selected option",
+        "Raise the Selected limit with Graph PowerShell",
+        "Split the groups between two tenants"
+      ],
+      "answer": 1,
+      "explanation": "You can add up to 500 groups when expiration is set to Selected. A tenant supports only one expiration policy, so choose All to remove that cap."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A company wants only members of a security group named Group-Creators to create Microsoft 365 groups. Which licensing consideration applies?",
+      "options": [
+        "No license is needed; it's available in Entra ID Free",
+        "Only Entra ID Governance covers it",
+        "Only Entra ID P2 covers it",
+        "Entra ID P1 or P2 licenses are required for the administrator who configures it and for the allowed creators"
+      ],
+      "answer": 3,
+      "explanation": "Restricting group creation is a Premium feature, and the people configuring it and those allowed to create groups need Entra ID P1 or P2 (or Basic EDU) licenses."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "A web app configured for JWT group claims stops receiving the groups claim for a user who belongs to 250 groups; the token carries an overage indicator instead. Why?",
+      "options": [
+        "JWT tokens include at most 200 groups; beyond that, an overage claim is sent and the app must query Microsoft Graph",
+        "JWT tokens include at most 100 groups; the user must be removed from nested groups and the app must be reconsented",
+        "Group claims work only for users in fewer than 50 groups",
+        "The app registration needs the Group.ReadWrite.All permission"
+      ],
+      "answer": 0,
+      "explanation": "When a user exceeds the group limit for the token type (200 for JWT, 150 for SAML), Entra ID omits the groups claim and sends an overage claim. The app then calls Graph to get the groups."
+    },
+    {
+      "topic": "groups-and-administrative-units",
+      "q": "Which statement about group ownership is correct?",
+      "options": [
+        "A group can own another group if both are security groups",
+        "A group can own another group only if it is role-assignable",
+        "A group can't be added as an owner of another group",
+        "A group's owner must be a Global Administrator"
+      ],
+      "answer": 2,
+      "explanation": "Owners must be users or service principals, so a group can't be an owner. A single group can have up to 100 users as owners."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SC-300 Study Coach</title>
+<style>
+:root{color-scheme:light dark;--bg:#eef2f4;--cd:#fff;--tx:#14272e;--mu:#56696f;--ac:#0f766e;--ok:#15803d;--bad:#b91c1c;--wn:#b45309;--bd:#d3dde0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b1f;--cd:#17262b;--tx:#e4eef0;--mu:#93a9ae;--ac:#2dd4bf;--ok:#4ade80;--bad:#f87171;--wn:#fbbf24;--bd:#2a3d43}}
+:root[data-theme="dark"]{--bg:#0f1b1f;--cd:#17262b;--tx:#e4eef0;--mu:#93a9ae;--ac:#2dd4bf;--ok:#4ade80;--bad:#f87171;--wn:#fbbf24;--bd:#2a3d43}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 "Segoe UI",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font:700 26px/1.2 Georgia,serif;margin:8px 0 4px}h2{font-size:18px;margin:22px 0 8px}h3{font-size:16px;margin:0}
+p{margin:6px 0}.mu{color:var(--mu);font-size:14px}
+nav{display:flex;gap:8px;margin:12px 0}
+button,.btn{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--cd);color:var(--tx);padding:9px 14px;border-radius:8px;text-decoration:none;display:inline-block}
+button:focus-visible,a:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+button.on,button.pri{background:var(--ac);color:var(--bg);border-color:var(--ac);font-weight:600}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:14px;margin:10px 0}
+.big{font:700 44px/1 Georgia,serif;color:var(--ac)}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--ac)}
+.bar.weak i{background:var(--bad)}.bar.mid i{background:var(--wn)}
+.opt{display:block;width:100%;text-align:left;margin:8px 0}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--cd))}
+.opt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,var(--cd))}
+.tag{font-size:13px;color:var(--mu)}.weak-t{color:var(--bad)}.mid-t{color:var(--wn)}.ok-t{color:var(--ok)}
+a{color:var(--ac)}
+.miss{border-left:3px solid var(--bad);padding-left:10px;margin:10px 0;font-size:14px}
+body.drop{outline:3px dashed var(--ac);outline-offset:-6px}
+</style></head>
+<body><main>
+<h1>SC-300 Study Coach</h1>
+<p class="mu">Microsoft Identity and Access Administrator. Questions come from a JSON file you load once. Short check-ins track your mastery, then coaching points you to the Learn modules for your weak spots.</p>
+<nav id="nav"></nav>
+<div id="v"></div>
+<input type="file" id="f" accept=".json,application/json" multiple hidden>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const OLD=["hybrid-identity-sync","groups-and-administrative-units","external-identities","mfa-and-authentication-methods","sspr-and-password-protection","conditional-access","identity-protection","app-registrations-and-consent","managed-identities","entitlement-management","access-reviews","privileged-identity-management"];
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const hash=s=>{let h=5381;for(const c of s)h=((h<<5)+h+c.charCodeAt(0))|0;return(h>>>0).toString(36)};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||"")?esc(u):"#";
+const DAY=864e5,now=()=>Date.now();
+let S;try{S=JSON.parse(localStorage.getItem("sc300"))||{}}catch(e){S={}}
+S.t=S.t||{};S.h=S.h||[];
+const save=()=>{try{localStorage.setItem("sc300",JSON.stringify(S))}catch(e){}};
+let raw=null;try{raw=JSON.parse(localStorage.getItem("sc300bank"))}catch(e){}
+let D=[],W=[],T=[],Q=[],QI={};
+// T: [name, domainIdx, url, tip, id]   Q: [topicIdx, question, options, answerIdx, explanation, qid]
+function build(){D=[];W=[];T=[];Q=[];QI={};if(!raw)return;
+ D=raw.domains.map(d=>d.name);W=raw.domains.map(d=>d.weight||1);
+ const ti={};raw.topics.forEach(t=>{ti[t.id]=T.length;T.push([t.name,D.indexOf(t.domain),t.url,t.tip,t.id])});
+ raw.questions.forEach(q=>{if(q.topic in ti){const id=hash(q.q);QI[id]=Q.length;Q.push([ti[q.topic],q.q,q.options,q.answer,q.explanation,id])}})}
+function norm(o,ex){const errs=[],doms=[],topics=[],qs=[];
+ if(!o||typeof o!=="object")return{errs:["expected a JSON object"],bank:null};
+ (o.domains||[]).forEach(d=>{const n=typeof d==="string"?d:d&&d.name;if(n)doms.push({name:n,weight:d.weight>0?+d.weight:1})});
+ (o.topics||[]).forEach((t,i)=>{if(!t||!t.name){errs.push("topic "+(i+1)+" has no name");return}
+  const dn=typeof t.domain==="number"?(doms[t.domain]||{}).name:t.domain;
+  topics.push({id:t.id||slug(t.name),name:t.name,domain:dn||"General",url:t.url||"",tip:t.tip||""})});
+ const all=topics.concat(ex||[]);
+ (o.questions||[]).forEach((q,i)=>{const hit=q&&(all.find(t=>t.id===q.topic)||all.find(t=>slug(t.name)===slug(q.topic||"")));
+  if(!hit||!q.q||!Array.isArray(q.options)||q.options.length<2||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length){errs.push("question "+(i+1)+" skipped (needs topic, q, options, answer)");return}
+  qs.push({topic:hit.id,q:q.q,options:q.options.map(String),answer:q.answer,explanation:q.explanation||""})});
+ topics.forEach(t=>{if(!doms.some(d=>d.name===t.domain))doms.push({name:t.domain,weight:1})});
+ return{errs,bank:{domains:doms,topics,questions:qs}}}
+function merge(a,b){const dm=new Map(a.domains.map(d=>[d.name,d]));b.domains.forEach(d=>{if(!dm.has(d.name))dm.set(d.name,d)});
+ const tm=new Map(a.topics.map(t=>[t.id,t]));b.topics.forEach(t=>tm.set(t.id,t));
+ const qm=new Map(a.questions.map(q=>[hash(q.q),q]));b.questions.forEach(q=>qm.set(hash(q.q),q));
+ return{domains:[...dm.values()],topics:[...tm.values()],questions:[...qm.values()]}}
+let mode="replace",msg="",view="dash",qz=null;
+async function load(files,m){const errs=[];let b=m==="add"&&raw?raw:{domains:[],topics:[],questions:[]},added=0;
+ for(const f of files){try{const o=JSON.parse(await f.text()),r=norm(o,b.topics);r.errs.forEach(e=>errs.push(f.name+": "+e));
+  if(r.bank&&(r.bank.questions.length||r.bank.topics.length)){b=merge(b,r.bank);added+=r.bank.questions.length}}catch(e){errs.push(f.name+": not valid JSON")}}
+ if(added){raw=b;try{localStorage.setItem("sc300bank",JSON.stringify(raw))}catch(e){errs.push("too large to keep after closing; usable this session only")}build();qz=null}
+ msg=(added?`Read ${added} question(s) from ${files.length} file(s). `:"No questions loaded. ")+(errs.length?errs.slice(0,5).join(" · ")+(errs.length>5?" · +"+(errs.length-5)+" more":""):"");
+ view="dash";render()}
+function pick(m){mode=m;$("#f").click()}
+function clearBank(){if(!confirm("Remove the loaded question bank? Your progress is kept."))return;raw=null;try{localStorage.removeItem("sc300bank")}catch(e){}build();qz=null;msg="";render()}
+build();
+// one-time migration of progress saved by the earlier built-in version (keyed by topic number)
+if(!S.v){Object.keys(S.t).forEach(k=>{if(/^\d+$/.test(k)&&OLD[k]){S.t[OLD[k]]=Object.assign(S.t[k],{miss:[]});delete S.t[k]}});S.v=2;save()}
+const tid=i=>T[i][4],st=i=>S.t[tid(i)];
+const ms=i=>st(i)?st(i).ema:null;
+const cls=m=>m==null?"":m<.6?"weak":m<.8?"mid":"";
+function nav(){$("#nav").innerHTML=[["dash","Dashboard"],["quiz","Check-in"],["coach","Coaching"]].map(([k,n])=>`<button class="${view===k?"on":""}" onclick="go('${k}')">${n}</button>`).join("")}
+function go(v){if(v!=="dash"&&!Q.length){v="dash"}view=v;if(v==="quiz"&&!qz)start();render()}
+function readiness(){let s=0,t=0;D.forEach((_,d)=>{const m=T.map((x,i)=>x[1]===d?ms(i):null).filter(x=>x!=null);if(m.length){s+=W[d]*m.reduce((a,b)=>a+b,0)/m.length;t+=W[d]}});return t?Math.round(100*s/t):null}
+function due(){return T.map((x,i)=>i).filter(i=>!st(i)||now()-st(i).last>3*DAY||st(i).ema<.6)}
+function start(topic,n){let pool=Q.map((q,i)=>i).filter(i=>topic==null||Q[i][0]===topic);if(!pool.length){view="dash";render();return}
+ const w=i=>{const t=st(Q[i][0]);return t?(1-t.ema)+Math.min((now()-t.last)/DAY,10)*.06+.1:1.2};
+ const list=[];n=Math.min(n||10,pool.length);
+ while(list.length<n){const tot=pool.reduce((a,i)=>a+w(i),0);let r=Math.random()*tot;for(const i of pool){r-=w(i);if(r<=0){list.push(i);pool=pool.filter(x=>x!==i);break}}}
+ qz={list,i:0,sc:0,pick:null,topic,ord:list.map(i=>Q[i][2].map((_,k)=>k).sort(()=>Math.random()-.5))};view="quiz";render()}
+function answer(k){if(qz.pick!=null)return;const qi=qz.list[qz.i],q=Q[qi],ok=qz.ord[qz.i][k]===q[3];qz.pick=k;if(ok)qz.sc++;
+ const id=tid(q[0]),t=S.t[id]||(S.t[id]={ema:ok?1:0,n:0,last:0,miss:[]});
+ if(t.n)t.ema=t.ema*.6+.4*(ok?1:0);t.n++;t.last=now();t.miss=t.miss.filter(x=>x!==q[5]);if(!ok)t.miss.push(q[5]);save();render()}
+function next(){qz.i++;qz.pick=null;if(qz.i>=qz.list.length){S.h.push({d:now(),s:qz.sc,n:qz.list.length});S.h=S.h.slice(-30);save();qz.done=true}render()}
+function pct(m){return m==null?"Not assessed":Math.round(m*100)+"%"}
+function bankCard(){return `<div class="card"><div class="row"><div><b>Question bank</b><p class="mu">${Q.length} questions · ${T.length} topics · loaded from your file</p></div><div><button onclick="pick('replace')">Load file</button> <button onclick="pick('add')">Add file</button> <button onclick="clearBank()">Clear</button></div></div>${msg?`<p class="mu">${esc(msg)}</p>`:""}</div>`}
+const FORMAT=`{
+  "domains": [ { "name": "Domain A", "weight": 0.3 } ],
+  "topics": [
+    { "id": "topic-id", "name": "Topic name", "domain": "Domain A",
+      "url": "https://learn.microsoft.com/...", "tip": "Coaching blurb" }
+  ],
+  "questions": [
+    { "topic": "topic-id", "q": "Question text?",
+      "options": ["A", "B", "C", "D"], "answer": 1,
+      "explanation": "Why B is right." }
+  ]
+}`;
+function render(){nav();const v=$("#v");
+if(!Q.length){v.innerHTML=`<div class="card"><h3>Load a question file</h3><p class="mu">This coach reads its questions from a separate JSON file. Pick one, or drop it anywhere on this page. It is remembered in this browser, so you only need to load it once.</p><p><button class="pri" onclick="pick('replace')">Choose question file</button></p>${msg?`<p class="weak-t">${esc(msg)}</p>`:""}<details><summary class="mu">File format</summary><pre style="overflow-x:auto;font-size:13px">${esc(FORMAT)}</pre><p class="mu"><code>answer</code> is the zero-based index of the correct option. Options are shuffled when asked. Questions can reference a topic by id or name. Weights are optional and default to equal.</p></details></div>`;return}
+if(view==="quiz"&&qz){
+ if(qz.done){const p=Math.round(100*qz.sc/qz.list.length);v.innerHTML=`<div class="card"><div class="big">${qz.sc}/${qz.list.length}</div><p>${p>=80?"Strong session.":p>=60?"Solid, with gaps to close.":"This session shows where to focus."} Your coaching plan has been updated.</p><button class="pri" onclick="qz=null;go('coach')">See coaching</button> <button onclick="qz=null;go('dash')">Dashboard</button></div>`;return}
+ const q=Q[qz.list[qz.i]],o=qz.ord[qz.i],cr=qz.pick!=null&&o[qz.pick]===q[3],t=T[q[0]];
+ v.innerHTML=`<div class="card"><div class="row tag"><span>Question ${qz.i+1} of ${qz.list.length}</span><span>${esc(t[0])}</span></div><h3 style="margin-top:10px">${esc(q[1])}</h3>${o.map((r,k)=>`<button class="opt ${qz.pick!=null?(r===q[3]?"ok":k===qz.pick?"no":""):""}" onclick="answer(${k})">${esc(q[2][r])}</button>`).join("")}${qz.pick!=null?`<p><b class="${cr?"ok-t":"weak-t"}">${cr?"Correct.":"Not quite."}</b> ${esc(q[4])}</p><div class="row">${t[2]?`<a class="btn" href="${safeUrl(t[2])}" target="_blank" rel="noopener">Read on Microsoft Learn</a>`:"<span></span>"}<button class="pri" onclick="next()">${qz.i+1>=qz.list.length?"Finish":"Next question"}</button></div>`:""}</div>`;return}
+if(view==="coach"){const seen=T.map((x,i)=>i).filter(i=>st(i)).sort((a,b)=>ms(a)-ms(b)),un=T.map((x,i)=>i).filter(i=>!st(i));
+ let h=`<h2>Your coaching plan</h2>`;
+ if(!seen.length)h+=`<div class="card"><p>Take a check-in first so coaching can target your weak topics.</p><button class="pri" onclick="qz=null;start()">Start check-in</button></div>`;
+ seen.forEach(i=>{const m=ms(i),t=T[i],miss=st(i).miss.filter(id=>id in QI);h+=`<div class="card"><div class="row"><h3>${esc(t[0])}</h3><span class="tag ${m<.6?"weak-t":m<.8?"mid-t":"ok-t"}">${m<.6?"Needs work":m<.8?"Getting there":"Strong"} · ${pct(m)}</span></div><div class="bar ${cls(m)}"><i style="width:${m*100}%"></i></div><p class="mu">${esc(D[t[1]]||"")}</p>${m<.8&&t[3]?`<p>${esc(t[3])}</p>`:""}${miss.map(id=>`<div class="miss"><b>${esc(Q[QI[id]][1])}</b><br>${esc(Q[QI[id]][4])}</div>`).join("")}<div class="row">${t[2]?`<a class="btn" href="${safeUrl(t[2])}" target="_blank" rel="noopener">Microsoft Learn module</a>`:"<span></span>"}<button onclick="qz=null;start(${i},4)">Drill this topic</button></div></div>`});
+ if(un.length)h+=`<h2>Not assessed yet</h2><p class="mu">${un.map(i=>esc(T[i][0])).join(", ")}</p>`;
+ h+=`<p><a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/sc-300" target="_blank" rel="noopener">Official SC-300 study guide</a></p>`;v.innerHTML=h;return}
+const r=readiness(),d=due(),last=S.h[S.h.length-1];
+let h=bankCard()+`<div class="card row"><div><div class="mu">Estimated readiness (weighted by domain)</div><div class="big">${r==null?"–":r+"%"}</div></div><div>${last?`<p class="mu">Last check-in: ${last.s}/${last.n}, ${Math.round((now()-last.d)/DAY)} day(s) ago</p>`:""}<button class="pri" onclick="qz=null;start()">Start 10-question check-in</button> <button onclick="qz=null;start(null,5)">Quick 5</button></div></div>`;
+h+=d.length?`<div class="card"><b>Check-in due.</b> <span class="mu">${d.length} topic(s) are unassessed, below 60% or not reviewed in 3 days. Smart check-ins weight questions toward these.</span></div>`:`<div class="card"><b>You're on track.</b> <span class="mu">Every topic is above 60% and recently reviewed.</span></div>`;
+D.forEach((n,di)=>{h+=`<h2>${esc(n)}</h2>`;T.forEach((t,i)=>{if(t[1]!==di)return;const m=ms(i);h+=`<div class="card" style="padding:10px 14px"><div class="row"><span>${esc(t[0])}</span><span class="tag">${pct(m)}${st(i)?" · "+st(i).n+" answered":""}</span></div><div class="bar ${cls(m)}"><i style="width:${(m||0)*100}%"></i></div></div>`})});
+h+=`<p><button onclick="if(confirm('Reset all progress?')){S={t:{},h:[],v:2};save();render()}">Reset progress</button></p><p class="mu">Progress is stored in this browser only.</p>`;
+v.innerHTML=h}
+$("#f").addEventListener("change",e=>{const fs=[...e.target.files];e.target.value="";if(fs.length)load(fs,mode)});
+addEventListener("dragover",e=>{e.preventDefault();document.body.classList.add("drop")});
+addEventListener("dragleave",e=>{if(!e.relatedTarget)document.body.classList.remove("drop")});
+addEventListener("drop",e=>{e.preventDefault();document.body.classList.remove("drop");const fs=[...(e.dataTransfer&&e.dataTransfer.files||[])];if(fs.length)load(fs,raw?"add":"replace")});
+render();
+</script></body></html>

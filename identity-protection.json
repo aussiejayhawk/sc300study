@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "identity-protection",
+      "q": "Which license is required to use the full set of Microsoft Entra ID Protection capabilities, including risk-based Conditional Access policies and full risk reports?",
+      "options": [
+        "Microsoft Entra ID Free",
+        "Microsoft Entra ID P1",
+        "Microsoft Entra ID P2",
+        "Microsoft Entra ID Governance"
+      ],
+      "answer": 2,
+      "explanation": "ID Protection needs Entra ID P2 (or the Microsoft Entra Suite). Free and P1 tenants get only limited risk data and nonpremium detections."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "An administrator with only Entra ID P1 licenses sees a detection titled Additional risk detected with no further details. What does this mean?",
+      "options": [
+        "A premium detection fired, but its details are visible only with Entra ID P2",
+        "The detection was a false positive that ID Protection dismissed automatically after reviewing it",
+        "An administrator generated the detection manually",
+        "The detection came from Defender for Cloud Apps and needs that license"
+      ],
+      "answer": 0,
+      "explanation": "Premium detections are labeled Additional risk detected for tenants without P2, so you know something risky happened but can't see the detection type or details."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which of these detections is available in tenants that don't have Entra ID P2 (a nonpremium detection)?",
+      "options": [
+        "Atypical travel between two geographically distant locations",
+        "Unfamiliar sign-in properties",
+        "Password spray",
+        "Leaked credentials"
+      ],
+      "answer": 3,
+      "explanation": "Leaked credentials, Anonymous IP address, Microsoft Entra threat intelligence and Admin confirmed user compromised are nonpremium. The others require P2."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Security analysts must view all ID Protection reports and dismiss user risk or confirm compromise, but must not configure policies or reset passwords. Which role is the least-privileged fit?",
+      "options": [
+        "Security Reader",
+        "Security Operator",
+        "Global Reader with read-only directory access",
+        "Security Administrator"
+      ],
+      "answer": 1,
+      "explanation": "Security Operator can view reports and dismiss user risk, confirm safe sign-ins and confirm compromise. Security Reader and Global Reader are read-only, and Security Administrator can also configure policies."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which role is the least-privileged option for creating Conditional Access policies that use user risk or sign-in risk as a condition?",
+      "options": [
+        "Security Operator assigned at tenant scope",
+        "Security Reader",
+        "Conditional Access Administrator",
+        "Global Reader with read-only directory access"
+      ],
+      "answer": 2,
+      "explanation": "Conditional Access Administrators can create policies that factor in user or sign-in risk. The other roles can't create or edit Conditional Access policies."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A Security Administrator is investigating a risky user and tries to reset the user's password from the Risky users report, but can't. Which role provides that ability?",
+      "options": [
+        "User Administrator",
+        "Security Operator assigned at tenant scope",
+        "Reports Reader",
+        "Global Reader with read-only directory access"
+      ],
+      "answer": 0,
+      "explanation": "Security Administrators have full access to ID Protection but can't reset passwords. A User Administrator is needed to reset a user's password."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which statement correctly describes user risk in Microsoft Entra ID Protection?",
+      "options": [
+        "It represents the probability that a specific authentication request wasn't made by the account owner",
+        "It counts the failed sign-ins recorded in the last 24 hours",
+        "It represents how many devices a user has registered",
+        "It represents the probability that an identity or account is compromised"
+      ],
+      "answer": 3,
+      "explanation": "User risk is about the likelihood that the account is compromised and persists until remediated. Sign-in risk is about a single authentication request."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "How long do low-risk detections and low-risk users persist in ID Protection?",
+      "options": [
+        "30 days",
+        "About six months, after which they age out automatically",
+        "Until an administrator dismisses or remediates them, as with medium and high risk",
+        "90 days"
+      ],
+      "answer": 1,
+      "explanation": "Low-level detections and users age out after six months to keep investigations focused. Medium and high risk persist until remediated or dismissed."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "How long can it take for an offline-calculated risk detection to appear in the reports?",
+      "options": [
+        "Up to 48 hours",
+        "5 to 10 minutes",
+        "Up to 7 days",
+        "It is shown immediately"
+      ],
+      "answer": 0,
+      "explanation": "Real-time detections surface in 5 to 10 minutes, while offline detections can take up to 48 hours. Risk levels can change after sign-in because some detections are calculated offline."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A tenant with only Entra ID Free licenses needs a real-time detection of sign-ins from anonymous IP addresses such as Tor. Which detection provides this?",
+      "options": [
+        "Activity from anonymous IP address",
+        "Malicious IP address",
+        "Anonymous IP address",
+        "Verified threat actor IP"
+      ],
+      "answer": 2,
+      "explanation": "Anonymous IP address is calculated in real time and is a nonpremium detection. Activity from anonymous IP address comes from Defender for Cloud Apps, is offline and premium."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A hybrid tenant receives a leaked credentials detection for a synchronized user. What is required for a cloud-based password reset to remediate the on-premises password?",
+      "options": [
+        "Pass-through authentication must be enabled on at least three agents",
+        "AD FS must be deployed",
+        "Seamless SSO must be enabled",
+        "Password hash synchronization must be enabled"
+      ],
+      "answer": 3,
+      "explanation": "A secure password reset in Entra ID remediates leaked credentials for on-premises passwords only if password hash synchronization is enabled."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which statement about the password spray detection is correct?",
+      "options": [
+        "It triggers on every burst of failed sign-ins against a user from a single IP address",
+        "It triggers only when an attacker successfully validates a user's password, not on failed attempts",
+        "It is a nonpremium detection available with Free",
+        "It is calculated only offline"
+      ],
+      "answer": 1,
+      "explanation": "Unsuccessful spray attempts don't generate a detection. When it fires, Microsoft observed a spray attack and a successful credential validation against a user in your tenant."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A company wants to use the Impossible travel detection. In addition to Entra ID P2, which license is required?",
+      "options": [
+        "Microsoft Defender for Cloud Apps, as a standalone license or through Microsoft 365 E5 with EMS E5",
+        "Microsoft Defender for Endpoint Plan 2 on each managed device",
+        "Microsoft Purview Insider Risk Management",
+        "Microsoft Entra ID Governance"
+      ],
+      "answer": 0,
+      "explanation": "Impossible travel is discovered using Defender for Cloud Apps and calculated offline. Atypical travel is a separate real-time detection that needs only P2."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A user account was created yesterday, and a sign-in from an unusual browser and country didn't produce an unfamiliar sign-in properties detection. What is the likely reason?",
+      "options": [
+        "The detection works only for interactive sign-ins and ignores non-interactive ones entirely",
+        "The detection requires Defender for Cloud Apps",
+        "New users are in a learning mode, with a minimum of five days, during which the detection is off",
+        "The detection is offline and takes 30 days to appear"
+      ],
+      "answer": 2,
+      "explanation": "Newly created users are in a learning period that lasts at least five days while ID Protection learns their sign-in patterns. A user can re-enter learning mode after long inactivity."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which detection indicates that the issuer of a SAML token might be compromised?",
+      "options": [
+        "Anomalous token",
+        "Token issuer anomaly",
+        "Suspicious browser",
+        "Anomalous user activity"
+      ],
+      "answer": 1,
+      "explanation": "Token issuer anomaly flags SAML token issuers whose claims are unusual or match known attacker patterns. Anomalous token flags abnormal token characteristics such as lifetime or replay from unfamiliar locations."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Users deny unexpected MFA prompts and report them as suspicious, yet no User reported suspicious activity detections appear in ID Protection. What is the likely cause?",
+      "options": [
+        "The detection requires Entra ID Governance",
+        "The detections appear only after a 90-day learning period for the tenant",
+        "Users must hold the Security Reader role",
+        "The Report suspicious activity setting isn't turned on"
+      ],
+      "answer": 3,
+      "explanation": "The user reported suspicious activity detection works only when Report suspicious activity is turned on in the MFA settings. It is an offline, premium detection."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which detection compares properties such as ASN, browser, device and GPS proximity between the requesting and approving devices to flag likely MFA phishing?",
+      "options": [
+        "Suspicious MFA authentication approval",
+        "Atypical travel between two geographically distant locations",
+        "Suspicious browser",
+        "Anomalous user activity"
+      ],
+      "answer": 0,
+      "explanation": "Suspicious MFA authentication approval is a real-time premium detection that uses Authenticator telemetry for password plus MFA sign-ins and flags the sign-in as high risk."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which user risk detection fires only in organizations that deploy Microsoft Defender for Endpoint and moves the user to high risk?",
+      "options": [
+        "Suspicious API traffic against Microsoft Graph and directory enumeration",
+        "Anomalous user activity",
+        "Possible attempt to access Primary Refresh Token (PRT)",
+        "Leaked credentials"
+      ],
+      "answer": 2,
+      "explanation": "The PRT detection uses Defender for Endpoint information and raises users to high risk. Leaked credentials is a Microsoft-sourced nonpremium detection."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Your tenant still uses legacy user risk and sign-in risk policies configured inside ID Protection. What should you do?",
+      "options": [
+        "Nothing; the legacy ID Protection policies remain the recommended approach for risk-based access",
+        "Replace them with security defaults",
+        "Move them to the Authentication methods policy",
+        "Migrate them to risk-based Conditional Access policies, since Microsoft scheduled the legacy policies for retirement on October 1, 2026"
+      ],
+      "answer": 3,
+      "explanation": "Risk policies are configured in Conditional Access, which offers more conditions and session controls. Create equivalent policies in report-only mode first, then enforce them and disable the legacy ones."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "You are creating a sign-in risk policy in Conditional Access. Which configuration matches Microsoft's recommendation?",
+      "options": [
+        "Sign-in risk of Low and above, requiring a password change and terms of use acceptance",
+        "Sign-in risk of Medium and High, requiring MFA (or an MFA authentication strength)",
+        "Sign-in risk of High only, requiring terms of use",
+        "Sign-in risk of None, requiring a compliant device"
+      ],
+      "answer": 1,
+      "explanation": "Sign-in risk calls for proving identity with MFA. Requiring controls at Low risk adds more friction and interruptions than Medium or High."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "You are creating a user risk policy in Conditional Access. Which configuration matches Microsoft's recommendation?",
+      "options": [
+        "User risk of High, requiring MFA and a secure password change, with sign-in frequency set to Every time",
+        "User risk of Low, requiring MFA only and a sign-in frequency of 90 days",
+        "User risk of Medium, requiring terms of use",
+        "User risk of High, requiring an approved client app"
+      ],
+      "answer": 0,
+      "explanation": "A compromised account needs a secure password change, which requires MFA first. Sign-in frequency Every time forces reauthentication until the risk is remediated."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A user is assigned to three Conditional Access risk policies: one blocks access, one requires risk remediation, and one requires a password change. Which result applies?",
+      "options": [
+        "Require password change applies, because it is the most specific control and is evaluated last",
+        "Require risk remediation applies, because it is evaluated first",
+        "Access is blocked, because Block overrides Require risk remediation, which overrides Require password change",
+        "The most recently created policy applies"
+      ],
+      "answer": 2,
+      "explanation": "Block takes precedence over everything, and Require risk remediation overrides Require password change. Assign each user to only one risk policy at a time to avoid conflicts."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Many users sign in without passwords, so Require password change isn't meaningful for them. Which grant control lets ID Protection manage the right remediation flow for all authentication methods?",
+      "options": [
+        "Require password change",
+        "Require risk remediation",
+        "Require authentication strength",
+        "Require terms of use"
+      ],
+      "answer": 1,
+      "explanation": "Require risk remediation lets ID Protection choose the appropriate remediation, which works for passwordless users as well as password-based users."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Hybrid users synchronized with only password hash synchronization must be able to remediate user risk by changing their on-premises password. Which setting should you enable?",
+      "options": [
+        "Seamless single sign-on for hybrid joined devices",
+        "Password protection in audit mode",
+        "Federation for the domain",
+        "Allow on-premises password change to reset user risk"
+      ],
+      "answer": 3,
+      "explanation": "With PHS only, enabling Allow on-premises password change to reset user risk lets a password change from a hybrid joined Windows device remediate risk. Alternatively, use SSPR with password writeback."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A high-risk user changes their password on the My Account page by entering the old password. Is the user risk remediated?",
+      "options": [
+        "No; only a secure password change completed in the risk remediation flow remediates user risk",
+        "Yes; any password change, including one that uses the old password, clears user risk",
+        "Yes, but only for cloud-only users",
+        "No; only an administrator can ever remediate user risk"
+      ],
+      "answer": 0,
+      "explanation": "A password change outside the risky user remediation flow doesn't meet the secure password change requirement. The user must authenticate with MFA and then change the password through the flow."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which prerequisite must be in place for users to self-remediate risk through risk-based policies?",
+      "options": [
+        "Users must be members of the Security Reader role in the tenant",
+        "Users must be on hybrid joined devices",
+        "Users must have previously registered for MFA and SSPR",
+        "Users must have enabled passwordless sign-in"
+      ],
+      "answer": 2,
+      "explanation": "Self-remediation relies on the user completing MFA or a secure password change, so they must have registered the required methods ahead of time. Otherwise an administrator must remediate."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "After an investigation, an administrator determines that a flagged sign-in was legitimate and wants similar sign-ins to stop being treated as risky. Which action should the administrator choose?",
+      "options": [
+        "Dismiss sign-in risk",
+        "Confirm sign-in safe",
+        "Confirm sign-in compromised",
+        "Confirm user compromised"
+      ],
+      "answer": 1,
+      "explanation": "Confirm sign-in safe marks a false positive and teaches ID Protection that similar sign-ins shouldn't be risky. Dismiss is for a benign true positive."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "An administrator dismisses a user's risk after investigating. What is the effect?",
+      "options": [
+        "The user's password is reset automatically",
+        "The user's refresh tokens are revoked and all sessions end immediately",
+        "The user is blocked until MFA is registered",
+        "The risk state becomes Dismissed, and the user's existing password isn't changed"
+      ],
+      "answer": 3,
+      "explanation": "Dismissing user risk changes the state from At risk to Dismissed but doesn't touch the password, so the identity isn't necessarily back in a safe state."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "An administrator selects Confirm user compromised for a user. What is the effect?",
+      "options": [
+        "The user's risk is raised to High, and an Admin confirmed user compromised detection is recorded",
+        "The user's account is deleted",
+        "The user's risk is dismissed and the detection is archived for 30 days",
+        "The user's password is reset to a temporary value"
+      ],
+      "answer": 0,
+      "explanation": "Confirming compromise marks the user as a true positive, which raises the user to high risk and records the Admin confirmed user compromised detection. Remediation then still needs a secure password reset."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Why should organizations deploy risk-based policies that let users self-remediate sign-in risk?",
+      "options": [
+        "Sign-in risk is ignored by user risk calculations, so remediation is optional",
+        "Sign-in risks that aren't remediated affect the user's risk level",
+        "Self-remediation is mandatory in Free tenants",
+        "Risk-based policies remove the need to register for MFA"
+      ],
+      "answer": 1,
+      "explanation": "Unremediated sign-in risk feeds into user risk. A sign-in risk policy that requires MFA lets users prove identity so their user risk isn't raised."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which risk level triggers the Users at risk detected email by default?",
+      "options": [
+        "Low",
+        "Medium",
+        "High",
+        "Any risk detection"
+      ],
+      "answer": 2,
+      "explanation": "By default the alert is configured for high risk, and you can lower the level. The email goes to Global Administrators, Security Administrators and Security Readers by default."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "What does the ID Protection weekly digest email contain?",
+      "options": [
+        "A list of every user's MFA registration status and authentication methods",
+        "Only risky users that stayed unremediated for 7 days",
+        "A count of failed password resets",
+        "A summary of new risky users and new real-time risky sign-ins, with links to the reports"
+      ],
+      "answer": 3,
+      "explanation": "The weekly digest summarizes newly detected risky users and risky sign-ins (in real time) and links to the related reports. You can turn it on or off and choose its recipients."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A SOC wants ID Protection risk data in Microsoft Sentinel. What should you configure?",
+      "options": [
+        "Microsoft Entra diagnostic settings that stream risky users and user risk events",
+        "Weekly digest forwarding to a mail-enabled security group that feeds Sentinel",
+        "A Conditional Access report-only policy",
+        "Password protection audit logs"
+      ],
+      "answer": 0,
+      "explanation": "Diagnostic settings can send risky user and risk event logs to Log Analytics, Sentinel, a storage account or an event hub for correlation."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A guest from a partner tenant is blocked by a user risk policy in your tenant, and the guest's home tenant has SSPR disabled. How can the risk be resolved?",
+      "options": [
+        "Your Security Administrator can reset the password of the guest's home account",
+        "The guest can self-remediate with a Temporary Access Pass from your tenant",
+        "The guest's home organization IT staff must dismiss the risk or reset the guest's password",
+        "Remove the guest's licenses from your tenant"
+      ],
+      "answer": 2,
+      "explanation": "If the guest has no SSPR in their home directory, they must contact their own organization's IT staff to manually dismiss the risk or reset the password."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which license is required to use the risky workload identities report and workload identity detections?",
+      "options": [
+        "Entra ID P1",
+        "Workload Identities Premium",
+        "Entra ID Governance",
+        "Microsoft Defender for Identity"
+      ],
+      "answer": 1,
+      "explanation": "Full workload identity risk details and risk-based access controls need Workload Identities Premium. Without it you still receive detections with limited reporting."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which ID Protection report lists each individual detection, including its type, whether it was real-time or offline, and its risk level?",
+      "options": [
+        "Risky users report",
+        "Risky sign-ins report",
+        "Authentication methods activity report",
+        "Risk detections report"
+      ],
+      "answer": 3,
+      "explanation": "The Risk detections report lists every detection with its details. Risky users and risky sign-ins summarize the accounts and sign-ins that are at risk."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "Which user risk detection baselines normal administrative behavior and flags suspicious changes to the directory?",
+      "options": [
+        "Anomalous user activity",
+        "Suspicious API traffic against Microsoft Graph and directory enumeration",
+        "Token issuer anomaly",
+        "New country"
+      ],
+      "answer": 0,
+      "explanation": "Anomalous user activity is an offline premium detection that flags unusual administrative actions against the administrator or the changed object."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "What data is available in the Risky users report for tenants with only Entra ID Free or P1?",
+      "options": [
+        "No access at all",
+        "Limited data about risky users; full access requires Entra ID P2",
+        "Full access, because the report is a Free feature",
+        "Full access to risky users, but without any risk history or remediation actions"
+      ],
+      "answer": 1,
+      "explanation": "Free and P1 tenants get limited user risk information, while P2 gives full access to risky user data, history and remediation actions."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A risky sign-in shows risk state Dismissed with the detail Microsoft Entra ID Protection assessed sign-in safe. What happened?",
+      "options": [
+        "An administrator confirmed the sign-in as compromised and ID Protection blocked the user",
+        "The user completed MFA",
+        "An administrator reset the user's password",
+        "System-based remediation automatically dismissed the risk after assessing the sign-in as safe"
+      ],
+      "answer": 3,
+      "explanation": "ID Protection can automatically dismiss risk it later determines to be benign, reducing noise. User self-remediation shows as Remediated, not Dismissed."
+    },
+    {
+      "topic": "identity-protection",
+      "q": "A junior analyst must view all ID Protection reports but must not be able to dismiss risk, confirm compromise or change settings. Which role fits?",
+      "options": [
+        "Security Operator assigned at tenant scope",
+        "Security Administrator",
+        "Security Reader",
+        "User Administrator"
+      ],
+      "answer": 2,
+      "explanation": "Security Reader is read-only for ID Protection. Security Operator can also dismiss risk and confirm compromise, and Security Administrator can change settings."
+    }
+  ]
+}

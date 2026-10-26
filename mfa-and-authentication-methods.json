@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which built-in role is the least-privileged option for editing the Authentication methods policy to enable methods for users or groups?",
+      "options": [
+        "Authentication Administrator assigned at tenant scope",
+        "Security Reader",
+        "Authentication Policy Administrator",
+        "User Administrator"
+      ],
+      "answer": 2,
+      "explanation": "Authentication Policy Administrators edit the tenant-wide Authentication methods policy. Authentication Administrators manage the methods registered on individual users, such as creating a Temporary Access Pass."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "After you enable voice call for only a pilot group in the Authentication methods policy, users outside the group can still sign in with voice calls. What is the most likely cause?",
+      "options": [
+        "Those users are still enabled for phone methods in the legacy MFA or SSPR policy",
+        "Voice call can't be scoped to groups in the Authentication methods policy and always applies to the whole tenant",
+        "Number matching is enabled for voice calls in the tenant",
+        "The Authentication methods policy requires an Entra ID P2 license for scoping"
+      ],
+      "answer": 0,
+      "explanation": "Until migration is complete, legacy policy settings are still respected, so users enabled there can use those methods regardless of the new policy. Migrating and disabling the legacy settings centralizes control."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which statement about the migration states of the Authentication methods policy is correct?",
+      "options": [
+        "In Pre-migration the Authentication methods policy is used for both authentication and SSPR, and legacy settings are ignored",
+        "A tenant that starts in Migration in Progress can return to Pre-migration",
+        "In Migration in Progress the legacy policy settings are ignored",
+        "In Migration Complete only the Authentication methods policy is used, and legacy settings are ignored"
+      ],
+      "answer": 3,
+      "explanation": "Pre-migration uses the policy for authentication only, Migration in Progress adds SSPR while still respecting legacy settings, and Migration Complete uses only the new policy. Tenants that begin in Migration in Progress can't go back to Pre-migration."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "You finished migrating to the Authentication methods policy but must keep security questions available for SSPR. What should you do?",
+      "options": [
+        "Re-enable the legacy MFA policy for all users and disable the Authentication methods policy",
+        "Keep security questions enabled in the legacy SSPR policy, because they can't be managed in the Authentication methods policy",
+        "Enable security questions in the Authentication methods policy",
+        "Roll the tenant back to Pre-migration"
+      ],
+      "answer": 1,
+      "explanation": "Security questions can only be enabled in the legacy SSPR policy, so you can migrate everything else and keep managing them there. Rolling back isn't possible once the tenant has moved past Pre-migration."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "What does the Authentication methods migration guide migrate?",
+      "options": [
+        "Tenant policy settings only, not individual user settings",
+        "Both tenant policy settings and every user's registered methods",
+        "Only the legacy SSPR policy",
+        "Only the legacy MFA service settings"
+      ],
+      "answer": 0,
+      "explanation": "The migration guide audits the legacy MFA and SSPR tenant policies and consolidates them into the Authentication methods policy. Methods users have already registered aren't changed."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A security team wants a method that users can use as a primary (first-factor) sign-in but that can't be used as a second factor. Which method fits?",
+      "options": [
+        "Microsoft Authenticator push notifications",
+        "Voice call",
+        "Microsoft Authenticator passwordless phone sign-in",
+        "Software OATH tokens"
+      ],
+      "answer": 2,
+      "explanation": "Authenticator passwordless sign-in is listed for primary authentication only. Push notifications, voice calls and OATH tokens serve as second factors."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A user has lost every authentication method. Which capability provides cryptographic proof of a verified identity for account recovery but can't be used for sign-in, MFA or SSPR?",
+      "options": [
+        "Temporary Access Pass",
+        "Email one-time passcode",
+        "QR code",
+        "Verified ID"
+      ],
+      "answer": 3,
+      "explanation": "Verified ID is an identity verification capability used for high-assurance account recovery, not a traditional authentication method. A Temporary Access Pass can be used to sign in."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which of these authentication methods is not classified as phishing-resistant?",
+      "options": [
+        "Passkeys in Microsoft Authenticator",
+        "Microsoft Authenticator push notifications",
+        "Certificate-based authentication",
+        "Windows Hello for Business on a TPM-enabled device"
+      ],
+      "answer": 1,
+      "explanation": "Phishing-resistant methods bind the credential to a device or key, such as Windows Hello for Business, FIDO2 passkeys, passkeys in Authenticator and CBA. Push approvals and codes can still be phished remotely."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A user signs in with a password and is prompted for MFA. The user has Windows Hello for Business on their device. What must be true for Windows Hello for Business to satisfy the MFA step-up?",
+      "options": [
+        "The user is enabled for passkey (FIDO2) and has a passkey registered",
+        "The user holds an Entra ID P2 license",
+        "A Temporary Access Pass is active for the user",
+        "The device is Microsoft Entra hybrid joined and password hash synchronization is enabled"
+      ],
+      "answer": 0,
+      "explanation": "Windows Hello for Business can act as a step-up MFA credential only when the user is enabled for passkey (FIDO2) and has a passkey registered. Licensing and device state alone don't make it satisfy the MFA prompt."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "An administrator asks whether number matching must be turned on to prevent accidental approvals of Microsoft Authenticator push notifications. What is the current status?",
+      "options": [
+        "It is optional and stays disabled in every tenant until Entra ID P2 licenses are assigned to users",
+        "It applies only to passwordless phone sign-in",
+        "Number matching is enabled by default for Authenticator push notifications",
+        "It must be enabled for each user with PowerShell"
+      ],
+      "answer": 2,
+      "explanation": "Number matching is default behavior for Authenticator push notifications, and passwordless notifications already require it. It helps counter MFA fatigue attacks."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "You want users to use Microsoft Authenticator both for push-based MFA and for passwordless phone sign-in. Which Authentication mode should you set?",
+      "options": [
+        "Push",
+        "Passwordless",
+        "Disabled",
+        "Any"
+      ],
+      "answer": 3,
+      "explanation": "Any allows both passwordless phone sign-in and push notifications. Push allows only MFA notifications, and Passwordless allows only phone sign-in."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Users approve Microsoft Authenticator prompts without knowing which app triggered them. Which setting shows the requesting application and sign-in location in the notification?",
+      "options": [
+        "Number matching",
+        "Additional context (application name and geographic location) in the Authenticator settings",
+        "Registration campaign",
+        "System-preferred multifactor authentication, which selects the most secure registered method"
+      ],
+      "answer": 1,
+      "explanation": "Additional context shows the name of the requesting application and the location based on the sign-in IP address, and it works alongside number matching. A registration campaign only nudges users to register."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A tenant that uses only Entra ID Free wants to nudge users to move from SMS to Microsoft Authenticator during sign-in. What is required?",
+      "options": [
+        "Only MFA enabled, because a registration campaign has no extra license requirement",
+        "Entra ID P1 licenses for all targeted users and for the administrators who configure the campaign",
+        "Entra ID P2 licenses for targeted users",
+        "Entra ID Governance licenses for targeted users"
+      ],
+      "answer": 0,
+      "explanation": "Every edition of Entra ID includes MFA, and the registration campaign has no license requirement beyond enabling it."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "In a registration campaign, Limited number of snoozes is set to Enabled. How many times can a user skip the prompt before registration is required?",
+      "options": [
+        "One",
+        "Five",
+        "Seven",
+        "Three"
+      ],
+      "answer": 3,
+      "explanation": "With limited snoozes enabled, users can skip the prompt three times and are then required to register. The days allowed to snooze range from 0 to 14."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which statement about registration campaigns is correct?",
+      "options": [
+        "A campaign can target Authenticator and passkeys simultaneously",
+        "Passwordless phone sign-in can be the targeted method",
+        "A campaign targets only one authentication method at a time",
+        "A campaign requires an Entra ID P1 license"
+      ],
+      "answer": 2,
+      "explanation": "A campaign nudges toward one method at a time, either Microsoft Authenticator or passkeys. Passwordless phone sign-in isn't a targeted method, and no license is required beyond MFA."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which license is required to use passkeys (FIDO2) as an authentication method?",
+      "options": [
+        "Entra ID P1",
+        "No extra license; passkeys are available in all editions, including Free",
+        "Entra ID P2",
+        "Entra ID Governance"
+      ],
+      "answer": 1,
+      "explanation": "Passkeys (FIDO2) are available in all Entra ID editions. Conditional Access authentication strengths that enforce them need P1, but the method itself doesn't."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A user tries to register a FIDO2 security key after signing in with only a password and the registration fails. What is the likely requirement?",
+      "options": [
+        "The user must be Microsoft Entra joined",
+        "The user must hold the Authentication Administrator role",
+        "A Temporary Access Pass must already exist for the user",
+        "The user must have completed MFA within the past five minutes"
+      ],
+      "answer": 3,
+      "explanation": "Users must complete MFA within the past five minutes before registering a passkey (FIDO2). A TAP can help bootstrap, but it isn't a prerequisite."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "An administrator sets Enforce attestation to Yes in a passkey profile and also wants to allow synced passkeys. What is the outcome?",
+      "options": [
+        "Synced passkeys aren't available while attestation is enforced; only device-bound passkeys are allowed",
+        "Both types are allowed because attestation applies only at sign-in",
+        "Synced passkeys are allowed only for Microsoft Authenticator",
+        "Synced passkeys are allowed only when key restrictions are disabled and Microsoft Authenticator isn't targeted"
+      ],
+      "answer": 0,
+      "explanation": "Enforcing attestation limits a profile to device-bound passkeys, because attestation can verify make and model only for authenticators that provide it. Synced passkeys require attestation to be off."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Your security policy allows only two specific FIDO2 security key models. Which setting should you use?",
+      "options": [
+        "Enforce attestation set to No",
+        "A Conditional Access device filter that targets the vendor name of the security keys",
+        "Enforce key restrictions with an allow list of their AAGUIDs",
+        "Tenant restrictions v2"
+      ],
+      "answer": 2,
+      "explanation": "Key restrictions allow or block specific authenticator models by AAGUID. Attestation verifies that a key is genuine but doesn't pick specific models."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "You remove an AAGUID from the allowed key restrictions list. What happens to users who previously registered a key with that AAGUID?",
+      "options": [
+        "Their registered keys keep working indefinitely",
+        "They can no longer use that key to sign in",
+        "Their registered keys keep working until the next password change",
+        "Their registered keys keep working for 30 days"
+      ],
+      "answer": 1,
+      "explanation": "Key restrictions apply to authentication as well as registration, so removing an allowed AAGUID blocks sign-in with keys already registered under it."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A help desk technician must create Temporary Access Passes for users who lost their MFA methods. Which role is the least-privileged option in the list?",
+      "options": [
+        "Authentication Administrator",
+        "Authentication Policy Administrator",
+        "Security Reader",
+        "Global Reader"
+      ],
+      "answer": 0,
+      "explanation": "Authentication Administrator and Privileged Authentication Administrator can create a TAP for users. Authentication Policy Administrator configures the policy, and Global Reader can only view TAP details."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A Temporary Access Pass is created without specifying a lifetime, and the tenant's TAP policy uses default settings. What lifetime does the pass have?",
+      "options": [
+        "10 minutes",
+        "8 hours",
+        "24 hours",
+        "1 hour"
+      ],
+      "answer": 3,
+      "explanation": "The default lifetime in the TAP policy is 1 hour. The default maximum is 8 hours, and the policy accepts values from 10 minutes to 30 days."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "An administrator created a Temporary Access Pass for a user, but the user can't sign in with it. What is the most likely cause?",
+      "options": [
+        "A TAP can be used only after the user changes their password",
+        "The user isn't included in the Temporary Access Pass authentication method policy",
+        "A TAP works only for users with Entra ID P2",
+        "A TAP lifetime can't be shorter than 8 hours"
+      ],
+      "answer": 1,
+      "explanation": "You can create a TAP for any user, but only users included in the TAP authentication method policy can sign in with it."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A user in a federated domain signs in with a Temporary Access Pass. What happens?",
+      "options": [
+        "The user is redirected to AD FS to validate the pass",
+        "The pass is rejected because TAP doesn't work with federated domains",
+        "Authentication completes in Entra ID, and the user isn't redirected to the federated identity provider",
+        "The pass works only if password hash synchronization and Seamless SSO are both enabled for the domain"
+      ],
+      "answer": 2,
+      "explanation": "For federated domains, a TAP is preferred over federation. The user authenticates in Entra ID and isn't sent to the federated IdP."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which user can't be given a Temporary Access Pass?",
+      "options": [
+        "An internal guest whose userType is Guest",
+        "A cloud-only member user",
+        "A user synchronized from on-premises Active Directory",
+        "An external guest user from another organization"
+      ],
+      "answer": 3,
+      "explanation": "A TAP can be added for an internal guest that has authentication methods registered in your tenant, but not for an external guest, where you receive an error."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "After you enable certificate-based authentication and leave the authentication binding policy at its defaults, which protection level do certificates receive?",
+      "options": [
+        "Single-factor",
+        "Multifactor",
+        "Phishing-resistant multifactor for smart cards only",
+        "No level until a Conditional Access policy assigns one"
+      ],
+      "answer": 0,
+      "explanation": "The default protection level for CBA is single-factor. To have certificates count as multifactor, change the default or add rules by issuer or policy OID."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Only certificates from one specific issuing CA should count as multifactor in CBA, and all other certificates must stay single-factor. What should you configure?",
+      "options": [
+        "A username binding for that issuer",
+        "High affinity binding for the whole tenant",
+        "A custom authentication binding rule for the issuer, leaving the default at single-factor",
+        "A Conditional Access custom control that evaluates the certificate issuer for each sign-in"
+      ],
+      "answer": 2,
+      "explanation": "Authentication binding rules match on certificate issuer or policy OID to set the protection level. Username and affinity bindings map certificates to users, not to a protection level."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which role is required to configure the PKI-based certificate authority trust store for certificate-based authentication?",
+      "options": [
+        "Authentication Policy Administrator",
+        "Privileged Authentication Administrator",
+        "Security Administrator",
+        "Authentication Administrator assigned at tenant scope"
+      ],
+      "answer": 1,
+      "explanation": "The PKI-based trust store is managed by Privileged Authentication Administrators. An Authentication Policy Administrator configures user-related CBA settings in the Authentication methods policy."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which combination lets a user complete MFA when they have only a single-factor certificate?",
+      "options": [
+        "Single-factor CBA together with passwordless phone sign-in or a passkey (FIDO2)",
+        "Single-factor CBA together with SMS",
+        "Single-factor CBA together with an email one-time passcode",
+        "Single-factor CBA together with security questions"
+      ],
+      "answer": 0,
+      "explanation": "Single-factor CBA combined with passwordless phone sign-in or FIDO2 is a supported way to achieve MFA. The other combinations don't produce an MFA claim."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which OATH standard does Microsoft Entra ID not support?",
+      "options": [
+        "TOTP with SHA-1",
+        "TOTP with SHA-256",
+        "TOTP tokens that refresh every 60 seconds",
+        "HOTP (event-based codes)"
+      ],
+      "answer": 3,
+      "explanation": "Entra ID supports time-based OATH TOTP, with SHA-1 and SHA-256 tokens that refresh every 30 or 60 seconds, but not HOTP."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "How many OATH hardware tokens and authenticator apps combined can a user have configured at one time?",
+      "options": [
+        "Only one",
+        "Up to three",
+        "Up to five",
+        "Up to ten"
+      ],
+      "answer": 2,
+      "explanation": "A user can have up to five OATH hardware tokens or authenticator applications, such as Microsoft Authenticator, configured at the same time."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A small company has only Entra ID Free licensing and wants MFA for all users and administrators at no extra cost. What should they do?",
+      "options": [
+        "Create a Conditional Access policy that requires MFA",
+        "Enable security defaults",
+        "Configure risk-based Conditional Access",
+        "Run a registration campaign with enforcement"
+      ],
+      "answer": 1,
+      "explanation": "Security defaults provide preconfigured MFA and legacy authentication blocking in Free tenants. Conditional Access requires Entra ID P1 or P2."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "An administrator can't turn on security defaults. Which is a likely cause?",
+      "options": [
+        "The administrator isn't assigned an Entra ID P1 license",
+        "The tenant has more than 1,000 users",
+        "Users haven't registered Microsoft Authenticator yet",
+        "One or more Conditional Access policies are enabled"
+      ],
+      "answer": 3,
+      "explanation": "Security defaults and Conditional Access policies are mutually exclusive: you can't enable security defaults while any Conditional Access policy is enabled."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "What is the current MFA registration behavior when security defaults are enabled?",
+      "options": [
+        "Users must register at their next sign-in, with no 14-day grace period",
+        "Users have 14 days to register",
+        "Only administrators must register",
+        "Registration is optional until MFA is first required by a sign-in risk policy"
+      ],
+      "answer": 0,
+      "explanation": "Microsoft removed the 14-day grace period, so users are prompted to register immediately after security defaults are enabled. Older material still describes the 14-day window."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which feature replaced the legacy Fraud alert and Block/unblock users settings for letting users report unexpected MFA prompts?",
+      "options": [
+        "Sign-in frequency",
+        "Terms of use",
+        "Report suspicious activity",
+        "Account lockout thresholds for MFA denials"
+      ],
+      "answer": 2,
+      "explanation": "Report suspicious activity, configured in the Authentication methods policy settings, replaced the legacy fraud alert, block/unblock and notification features, which were removed on March 1, 2025."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Where can an administrator see events when users report an MFA prompt as suspicious?",
+      "options": [
+        "Only in the legacy MFA service settings blade",
+        "In the sign-in logs, the audit logs and the Risk detections report",
+        "Only in the Conditional Access insights and reporting workbook for each policy",
+        "Only in the legacy fraud alert notification email"
+      ],
+      "answer": 1,
+      "explanation": "Reported prompts appear in the sign-in logs as rejected by the user, in the audit logs and in the Risk detections report. The user can also be set to high risk."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "How many built-in authentication strengths does Conditional Access provide?",
+      "options": [
+        "One: Multifactor authentication",
+        "Two: Multifactor authentication and Passwordless MFA",
+        "Four: Multifactor, Passwordless, Phishing-resistant and a Legacy MFA strength",
+        "Three: Multifactor authentication, Passwordless MFA and Phishing-resistant MFA"
+      ],
+      "answer": 3,
+      "explanation": "Microsoft provides three built-in strengths that can't be modified. You can add up to 15 custom strengths of your own."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "You want to use a built-in authentication strength that still allows a Temporary Access Pass. Which built-in strength includes it?",
+      "options": [
+        "Multifactor authentication strength only",
+        "Passwordless MFA strength",
+        "Phishing-resistant MFA strength",
+        "All three built-in strengths, because TAP is a multifactor credential"
+      ],
+      "answer": 0,
+      "explanation": "TAP appears only in the Multifactor authentication strength. Passwordless and phishing-resistant strengths use methods such as passkeys, WHfB, CBA and Authenticator phone sign-in."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "Which statement about Conditional Access authentication strengths is correct?",
+      "options": [
+        "Built-in strengths can be edited to remove methods",
+        "Authentication strengths are available in every Entra ID edition, including Entra ID Free",
+        "You can't combine Require multifactor authentication and Require authentication strength in the same policy",
+        "An unlimited number of custom strengths can be created"
+      ],
+      "answer": 2,
+      "explanation": "The two grant controls can't be used together, because the built-in MFA strength is equivalent to Require MFA. Strengths need Entra ID P1, built-ins can't be modified, and custom strengths are limited to 15."
+    },
+    {
+      "topic": "mfa-and-authentication-methods",
+      "q": "A Conditional Access policy requires the built-in Phishing-resistant MFA strength, yet users can still type a password when they first sign in. Why?",
+      "options": [
+        "Passwords count as a phishing-resistant first factor when the user also has a registered passkey",
+        "Conditional Access is evaluated after the initial authentication, so the strength doesn't restrict the first sign-in step",
+        "The strength applies only to guest users",
+        "Authentication strengths ignore the methods users have registered"
+      ],
+      "answer": 1,
+      "explanation": "Policies are evaluated after the first authentication, so the user can enter a password but must then sign in with a phishing-resistant method to continue."
+    }
+  ]
+}

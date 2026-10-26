@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "entitlement-management",
+      "q": "Which licenses allow you to use entitlement management and assign users to access packages?",
+      "options": [
+        "Microsoft Entra ID Free",
+        "Microsoft Entra ID P1, which includes all identity governance features",
+        "Microsoft Entra Workload Identities Premium",
+        "Microsoft Entra ID P2 or Microsoft Entra ID Governance (EMS E5 also qualifies)"
+      ],
+      "answer": 3,
+      "explanation": "Entitlement management is an identity governance feature that needs Entra ID P2 or Entra ID Governance, and EMS E5 includes it. P1 alone isn't enough."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A company emails IT to add employees and contractors to groups, apps and SharePoint sites, and nobody tracks when that access should end. Which feature automates requests, approvals, assignments and expiration of that access?",
+      "options": [
+        "Entitlement management access packages",
+        "Self-service group management with owner approval for each group",
+        "Administrative units",
+        "Cross-tenant synchronization"
+      ],
+      "answer": 0,
+      "explanation": "Access packages bundle resources with policies for who can request, who approves and when access expires, which automates the access lifecycle."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Which resource types can an access package include?",
+      "options": [
+        "Only Microsoft 365 groups and the Teams that are connected to them, with no applications",
+        "Only enterprise applications",
+        "Groups and teams, applications, SharePoint sites, Microsoft Entra roles and API permissions",
+        "Only Azure subscriptions and resource groups"
+      ],
+      "answer": 2,
+      "explanation": "Access packages list resources such as groups, apps and sites, along with Microsoft Entra roles and API permissions, and the roles identities need in them."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "What is a catalog in entitlement management?",
+      "options": [
+        "A report of all access package assignments in the tenant, exported to a storage account",
+        "A container of resources and access packages that can be delegated to owners",
+        "A policy that defines who can request access",
+        "A role assigned to resource owners"
+      ],
+      "answer": 1,
+      "explanation": "Access packages are defined in catalogs. You can use one catalog for everything or let individuals create and own catalogs for their departments."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Why aren't dynamic membership groups suitable as access package resources?",
+      "options": [
+        "Dynamic groups can't contain guest users, so external requestors could never be added",
+        "Dynamic groups need Entra ID P2 to be added to a catalog",
+        "Dynamic groups are always role-assignable",
+        "Their membership can't be changed by adding or removing a member, so entitlement management can't update it"
+      ],
+      "answer": 3,
+      "explanation": "Entitlement management adds and removes members when assignments change, which isn't possible for groups whose membership is controlled by a rule."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A user was already a member of a group before it was added to an access package as a resource role. What happens when the user's assignment to the package expires?",
+      "options": [
+        "The user is removed from the group, even though they were a member before",
+        "The user stays in the group because the membership predates the package and isn't tracked by it",
+        "The user stays in the group but loses ownership rights",
+        "The assignment can't expire for users who were members already"
+      ],
+      "answer": 0,
+      "explanation": "Expiring or removing an assignment removes the user from all resource roles in the package, including memberships that existed beforehand."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Following least privilege, which role does Microsoft recommend for administering entitlement management?",
+      "options": [
+        "Global Administrator, because it is required for every governance task",
+        "Identity Governance Administrator",
+        "User Administrator",
+        "Privileged Role Administrator"
+      ],
+      "answer": 1,
+      "explanation": "Identity Governance Administrator can manage catalogs, access packages and policies without broader directory privileges, and Microsoft recommends it when possible."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Marketing, Finance and Legal managers should each create and own their own catalogs without becoming administrators. Which role should you assign them?",
+      "options": [
+        "Access package manager, who can also edit packages and policies",
+        "Access package assignment manager",
+        "Catalog creator",
+        "Catalog reader"
+      ],
+      "answer": 2,
+      "explanation": "Catalog creators can create catalogs and automatically become the owner of the catalogs they create, so departments can manage their own resources."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A catalog owner who isn't a group-management administrator wants to add a security group to the catalog. What must be true?",
+      "options": [
+        "The catalog owner must also be an owner of the group",
+        "The group must be a dynamic group, so membership is evaluated automatically",
+        "The group must be role-assignable",
+        "The group must have no members"
+      ],
+      "answer": 0,
+      "explanation": "Administrators who can manage groups can add any group, but a catalog owner can add only groups they own."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A project manager is an access package manager in a catalog. Which task can they not do?",
+      "options": [
+        "Create access packages in the catalog",
+        "Create policies for the access packages",
+        "Directly assign users to the access packages",
+        "Add new resources to the catalog"
+      ],
+      "answer": 3,
+      "explanation": "Access package managers can manage access packages and policies in the catalog, but they can't add resources to it. That requires a catalog owner or administrator."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Which role can assign users to and remove users from existing access packages but can't create or edit access packages?",
+      "options": [
+        "Access package manager, who can also edit packages and policies",
+        "Catalog owner",
+        "Access package assignment manager",
+        "Catalog reader"
+      ],
+      "answer": 2,
+      "explanation": "The assignment manager role is limited to managing assignments on existing packages in the catalog. Catalog reader is view-only."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Which catalog role provides view-only access to the catalog?",
+      "options": [
+        "Access package assignment manager",
+        "Catalog reader",
+        "Catalog creator, which can create catalogs and connected organizations",
+        "Access package manager, who can also edit packages and policies"
+      ],
+      "answer": 1,
+      "explanation": "Catalog reader can view existing access packages within a catalog but can't change anything."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Which entitlement management role can create and manage connected organizations?",
+      "options": [
+        "Connected Organization Administrator",
+        "Catalog creator, which can create catalogs and connected organizations",
+        "Access package manager, who can also edit packages and policies",
+        "Catalog owner"
+      ],
+      "answer": 0,
+      "explanation": "Connected Organization Administrator is a tenant-wide entitlement management role for creating and managing connected organizations. Identity Governance Administrator can do this too."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Some users were assigned the User Administrator role to configure catalogs, access packages and policies. What does Microsoft advise?",
+      "options": [
+        "Keep User Administrator, because it is the least-privileged option for governance tasks",
+        "Assign Global Administrator for better auditing",
+        "Assign Privileged Role Administrator",
+        "Assign those users the Identity Governance Administrator role instead"
+      ],
+      "answer": 3,
+      "explanation": "Identity Governance Administrator is the purpose-built role, so it's preferred over User Administrator for managing entitlement management configuration."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "What does an access package policy define?",
+      "options": [
+        "Which Azure subscriptions and resource groups the package can use for deployments",
+        "Who can request the package, who approves, and when access expires",
+        "Which Conditional Access policies protect the resources",
+        "Which licenses are assigned to requestors"
+      ],
+      "answer": 1,
+      "explanation": "Policies carry the request, approval and lifecycle rules for an access package, and a package can have several policies for different user communities."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Employees and contractors need the same access package but with different approvers and expirations. How should you configure it?",
+      "options": [
+        "Create two catalogs with identical resources, one for each community of users",
+        "Create one policy and vary the approvers by group",
+        "Create one access package with a separate policy for each community",
+        "Create two access packages that include each other"
+      ],
+      "answer": 2,
+      "explanation": "Each policy specifies a user community, approvers and lifecycle, so one package can serve several communities with different rules."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "All employees, but not guests, in your directory must be able to request an access package. Which option should you choose?",
+      "options": [
+        "For users not in your directory, All users",
+        "Administrator direct assignments only",
+        "Specific users and groups, with every employee added individually",
+        "For users in your directory, All members (excluding guests)"
+      ],
+      "answer": 3,
+      "explanation": "The In your directory option offers specific users and groups, all members excluding guests, or all users including guests. All members excludes guests automatically."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A request must be approved by the requestor's manager and then by the resource owner, and a backup is needed if the manager can't be found. Which configuration meets this?",
+      "options": [
+        "Two approval stages, with the manager approving first and a fallback approver defined",
+        "A single approval stage that contains both approvers and requires only one of them",
+        "No approval, with an access review after 90 days",
+        "An automatic assignment policy with a fallback group"
+      ],
+      "answer": 0,
+      "explanation": "Policies support multi-stage approval, and fallback approvers receive requests when the primary approvers can't be determined."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "What is the purpose of escalation approvers in an approval stage?",
+      "options": [
+        "They approve only requests from external users who belong to a connected organization",
+        "They override approvals after the assignment is granted",
+        "They are asked to approve if primary approvers don't respond within the escalation time",
+        "They receive a copy of every request but can't approve"
+      ],
+      "answer": 2,
+      "explanation": "Escalation approvers are asked when primary approvers haven't responded by the configured escalation time."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Approvers must see a business reason from users, and each requestor must provide their cost center. What should you configure on the policy?",
+      "options": [
+        "A custom extension that queries the HR system for each requestor's cost center",
+        "Require requestor justification and add a question for the cost center",
+        "An access review with a cost-center filter",
+        "A catalog attribute named cost center"
+      ],
+      "answer": 1,
+      "explanation": "Policies can require a justification and ask custom questions, and the answers are shown to approvers."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "After a request is approved, a workflow must call an external system to provision access. What should you add?",
+      "options": [
+        "A custom extension that runs a Logic App, configured in the catalog",
+        "An access review on the policy that runs after each approval",
+        "A connected organization",
+        "A dynamic group rule"
+      ],
+      "answer": 0,
+      "explanation": "Custom extensions trigger Azure Logic Apps at stages such as request approved or assignment granted, and they are configured in the catalog first."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "All Sales employees should receive an access package automatically and lose it when they leave Sales. What should you configure?",
+      "options": [
+        "A request policy with no approval that allows all Sales employees to self-assign",
+        "A connected organization for Sales",
+        "An incompatible access package",
+        "An automatic assignment policy with a membership rule on the department attribute"
+      ],
+      "answer": 3,
+      "explanation": "Automatic assignment policies use a rule like a dynamic group to create and remove assignments as attributes change."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "An access package has two automatic assignment policies whose rules overlap. What does Microsoft recommend?",
+      "options": [
+        "Use as many overlapping policies as needed, because the policy with the highest priority always wins",
+        "Overlapping rules are blocked by the portal",
+        "Use one automatic assignment policy per package, or make sure the rules don't overlap",
+        "Overlap is required to provide a fallback"
+      ],
+      "answer": 2,
+      "explanation": "Microsoft suggests a single automatic assignment policy per access package, and multiple policies are supported only when no users are in scope of more than one."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Partner users can't request access packages in a catalog even though a policy allows connected organizations. Which catalog setting is the likely cause?",
+      "options": [
+        "No catalog reader is assigned to the catalog for the partner users",
+        "Enabled for external users is set to No",
+        "The catalog has no owners",
+        "The catalog contains dynamic groups"
+      ],
+      "answer": 1,
+      "explanation": "A catalog must have Enabled for external users set to Yes for its packages to be requested by users from connected organizations."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Which expiration options can you set for an access package assignment?",
+      "options": [
+        "On date, Number of days, Number of hours, or Never",
+        "A fixed 90 days only, configurable per catalog",
+        "On date only",
+        "Never or Number of days only"
+      ],
+      "answer": 0,
+      "explanation": "The lifecycle settings let assignments expire on a date, after a number of days or hours, or never."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A policy allows users to extend their assignments. When do users receive reminders to extend?",
+      "options": [
+        "30 days and 7 days before it expires, by email and Teams message",
+        "7 days and 1 day before it expires",
+        "14 days and 1 day before the assignment expires",
+        "On the day after it expires"
+      ],
+      "answer": 2,
+      "explanation": "If extensions are allowed, users get emails 14 days and one day before the assignment expires, and they must still be in scope of the policy to extend."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A policy sets assignments to expire on June 30 and allows extensions. A user asks for an extension in April. What is the maximum extension the user can request?",
+      "options": [
+        "Another 365 days from the date of the request",
+        "Up to June 30, the policy's expiration date",
+        "An additional 90 days beyond June 30",
+        "No limit, if the approver agrees"
+      ],
+      "answer": 1,
+      "explanation": "The extension can't go beyond the policy's expiration, so when assignments expire on a specific date, that date is the maximum."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "An access package has separate policies for employees and contractors. Can the two communities have different access review schedules?",
+      "options": [
+        "No; one review schedule applies to the whole package and all of its policies",
+        "No; reviews are configured at the catalog level",
+        "Yes, but only if each policy uses a different catalog",
+        "Yes; each policy can have its own independent access review schedule"
+      ],
+      "answer": 3,
+      "explanation": "Access reviews are enabled per assignment policy, so different communities can be reviewed on independent schedules."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Which access review setting can approve users who signed in recently and deny those who didn't?",
+      "options": [
+        "Take recommendations, which uses sign-in activity from the last 30 days",
+        "Remove access if reviewers don't respond within the review period",
+        "Approve access if reviewers don't respond",
+        "Require reviewer justification"
+      ],
+      "answer": 0,
+      "explanation": "When no reviewer responds, taking recommendations approves users who signed in during the last 30 days and denies the rest."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Through which portal do users request access packages?",
+      "options": [
+        "The Microsoft Entra admin center",
+        "The Azure portal Access control (IAM) blade",
+        "My Access (myaccess.microsoft.com)",
+        "The Microsoft 365 admin center"
+      ],
+      "answer": 2,
+      "explanation": "Requestors use the My Access portal to browse and request access packages, and approvers use it to act on requests."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "An administrator wants only users from Fabrikam and Litware to request an access package. What should the policy use?",
+      "options": [
+        "All users (All connected organizations + any new external users)",
+        "Specific connected organizations, with Fabrikam and Litware already added",
+        "All members (excluding guests)",
+        "A B2B allow list only, without any connected organizations"
+      ],
+      "answer": 1,
+      "explanation": "Selecting specific connected organizations restricts requests to users from those organizations. The organizations must be created first."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A policy uses All users (All connected organizations + any new external users). What must be enabled in the directory, and what happens for an unknown organization?",
+      "options": [
+        "Google federation must be enabled, and the user is blocked from requesting the package",
+        "Cross-tenant synchronization must be enabled, and a configured connected organization is created",
+        "Nothing is required, and no organization is created",
+        "Email one-time passcode must be enabled, and a connected organization in the proposed state is created automatically"
+      ],
+      "answer": 3,
+      "explanation": "The All users option requires email one-time passcode. If a requestor's organization isn't known, a connected organization is created automatically in the proposed state."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "How do configured and proposed connected organizations differ?",
+      "options": [
+        "Only users from configured organizations can request packages limited to connected organizations; proposed ones were created automatically and aren't approved",
+        "Proposed organizations are fully functional for all policies, and configured organizations are read-only until approved",
+        "Configured organizations can't be deleted",
+        "There is no functional difference"
+      ],
+      "answer": 0,
+      "explanation": "A configured organization is fully functional for policies that target connected organizations. Proposed organizations are created automatically and aren't usable for those policies until configured."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "By default, what happens to a guest invited through entitlement management when their last access package assignment ends?",
+      "options": [
+        "The guest is deleted immediately and their sign-in history is purged",
+        "The guest stays active indefinitely",
+        "The guest is blocked from signing in for 30 days and then removed",
+        "The guest is converted to a member"
+      ],
+      "answer": 2,
+      "explanation": "The external user lifecycle settings block sign-in after the last assignment ends, then remove the account after a configurable number of days."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "A B2B allow list doesn't include a partner's domain. A partner user requests an access package that uses the All users option. What is the result?",
+      "options": [
+        "The allow list is ignored by entitlement management because it uses its own invitation process",
+        "The user can't be invited; remove the allow list or add the partner's domain to it",
+        "The user is invited as a member",
+        "The request is approved but no account is created"
+      ],
+      "answer": 1,
+      "explanation": "Entitlement management uses B2B invitations, so the external collaboration allow list still applies. Remove it or add every partner domain."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Users from a connected organization request an access package, and someone from their own organization should approve. What should you configure?",
+      "options": [
+        "External sponsors from the connected organization as approvers",
+        "Internal sponsors as fallback approvers only, with no approver from the partner",
+        "A catalog owner as the sponsor",
+        "A connected organization administrator as the requestor"
+      ],
+      "answer": 0,
+      "explanation": "External sponsors are guests from the connected organization who are already in your directory, and they can approve requests from that organization."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "An administrator must give a partner contractor access immediately, without waiting for a request. What should the administrator do?",
+      "options": [
+        "Add the user to the catalog as an owner",
+        "Create a connected organization for the contractor",
+        "Approve the request in My Access on the contractor's behalf after creating it from the portal",
+        "Directly assign the user to the access package, which an assignment manager or higher can do"
+      ],
+      "answer": 3,
+      "explanation": "Direct assignment lets Identity Governance Administrators, catalog owners, access package managers and assignment managers assign identities without a request."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Users who hold the Developer access package must not be able to request the Production Approver package. How should you configure this?",
+      "options": [
+        "Give the catalogs different privilege levels so users can't move between them",
+        "Configure separation of duties by making the Developer package incompatible on the Production Approver package",
+        "Add a Conditional Access policy for My Access",
+        "Make both packages require approval from the same approver"
+      ],
+      "answer": 1,
+      "explanation": "Separation of duties settings block users who already have an incompatible access package or who are members of an incompatible group from requesting the package."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "An access package is configured as incompatible with a group, but several users who already hold the package are in that group. What happens?",
+      "options": [
+        "Their assignments are removed immediately and they receive a notification email",
+        "The configuration is rejected",
+        "Those users keep their access but can't re-request it, and you can identify them for review",
+        "They are moved to a different catalog"
+      ],
+      "answer": 2,
+      "explanation": "Existing assignments aren't removed. Users with incompatible access simply can't re-request, so administrators should review them."
+    },
+    {
+      "topic": "entitlement-management",
+      "q": "Contractors need a Teams team for 60 days, with approval by an internal sponsor. How should you configure this?",
+      "options": [
+        "A dynamic group of contractors with a 60-day access review that removes users automatically",
+        "A cross-tenant synchronization configuration with a 60-day schedule",
+        "A Conditional Access policy that expires after 60 days",
+        "An access package with a policy for users not in your directory, an approver for the sponsor, and a 60-day expiration"
+      ],
+      "answer": 3,
+      "explanation": "A policy for connected organizations can require sponsor approval and set an expiration of 60 days. When access ends, the guest lifecycle settings clean up the account."
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "managed-identities",
+      "q": "What is a managed identity in Microsoft Entra ID?",
+      "options": [
+        "A user account with a long random password that is stored in Key Vault and rotated by an Automation runbook every month",
+        "An app registration with a client secret that rotates every 90 days",
+        "A special service principal for an Azure resource, with credentials managed automatically by Azure",
+        "A guest account that every Azure subscription trusts"
+      ],
+      "answer": 2,
+      "explanation": "Managed identities give Azure services an automatically managed identity, so code can authenticate to Entra-protected services without holding credentials."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A workload runs entirely inside one Azure virtual machine and needs an identity that is removed automatically when the VM is deleted. Which type should you use?",
+      "options": [
+        "System-assigned managed identity",
+        "User-assigned managed identity",
+        "An app registration with a certificate",
+        "A service principal with a client secret"
+      ],
+      "answer": 0,
+      "explanation": "A system-assigned identity is tied to the lifecycle of its parent resource and is deleted when that resource is deleted."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Five virtual machines are recycled often and all need identical access to one Key Vault, and the permissions must persist when machines are recreated. What should you use?",
+      "options": [
+        "A system-assigned managed identity on each machine, with the same role assignments repeated on every identity",
+        "An app registration for each machine",
+        "A guest user shared by the machines",
+        "One user-assigned managed identity shared by the machines"
+      ],
+      "answer": 3,
+      "explanation": "A user-assigned identity is a standalone resource that can be attached to many resources, and its role assignments survive when the compute resources are recycled."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which statement about system-assigned managed identities is correct?",
+      "options": [
+        "It can be shared across multiple resources in the same resource group and subscription as the identity",
+        "A system-assigned identity can be associated with only one Azure resource and is deleted with it",
+        "It is created as a standalone resource and must be deleted explicitly",
+        "It supports federated identity credentials"
+      ],
+      "answer": 1,
+      "explanation": "System-assigned identities can't be shared and share the lifecycle of the parent resource. Standalone creation, explicit deletion and federated credentials describe user-assigned identities."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "How is a user-assigned managed identity created, and what is its lifecycle?",
+      "options": [
+        "As a standalone Azure resource with a lifecycle independent of the resources that use it",
+        "As part of the resource that uses it, and deleted automatically together with that resource and its role assignments",
+        "In Microsoft Entra ID only, and removed when unused for 30 days",
+        "As an app registration that expires after 90 days"
+      ],
+      "answer": 0,
+      "explanation": "A user-assigned identity is created separately, assigned to one or more resources, and must be deleted explicitly."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A VM has two user-assigned managed identities and no system-assigned identity. Code on the VM requests a token from IMDS without naming an identity and fails with the error Multiple user assigned identities exist. What should the developer do?",
+      "options": [
+        "Remove all role assignments from the identities except for the one the code is supposed to use",
+        "Request the token from the public Entra endpoint instead",
+        "Specify the client ID or resource ID of the intended identity in the token request",
+        "Wait for the credential to roll over"
+      ],
+      "answer": 2,
+      "explanation": "When more than one user-assigned identity exists and no system-assigned identity is enabled, IMDS needs to know which identity to use, so the request must include its client ID or resource ID."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "What is the display name of the system-assigned managed identity service principal for the deployment slot staging of an App Service named contoso-app?",
+      "options": [
+        "contoso-app",
+        "contoso-app/slots/staging",
+        "contoso-app-staging",
+        "staging.contoso-app"
+      ],
+      "answer": 1,
+      "explanation": "A system-assigned identity is named after its resource, and for a deployment slot the name has the form app-name/slots/slot-name."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "How does a managed identity differ from an app registration in the directory?",
+      "options": [
+        "A managed identity has an application object in the home tenant but no service principal in any directory",
+        "A managed identity has both objects, but the application object is hidden",
+        "They are identical; only the portal names differ",
+        "A managed identity has only a service principal object and no application object"
+      ],
+      "answer": 3,
+      "explanation": "App registrations have an application object and a service principal. Managed identities have only the service principal, which is why Graph permissions must be granted to the service principal directly."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Code running on an Azure VM needs to request a managed identity token locally. Which endpoint should it call?",
+      "options": [
+        "https://login.microsoftonline.com/common/oauth2/token, using the client secret stored in the VM's environment variables",
+        "https://graph.microsoft.com/v1.0/me",
+        "The Instance Metadata Service identity endpoint, http://169.254.169.254/metadata/identity/oauth2/token",
+        "https://management.azure.com/identity"
+      ],
+      "answer": 2,
+      "explanation": "The IMDS identity endpoint is reachable only from inside the VM and returns tokens for the VM's managed identity without any credentials in code."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "What credential does a managed identity use, and how is it rotated?",
+      "options": [
+        "A certificate managed by Azure, valid for 90 days and rolled after 45 days",
+        "A client secret that administrators rotate every 12 months by using a scheduled automation job",
+        "A password that expires after 180 days",
+        "A SAML signing key rotated every three years"
+      ],
+      "answer": 0,
+      "explanation": "Managed identities use certificate-based authentication. Azure issues and rotates the certificate automatically, so no credential is exposed to administrators or code."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "An administrator assigns a new role to a managed identity, but the workload keeps getting access denied for several hours. What is the explanation?",
+      "options": [
+        "The VM must be restarted and the identity re-enabled before any role change applies to the workload",
+        "Managed identity tokens are cached, so permission changes can take hours and the token can't be force-refreshed",
+        "The identity must be recreated for role changes to apply",
+        "Role assignments to managed identities require an approval workflow"
+      ],
+      "answer": 1,
+      "explanation": "Tokens for managed identities are cached by the underlying infrastructure, so changes to permissions can take several hours to take effect."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which libraries can application code use to retrieve a managed identity token on Azure compute?",
+      "options": [
+        "Only the Azure CLI",
+        "ADAL with a client secret that is stored in the application's configuration file",
+        "Active Directory Federation Services",
+        "The Microsoft Authentication Library (MSAL) or the Azure.Identity SDK"
+      ],
+      "answer": 3,
+      "explanation": "Service code uses MSAL or the Azure.Identity SDK, such as DefaultAzureCredential, to get a token for the managed identity from Entra ID."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A workload running with a managed identity must get a token for an Entra application without any secret. What lets the app registration trust the managed identity?",
+      "options": [
+        "A client secret stored in Key Vault and retrieved by the managed identity at startup",
+        "A redirect URI that points at the VM",
+        "A federated identity credential on the app registration that trusts the managed identity",
+        "An app role assigned to the VM's public IP address"
+      ],
+      "answer": 2,
+      "explanation": "Managed identity as a federated identity credential lets the identity's token be exchanged for an Entra application token through workload identity federation, without secrets."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A subscription that hosts resources with managed identities is moved to another Microsoft Entra directory. What happens to the managed identities?",
+      "options": [
+        "They aren't recreated automatically; you must re-create them and grant role assignments again",
+        "They move to the new directory automatically, and their role assignments stay intact in the target subscription",
+        "They are recreated automatically within 24 hours",
+        "They are converted to app registrations"
+      ],
+      "answer": 0,
+      "explanation": "Managed identities are tied to the directory. After moving a subscription to another directory, they must be re-created manually and role assignments granted again."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A cloud engineer must create and delete user-assigned managed identities but do nothing else. Which built-in role should you assign?",
+      "options": [
+        "Managed Identity Operator",
+        "Virtual Machine Contributor at subscription scope",
+        "User Access Administrator",
+        "Managed Identity Contributor"
+      ],
+      "answer": 3,
+      "explanation": "Managed Identity Contributor permits creating and deleting user-assigned identities. Managed Identity Operator only allows assigning them to resources."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A team must attach an existing user-assigned managed identity to virtual machines. Which permissions are required?",
+      "options": [
+        "Managed Identity Contributor on the identity only, with no permissions on the virtual machines",
+        "Write permission on the VM and the Managed Identity Operator role on the identity",
+        "Owner on the subscription only",
+        "Global Administrator in Microsoft Entra ID"
+      ],
+      "answer": 1,
+      "explanation": "Assigning a user-assigned identity needs write access to the resource and the identity's assign action, which the Managed Identity Operator role provides."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "An engineer needs to enable a system-assigned managed identity on a virtual machine. What permission is required?",
+      "options": [
+        "Write permission over the virtual machine, such as the Virtual Machine Contributor role",
+        "Managed Identity Contributor on the resource group that contains the virtual machine",
+        "Application Administrator in Entra ID",
+        "Privileged Role Administrator in Entra ID"
+      ],
+      "answer": 0,
+      "explanation": "Enabling a system-assigned identity needs write permission on the resource itself, such as Microsoft.Compute/virtualMachines/write, which Virtual Machine Contributor includes."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "To let a managed identity read blobs in a storage account, which role must the administrator hold to create the role assignment?",
+      "options": [
+        "Managed Identity Operator on the identity and Reader on the storage account",
+        "Contributor on the storage account",
+        "Owner or User Access Administrator over the storage account",
+        "Storage Blob Data Reader on the storage account"
+      ],
+      "answer": 2,
+      "explanation": "Creating Azure role assignments requires a role that can write them, which Owner and User Access Administrator provide. Contributor can't manage access."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A system-assigned managed identity for an Azure Automation runbook needs the Microsoft Graph application permission User.Read.All. How do you grant it?",
+      "options": [
+        "Select Grant admin consent on the managed identity under Permissions in Enterprise applications, signed in as Global Administrator",
+        "Use PowerShell or Graph to create an app role assignment for Microsoft Graph on the managed identity's service principal",
+        "Add API permissions to the identity under App registrations",
+        "Assign the User Administrator Azure RBAC role to the identity"
+      ],
+      "answer": 1,
+      "explanation": "A managed identity has no application object, so API permissions can't be added in the portal. You create an app role assignment on its service principal with Graph PowerShell or the CLI."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which role is required to grant Microsoft Graph application permissions to a managed identity?",
+      "options": [
+        "Cloud Application Administrator or Application Administrator",
+        "Application Developer",
+        "Managed Identity Operator",
+        "Privileged Role Administrator or higher"
+      ],
+      "answer": 3,
+      "explanation": "Granting Microsoft Graph application permissions needs a Privileged Role Administrator or higher. Managed Identity Operator is an Azure RBAC role and has no effect on Graph permissions."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "An administrator without read access to a resource adds a role assignment and can't find the managed identity in the picker. What can the administrator do?",
+      "options": [
+        "Search by User, group, or service principal to find the identity's backing service principal",
+        "Search by Application registration, because every managed identity has one",
+        "Assign the Security Reader role to the identity",
+        "Recreate the identity"
+      ],
+      "answer": 0,
+      "explanation": "Without Reader access you can still find the identity through its service principal, so search by User, group, or service principal when adding the role assignment."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "An administrator accidentally deletes a managed identity. What does Microsoft Entra ID allow?",
+      "options": [
+        "It can be restored from the deleted items recycle bin by an administrator within 30 days",
+        "It is purged immediately and can't be seen",
+        "The service principal is soft deleted for 30 days and can be viewed, but not restored or permanently deleted",
+        "It is restored automatically when the resource is redeployed"
+      ],
+      "answer": 2,
+      "explanation": "Managed identities are soft deleted for 30 days. You can see the soft-deleted service principal, but you can't restore it or delete it permanently."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "You want to stop teams from creating user-assigned managed identities in a resource group. What should you use?",
+      "options": [
+        "A Conditional Access policy for workload identities that blocks creation of new managed identities",
+        "An access review on the resource group",
+        "A Microsoft Entra permission classification",
+        "An Azure Policy with a deny effect on Microsoft.ManagedIdentity/userAssignedIdentities"
+      ],
+      "answer": 3,
+      "explanation": "Azure Policy can deny creation of the userAssignedIdentities resource type at a scope such as a resource group."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which statement about user-assigned managed identities is correct?",
+      "options": [
+        "They can be used only in the region where they were created",
+        "They can be used by resources in more than one region, but they can't be moved to another resource group",
+        "They can be moved between subscriptions together with their role assignments by using a resource move",
+        "They can be used by only one resource at a time"
+      ],
+      "answer": 1,
+      "explanation": "The identity is a regional resource, but its service principal is global, so it can be used in multiple regions. Moving it to a different resource group isn't supported."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "You need a managed identity that lives in a different resource group or subscription than an existing one, and moving isn't supported. What does Microsoft advise?",
+      "options": [
+        "Move the identity to the new resource group with a resource move operation",
+        "Export the identity's certificate and import it in the new subscription",
+        "Create a new user-assigned identity there and grant it the necessary permissions",
+        "Reuse the same identity ID in the new subscription"
+      ],
+      "answer": 2,
+      "explanation": "Managed identities can't be moved, so create a new user-assigned identity where you need it and assign it the required permissions again."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A security team wants Conditional Access for workload identities to cover their managed identities. What is the outcome?",
+      "options": [
+        "It isn't supported; the policies cover single-tenant service principals but not managed identities",
+        "It is supported with Workload Identities Premium",
+        "It is supported if the identity's service principal is added to a group that the policy targets",
+        "It is supported only for system-assigned identities"
+      ],
+      "answer": 0,
+      "explanation": "Managed identities aren't covered by Conditional Access for workload identities, and policies assigned to a group that contains a service principal aren't enforced. Use other controls such as least-privilege roles and monitoring."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Where can an administrator see sign-in activity for managed identities in Microsoft Entra ID?",
+      "options": [
+        "Only in the user sign-ins tab, because managed identities sign in as users",
+        "Only in the Azure Activity log",
+        "In the Authentication methods activity report",
+        "In the sign-in logs, on the Managed identity sign-ins tab"
+      ],
+      "answer": 3,
+      "explanation": "Managed identity sign-ins appear in the Entra sign-in logs. The Azure Activity log shows create, update and delete operations on the identities."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which statement about directory quotas is correct for managed identities?",
+      "options": [
+        "Managed identities don't count toward any directory quota because they are Azure resources",
+        "Each managed identity counts toward the object quota of the Microsoft Entra tenant",
+        "Only user-assigned identities count toward the quota",
+        "Only system-assigned identities count toward the quota"
+      ],
+      "answer": 1,
+      "explanation": "Each managed identity creates a service principal that counts toward the directory's object quota, in addition to Azure limits on creating identities."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "How can you list managed identities in a tenant by using the Microsoft Entra admin center?",
+      "options": [
+        "Go to App registrations and filter by Owned applications to see managed identity objects",
+        "Go to Users and filter by user type Member",
+        "Go to Enterprise applications and filter by application type Managed Identities",
+        "Go to Roles and administrators"
+      ],
+      "answer": 2,
+      "explanation": "Managed identities appear as service principals, so they show under Enterprise applications with the Managed Identities application type filter. They don't appear in App registrations."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which of these can have a managed identity?",
+      "options": [
+        "An Azure virtual machine or an Azure App Service",
+        "A Microsoft 365 group",
+        "A guest user",
+        "A personal Microsoft account"
+      ],
+      "answer": 0,
+      "explanation": "Managed identities are assigned to Azure compute or hosting resources such as VMs, scale sets, App Service, Functions, Logic Apps and AKS, not to users or groups."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "An Azure Function app must read a secret from Key Vault without storing any credentials in its configuration. What should you do?",
+      "options": [
+        "Store a client secret in app settings, protect it with Key Vault references and rotate it monthly",
+        "Enable a managed identity on the function app and grant it access to the vault",
+        "Create a guest account for the function and add it to the vault",
+        "Store a shared access signature in code"
+      ],
+      "answer": 1,
+      "explanation": "A managed identity removes stored credentials. Grant the identity a Key Vault role or access policy, and the function gets tokens automatically."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A runbook in Azure Automation must create users through Microsoft Graph without stored credentials. What is the best approach?",
+      "options": [
+        "Store a service account password in an encrypted Automation variable and read it at run time",
+        "Use an app registration with a client secret inside the runbook",
+        "Use a guest account with the User Administrator role",
+        "Use the Automation account's managed identity, with Graph application permissions granted by PowerShell"
+      ],
+      "answer": 3,
+      "explanation": "The Automation account's managed identity authenticates without secrets. Because the portal can't assign Graph permissions to it, grant them with an app role assignment through PowerShell."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A web app with a managed identity must call an internal API that is protected by Microsoft Entra ID and defines an app role. What should you do?",
+      "options": [
+        "Assign the API's app role to the managed identity's service principal by using PowerShell or the CLI",
+        "Add the managed identity as a guest user of the API's tenant and assign it the API's user role",
+        "Add delegated permissions for the API to the managed identity",
+        "Assign the API an Azure RBAC role for the web app"
+      ],
+      "answer": 0,
+      "explanation": "Apps and managed identities receive app roles through an app role assignment on their service principal for the API's resource. This is done with Graph PowerShell or the CLI."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which type of managed identity can have federated identity credentials?",
+      "options": [
+        "System-assigned managed identity",
+        "Both types equally",
+        "User-assigned managed identity",
+        "Neither type; only app registrations can"
+      ],
+      "answer": 2,
+      "explanation": "Federated identity credentials can be configured on user-assigned managed identities, but system-assigned identities can't currently receive external federated credentials."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "How many Azure role assignments does a single subscription support?",
+      "options": [
+        "500",
+        "4,000",
+        "2,000",
+        "10,000"
+      ],
+      "answer": 1,
+      "explanation": "A subscription supports up to 4,000 Azure role assignments, so assigning roles to groups instead of many individual identities helps stay within the limit. Verify the current limit before relying on it."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "An Azure-hosted API stores a client secret in its configuration to access Azure Storage. What is the recommended improvement?",
+      "options": [
+        "Replace it with a longer-lived certificate that is stored in the application configuration",
+        "Rotate the secret every 24 months",
+        "Put the storage account key in the code",
+        "Replace the secret with a managed identity and grant the identity a storage role"
+      ],
+      "answer": 3,
+      "explanation": "Managed identities eliminate stored credentials for Azure-to-Azure access. Rotating or lengthening a secret still leaves a credential to leak."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Which type of managed identity does Microsoft recommend for Microsoft services?",
+      "options": [
+        "User-assigned",
+        "System-assigned",
+        "Either type; Microsoft has no recommendation",
+        "Neither; use app registrations"
+      ],
+      "answer": 0,
+      "explanation": "Microsoft describes user-assigned managed identities, which are provisioned independently of compute and can be assigned to multiple resources, as the recommended type for Microsoft services."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A managed identity must read user objects in Microsoft Entra ID. Which kind of permission should you grant?",
+      "options": [
+        "An Azure RBAC role such as Reader or Contributor on the subscription that contains the identity",
+        "A Conditional Access exclusion",
+        "Microsoft Graph application permissions (app roles), because Azure RBAC roles don't control Graph access",
+        "A delegated permission consented to by a user"
+      ],
+      "answer": 2,
+      "explanation": "Azure RBAC governs access to Azure resources. Access to Microsoft Graph data is granted as application permissions on the identity's service principal."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "Where can you see create, update and delete operations on managed identities?",
+      "options": [
+        "In the Authentication methods activity report",
+        "In the Risky workload identities report",
+        "In the Entra provisioning logs",
+        "In the Azure Activity log"
+      ],
+      "answer": 3,
+      "explanation": "CRUD operations on managed identities are recorded in the Azure Activity log, while their sign-ins are recorded in the Entra sign-in logs."
+    },
+    {
+      "topic": "managed-identities",
+      "q": "A managed identity is added to a group, and the group is assigned an Azure role. Hours later the workload still lacks access. What is the cause?",
+      "options": [
+        "Managed identities can't be added to groups of any type, so the role assignment is ignored",
+        "Back-end services cache managed identity tokens, including group and role membership, for about 24 hours, so assign roles directly for faster effect",
+        "Group-based role assignments for managed identities need an Entra ID P2 license and role-assignable groups",
+        "The group must be role-assignable for Azure roles"
+      ],
+      "answer": 1,
+      "explanation": "The managed identity infrastructure caches tokens per resource URI for around 24 hours, so group or role membership changes can take hours to appear. Directly assigning the role avoids relying on the group."
+    }
+  ]
+}

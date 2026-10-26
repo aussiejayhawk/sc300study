@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which license is required to use Privileged Identity Management?",
+      "options": [
+        "Microsoft Entra ID Free",
+        "Microsoft Entra ID P1, which includes Privileged Identity Management for eligible users",
+        "Microsoft Entra Workload Identities Premium",
+        "Microsoft Entra ID P2 or Microsoft Entra ID Governance"
+      ],
+      "answer": 3,
+      "explanation": "PIM is an identity governance capability that needs Entra ID P2 or Entra ID Governance, including for users who are eligible for roles and group memberships."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "A user must perform an activation, optionally with MFA or approval, before a role takes effect. Which assignment type is this?",
+      "options": [
+        "Active assignment",
+        "Permanent active assignment",
+        "Eligible assignment",
+        "Direct assignment outside PIM"
+      ],
+      "answer": 2,
+      "explanation": "Eligible assignments require the member to activate the role before using it, while active assignments are usable immediately."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Who is automatically assigned the Security Administrator and Privileged Role Administrator roles when PIM is first used in an organization?",
+      "options": [
+        "The first person to use PIM",
+        "All Global Administrators",
+        "Every user with an Entra ID P2 license",
+        "Only the user who created the tenant"
+      ],
+      "answer": 0,
+      "explanation": "Entra ID assigns Security Administrator and Privileged Role Administrator to the first person to use PIM in the organization."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which role is the least-privileged option for managing PIM role settings for a Microsoft Entra role?",
+      "options": [
+        "Security Administrator",
+        "Security Reader",
+        "Authentication Policy Administrator",
+        "Privileged Role Administrator"
+      ],
+      "answer": 3,
+      "explanation": "Managing PIM role settings for Entra roles requires at least Privileged Role Administrator."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which roles can read PIM security alerts for Microsoft Entra roles?",
+      "options": [
+        "Only Global Administrator, Privileged Role Administrator and Security Administrator, because the reader roles are read-only",
+        "Global Administrator, Privileged Role Administrator, Global Reader, Security Administrator and Security Reader",
+        "Any user who has an eligible assignment",
+        "Only Security Administrator"
+      ],
+      "answer": 1,
+      "explanation": "Those five roles can read the alerts, and managing the alert settings needs a role such as Privileged Role Administrator."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "An administrator changes the PIM role settings for the Exchange Administrator role. How does this affect other roles?",
+      "options": [
+        "It applies to every role in the tenant, because role settings are tenant-wide policies for PIM",
+        "It applies to all roles in the same category",
+        "It applies to other roles that share the same permissions",
+        "It affects only that role, because role settings are defined per role and are independent"
+      ],
+      "answer": 3,
+      "explanation": "Role settings, also called PIM policies, are defined for each role and don't affect other roles."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which kinds of Microsoft Entra roles can PIM manage?",
+      "options": [
+        "Built-in roles only",
+        "Custom roles only",
+        "Both built-in and custom roles",
+        "Only roles with directory-level privileges"
+      ],
+      "answer": 2,
+      "explanation": "PIM supports built-in and custom Microsoft Entra roles."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "What is the allowed range for the activation maximum duration of a role in PIM?",
+      "options": [
+        "From 15 minutes to 8 hours",
+        "From one to 72 hours",
+        "From one to 24 hours",
+        "From one day to 30 days"
+      ],
+      "answer": 2,
+      "explanation": "The activation maximum duration slider accepts values from one to 24 hours."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Administrators activate roles from a device on which they signed in with Windows Hello for Business. You want them to authenticate again with a different method at activation. What should you configure?",
+      "options": [
+        "Require a Conditional Access authentication context together with an authentication strength",
+        "On activation, require multifactor authentication only, because Windows Hello for Business always counts as MFA",
+        "Require ticket information on activation",
+        "Require justification on activation"
+      ],
+      "answer": 0,
+      "explanation": "The MFA setting may be satisfied by earlier strong authentication in the session. An authentication context with an authentication strength forces a specific method at activation."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "You configure On activation, require Conditional Access authentication context for a role. Which statement is correct?",
+      "options": [
+        "The policy should target the directory role and the authentication context at the same time so that it applies during and after activation",
+        "The policy should target the authentication context for eligible users, not the directory role at the same time, and it should exist before you configure PIM",
+        "The policy can be in report-only mode and is still enforced",
+        "PIM falls back to MFA even if the policy is turned off"
+      ],
+      "answer": 1,
+      "explanation": "During activation the user doesn't have the role yet, so a policy that targets the role doesn't apply. The MFA backup applies only when no policy targets the context, and not when the policy is off, report-only or excludes the user."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "You must force users to reauthenticate every time they activate a role. How?",
+      "options": [
+        "Set the activation maximum duration to one hour and require justification and ticket information on activation",
+        "Require ticket information on activation",
+        "Require approval with two approvers",
+        "Use a Conditional Access policy for the authentication context with sign-in frequency set to Every time"
+      ],
+      "answer": 3,
+      "explanation": "Sign-in frequency set to Every time in the Conditional Access policy that targets the authentication context ensures reauthentication for each activation."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "A user reauthenticates to activate one eligible role and activates a second eligible role shortly afterward. What applies?",
+      "options": [
+        "A 10-minute window applies across Entra roles, Azure resource roles and PIM for Groups, so no new prompt appears within it",
+        "A 60-minute window applies to Entra roles only, and Azure resource roles always prompt again",
+        "Every activation always prompts again",
+        "The window applies only to roles in the same category"
+      ],
+      "answer": 0,
+      "explanation": "After a reauthentication for one activation, other activations within 10 minutes don't prompt again, regardless of whether they are Entra roles, Azure roles or group memberships."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "What does the Require ticket information on activation setting do?",
+      "options": [
+        "It asks for a ticket number, but the value isn't validated against any ticketing system",
+        "It validates the number against ServiceNow or another ticketing system automatically before activation",
+        "It requires an approver to enter the ticket",
+        "It opens a ticket in the Microsoft 365 admin center"
+      ],
+      "answer": 0,
+      "explanation": "The ticket field is informational only, and PIM doesn't correlate it with information in a ticketing system."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Auditors need to know why administrators activate privileged roles. What should you enable in the role settings?",
+      "options": [
+        "Require justification on active assignment",
+        "Allow permanent eligible assignment",
+        "Require justification on activation",
+        "Send notifications to the activated user only"
+      ],
+      "answer": 2,
+      "explanation": "Justification on activation captures the business reason each time an eligible user activates. The active assignment version applies when an admin creates an active assignment."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "You require approval to activate a role but don't select any approvers. Who become the default approvers?",
+      "options": [
+        "The user's manager",
+        "Security Administrators",
+        "The group owners of the activating user and any member of the Security Administrator role",
+        "Active Privileged Role Administrators and Global Administrators"
+      ],
+      "answer": 3,
+      "explanation": "If no approvers are selected, active Privileged Role Administrators and Global Administrators become the default approvers."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which combination can lock you out of your tenant?",
+      "options": [
+        "All Privileged Role Administrators and Global Administrators are eligible only, approval is required, and no approvers are configured",
+        "Approval is required, and two specific approvers are configured",
+        "Emergency access accounts have permanent active Global Administrator assignments",
+        "One Global Administrator exists and is permanently active"
+      ],
+      "answer": 0,
+      "explanation": "If nobody can activate and approvals have no configured approvers, nobody can approve a request. Emergency access accounts and specific approvers prevent this."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "How many approvers does Microsoft recommend selecting for role activation approval?",
+      "options": [
+        "Exactly one",
+        "At least five",
+        "None; rely on the default approvers",
+        "At least two"
+      ],
+      "answer": 3,
+      "explanation": "Select at least one approver and preferably two or more, so approvals don't depend on a single person. The approvers don't need to hold any role."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Auditors require every eligible assignment to have a start and end date. Which setting meets this?",
+      "options": [
+        "Allow permanent active assignment, which forces every assignment to have an end date",
+        "Require MFA on active assignment",
+        "Expire eligible assignment after, instead of Allow permanent eligible assignment",
+        "An activation maximum duration of one hour"
+      ],
+      "answer": 2,
+      "explanation": "The assignment duration settings decide whether eligible assignments can be permanent or must expire. Activation duration applies to each activation, not to the assignment."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Why can't PIM enforce MFA when a user uses an active assignment?",
+      "options": [
+        "MFA applies only to eligible users in the Free edition, and active assignments aren't covered by licensing",
+        "The user is already active in the role from the time it's assigned, so MFA applies only when the assignment is created",
+        "Active assignments use certificate-based authentication",
+        "MFA must be enforced by Conditional Access only for guests"
+      ],
+      "answer": 1,
+      "explanation": "Require MFA on active assignment applies when the administrator creates the active assignment. PIM can't prompt when the user later uses a role that's already active."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which approach is recommended for emergency access accounts in a PIM deployment?",
+      "options": [
+        "Make them eligible for Global Administrator with approval and exclude them from Conditional Access policies",
+        "Give them permanent active Global Administrator assignments and exclude them from Conditional Access policies",
+        "Require MFA on activation with a ticket number",
+        "Remove their role assignments and rely on approvals"
+      ],
+      "answer": 1,
+      "explanation": "Emergency access accounts must work when other administrators can't activate, so they keep permanent active assignments and are excluded from policies that could block them."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "A user is assigned the Exchange Administrator role directly in Microsoft Entra, bypassing PIM. Which alert fires, and with what severity?",
+      "options": [
+        "Potential stale accounts in a privileged role, severity Medium",
+        "There are too many Global Administrators, severity Low",
+        "Roles are being activated too frequently, severity Low",
+        "Roles are being assigned outside of Privileged Identity Management, severity High"
+      ],
+      "answer": 3,
+      "explanation": "Assignments made outside PIM aren't monitored and might indicate an attack, so the alert has High severity."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "What is the severity of the Potential stale accounts in a privileged role alert?",
+      "options": [
+        "High",
+        "Low",
+        "Medium",
+        "Informational"
+      ],
+      "answer": 2,
+      "explanation": "Potential stale accounts is a Medium alert, the outside-of-PIM alert is High, and the remaining alerts are Low."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "The tenant has more Global Administrators than your policy allows. How can you tune the related alert?",
+      "options": [
+        "Remove the alert from the PIM settings, because its thresholds can't be configured by administrators",
+        "Change the activation maximum duration",
+        "Require two approvers for Global Administrator",
+        "Adjust the thresholds for the number and percentage of Global Administrators in the alert settings"
+      ],
+      "answer": 3,
+      "explanation": "The too-many-Global-Administrators alert has configurable thresholds, including the minimum percentage of administrators who are Global Administrators."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "What is the remedy for the alert Roles don't require multifactor authentication for activation?",
+      "options": [
+        "Require approval on assignment",
+        "Require MFA on activation in the role settings",
+        "Enable a registration campaign",
+        "Turn on security defaults"
+      ],
+      "answer": 1,
+      "explanation": "Without MFA, compromised users can activate privileged roles, so the fix is to enable the MFA requirement on activation for those roles."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "In PIM for Azure resources, which alerts have Medium severity?",
+      "options": [
+        "Roles assigned outside PIM and potential stale accounts, plus roles that don't require MFA",
+        "Administrators aren't using their privileged roles",
+        "Too many owners assigned to a resource, and too many permanent owners assigned to a resource",
+        "Roles are being activated too frequently"
+      ],
+      "answer": 2,
+      "explanation": "The Azure resource alerts for too many owners and too many permanent owners are Medium severity, and their emails go to Owners and User Access Administrators."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which PIM alert indicates possible misuse because the same role is activated repeatedly in a short period?",
+      "options": [
+        "Potential stale accounts in a privileged role",
+        "Roles are being activated too frequently",
+        "Administrators aren't using their privileged roles",
+        "Roles don't require MFA for activation"
+      ],
+      "answer": 1,
+      "explanation": "The too-frequent activation alert flags repeated activations that might mean the role is being used as a standing privilege or misused."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Who has resource administrator permissions by default in PIM for Azure resources?",
+      "options": [
+        "Only Global Administrators and Privileged Role Administrators who enabled subscription management",
+        "Owners and User Access Administrators of the subscription, and Global Administrators who enable subscription management",
+        "Contributors on the subscription",
+        "Security Administrators"
+      ],
+      "answer": 1,
+      "explanation": "These administrators can assign roles, configure role settings and review access using PIM for Azure resources."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which feature lets you add conditions to eligible role assignments in PIM for Azure resources?",
+      "options": [
+        "Conditional Access authentication context",
+        "Access packages",
+        "Azure attribute-based access control (Azure ABAC)",
+        "Administrative units"
+      ],
+      "answer": 2,
+      "explanation": "Azure ABAC conditions can be added to eligible assignments for certain built-in roles in PIM for Azure resources."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "At which scopes can PIM manage Azure resource roles?",
+      "options": [
+        "Management groups, subscriptions, resource groups and resources",
+        "Subscriptions only, because resource groups and resources can't be scoped in PIM",
+        "Tenants and management groups only",
+        "Only the tenant root"
+      ],
+      "answer": 0,
+      "explanation": "PIM for Azure resources starts at a management group or subscription and can go down to resource groups and resources."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which Azure roles can PIM manage?",
+      "options": [
+        "Only Owner and User Access Administrator",
+        "Only built-in roles",
+        "Only custom roles",
+        "Built-in and custom Azure roles"
+      ],
+      "answer": 3,
+      "explanation": "PIM supports both built-in and custom Azure roles, including Owner, User Access Administrator, Contributor and others."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "A user will be an eligible member of a group in PIM for Groups. What is required for that user?",
+      "options": [
+        "A Microsoft 365 E3 license",
+        "A Microsoft Entra ID P2 or Microsoft Entra ID Governance license",
+        "Membership in an administrative unit",
+        "The Groups Administrator role"
+      ],
+      "answer": 1,
+      "explanation": "Every user who is eligible for membership or ownership of a PIM for Groups needs P2 or Governance."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "You aren't the owner of a role-assignable group. Which role is the minimum to make users eligible members in PIM for Groups?",
+      "options": [
+        "Groups Administrator",
+        "User Administrator",
+        "Privileged Role Administrator",
+        "Identity Governance Administrator"
+      ],
+      "answer": 2,
+      "explanation": "For role-assignable groups you need at least Privileged Role Administrator or must own the group."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Who can assign eligibility for a non-role-assignable group in PIM for Groups?",
+      "options": [
+        "Directory Writers, Groups Administrators, Identity Governance Administrators, User Administrators, or the group's owner",
+        "Only Global Administrators",
+        "Only Privileged Role Administrators and Global Administrators, because group roles aren't delegable",
+        "Only the group's members"
+      ],
+      "answer": 0,
+      "explanation": "Non-role-assignable groups can be managed by those roles or by the group's owner. Role-assignable groups need at least Privileged Role Administrator or ownership."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Group A is an eligible member of Group B, and Ann is an active member of Group A. What can Ann do?",
+      "options": [
+        "Group A is automatically a member of Group B",
+        "Activate membership in Group B, but Group A doesn't become a member of Group B",
+        "Nothing; nesting isn't supported in PIM for Groups",
+        "All members of Group A become members of Group B immediately"
+      ],
+      "answer": 1,
+      "explanation": "One group can be an eligible member of another, and activation applies to the user who requested it."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Which statement about role-assignable groups used with PIM is correct?",
+      "options": [
+        "They must use dynamic membership, so that role assignments follow user attributes",
+        "Role-assignable groups can't have other groups nested as active members",
+        "They can be nested in other role-assignable groups as active members",
+        "They don't need Entra ID P2"
+      ],
+      "answer": 1,
+      "explanation": "Role-assignable groups can't nest other groups, which keeps role assignments easy to audit."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "A role assignment with an end date is about to expire. Who can renew it for others, and what happens to user-initiated extension requests?",
+      "options": [
+        "Global Administrators and Privileged Role Administrators can renew, and user-initiated extension or renewal requests need their approval",
+        "Any eligible user can renew their own assignment without approval, up to the assignment's maximum duration",
+        "Security Administrators can renew all assignments",
+        "Assignments renew automatically if the user activated them"
+      ],
+      "answer": 0,
+      "explanation": "Users can request an extension or renewal, and Global Administrators or Privileged Role Administrators approve it. Those admins can also renew assignments themselves."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "You want PIM to email recipients only about events that need immediate action. Which notification option fits?",
+      "options": [
+        "Critical emails only",
+        "Turn off all emails",
+        "Send emails to default recipients only",
+        "Add additional recipients"
+      ],
+      "answer": 0,
+      "explanation": "With Critical emails only, PIM continues to send emails only when immediate action is required, such as approving an extension request."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Where do users activate their eligible Microsoft Entra roles?",
+      "options": [
+        "In Roles and administrators by editing their assignment",
+        "In the Access Reviews blade",
+        "In Privileged Identity Management, under My roles",
+        "In Entitlement management, under Access packages"
+      ],
+      "answer": 2,
+      "explanation": "Eligible users open PIM and activate the role from My roles, supplying MFA, justification or ticket information if required."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Contractors need the Application Administrator role for exactly two weeks starting next Monday. How should this be assigned in PIM?",
+      "options": [
+        "As a permanent active assignment",
+        "Through an access review of the role",
+        "As a permanent eligible assignment",
+        "As an eligible or active assignment with a custom start date and end date"
+      ],
+      "answer": 3,
+      "explanation": "PIM supports time-bound assignments with start and end dates, so the access ends automatically."
+    },
+    {
+      "topic": "privileged-identity-management",
+      "q": "Helpdesk staff should receive Helpdesk Administrator only when needed, with approval. How should you implement this by using PIM for Groups?",
+      "options": [
+        "Create a role-assignable group, assign the role to the group, and make the staff eligible members with approval required",
+        "Create a dynamic group that has the role assigned, and make the staff active members so that the role follows their department",
+        "Assign the role directly and require approval on the active assignment",
+        "Create an administrative unit that is scoped to the staff"
+      ],
+      "answer": 0,
+      "explanation": "A role-assignable group holds the role, and PIM for Groups gives eligible members just-in-time access with approval. Active assignments and dynamic groups don't provide just-in-time access."
+    }
+  ]
+}

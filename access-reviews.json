@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "access-reviews",
+      "q": "Which access review scenarios specifically require a Microsoft Entra ID Governance license?",
+      "options": [
+        "Reviews of inactive users and reviews that use user-to-group affiliation recommendations",
+        "Any review of group membership, including recurring reviews of guest users in Microsoft 365 groups",
+        "Reviews that use the No sign-in within 30 days recommendation",
+        "Reviews that are scoped to guest users only"
+      ],
+      "answer": 0,
+      "explanation": "Inactive-user reviews and user-to-group affiliation recommendations need Entra ID Governance. Basic group and application reviews are covered by the access review license."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Which role does Microsoft recommend, following least privilege, for creating access reviews of groups and applications?",
+      "options": [
+        "Identity Governance Administrator",
+        "Global Administrator, because it is the only role that can create reviews",
+        "Security Administrator",
+        "Privileged Role Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Identity Governance Administrator can create and manage reviews of groups and applications without broader privileges. Global Administrator also works but is far more privileged."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A security team must create an access review of a role-assignable group. Which role is the minimum required?",
+      "options": [
+        "Identity Governance Administrator",
+        "User Administrator",
+        "Groups Administrator",
+        "Privileged Role Administrator"
+      ],
+      "answer": 3,
+      "explanation": "Reviews of role-assignable groups need at least Privileged Role Administrator (or Global Administrator). Identity Governance Administrator and User Administrator can't review those groups."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Department heads who own Microsoft 365 groups should create and manage access reviews for their own groups. What must an administrator do first?",
+      "options": [
+        "Assign each group owner the User Administrator role so they can create and manage access reviews of the groups that they own in the tenant",
+        "As at least an Identity Governance Administrator, set Group owners can create and manage access reviews for groups they own to Yes",
+        "Assign each group owner the Identity Governance Administrator role",
+        "Add the owners to a role-assignable group"
+      ],
+      "answer": 1,
+      "explanation": "The setting in Access Reviews settings is No by default. Once enabled, group owners can manage reviews of their own groups without any directory role."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Where do reviewers complete access reviews of group membership and application access?",
+      "options": [
+        "In the Azure portal Access control (IAM) blade",
+        "In the Microsoft 365 admin center",
+        "In the Microsoft Entra admin center, by administrators only",
+        "In the My Access portal (the Access panel)"
+      ],
+      "answer": 3,
+      "explanation": "Reviewers of group and application access use the My Access experience, which is separate from the admin center used to create reviews. Role reviews in PIM are completed in the admin center."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Which tool is used to review assignments to Microsoft Entra roles such as Global Administrator?",
+      "options": [
+        "Privileged Identity Management",
+        "Entitlement management, which reviews access package assignments and Entra role assignments",
+        "Administrative units",
+        "Conditional Access"
+      ],
+      "answer": 0,
+      "explanation": "Reviews of Microsoft Entra roles and Azure resource roles are created in Privileged Identity Management. Group and application reviews are created in Access Reviews."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A company wants recurring reviews of all guest users across all of its Microsoft 365 groups and Teams. Which option fits, and what does it exclude?",
+      "options": [
+        "All Microsoft 365 groups with guest users, which excludes dynamic and role-assignable groups",
+        "Select Teams + groups with every group chosen, which includes dynamic and role-assignable groups",
+        "Applications, with every enterprise app selected",
+        "All Microsoft 365 groups, including role-assignable groups"
+      ],
+      "answer": 0,
+      "explanation": "This option creates recurring guest reviews across Microsoft 365 groups. Its scope is limited to guest users, and dynamic and role-assignable groups aren't included."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Which role has read access to access review results but can't change reviews?",
+      "options": [
+        "Directory Readers",
+        "Groups Administrator",
+        "Security Reader",
+        "Application Administrator"
+      ],
+      "answer": 2,
+      "explanation": "Security readers can read access review information. Creating and managing reviews needs a role such as Identity Governance Administrator or User Administrator."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Which reviewer options can you choose for a group access review?",
+      "options": [
+        "Group owners, selected users or groups, users reviewing their own access, and managers of users",
+        "Only selected users or groups chosen by the review creator",
+        "Only group owners and managers",
+        "Only Global Administrators"
+      ],
+      "answer": 0,
+      "explanation": "A review can use group owners (for team or group reviews), selected users or groups, self-review, or managers of users, and fallback reviewers can be added for owners and managers."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A review uses Managers of users as the reviewers, but some users have no manager in the directory. What should you configure?",
+      "options": [
+        "Fallback reviewers",
+        "A second review stage",
+        "Auto apply results to resource",
+        "Justification required"
+      ],
+      "answer": 0,
+      "explanation": "Fallback reviewers are asked to review when a user has no manager, or when a group has no owner."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "During a group review, the group's owner list changes. Which owners act as reviewers?",
+      "options": [
+        "All current owners, with the list updated immediately during the review",
+        "Only the owners at the time the review started; the changes apply to the next recurrence",
+        "Only the newly added owners",
+        "None; group reviews always use selected users"
+      ],
+      "answer": 1,
+      "explanation": "For group reviews, owners at the start of the instance are the reviewers. In a recurring review, owner changes are picked up by the next instance."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "You need two independent sets of reviewers to decide in sequence, and only users the first stage denied should go to the second stage. What should you configure?",
+      "options": [
+        "A single-stage review with two selected reviewers, where the last decision is applied",
+        "A multi-stage review, choosing Denied reviewees to go to the next stage",
+        "Two separate reviews that run at the same time",
+        "A single-stage review with fallback reviewers"
+      ],
+      "answer": 1,
+      "explanation": "Multi-stage reviews support two or three sequential stages, and you choose which reviewees continue, such as approved, denied, not reviewed, don't know or all."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "How can you make later-stage reviewers decide independently of earlier stages?",
+      "options": [
+        "Select Take recommendations under If reviewers don't respond",
+        "Add fallback reviewers",
+        "Use a single-stage review",
+        "Leave Show previous stage(s) decisions to later stage reviewers unchecked"
+      ],
+      "answer": 3,
+      "explanation": "The option to reveal earlier decisions is a checkbox under Reveal review results. Leaving it unchecked keeps stages independent."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A guest user was assigned as a reviewer but received no email. What is the likely cause?",
+      "options": [
+        "Guests can't be reviewers unless they are converted to member users first",
+        "Reminders are disabled",
+        "The guest hasn't accepted the invitation to the tenant yet",
+        "The review has no fallback reviewer"
+      ],
+      "answer": 2,
+      "explanation": "Guests who haven't accepted their invitation don't receive review emails and must accept it before they can review."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "You want guests to confirm whether they still need membership in a group. How should you configure the review?",
+      "options": [
+        "Scope the review to everyone and use group owners as reviewers with a fallback reviewer",
+        "Scope the review to guest users only and use managers of users as reviewers",
+        "Use an inactive-users review with fallback reviewers",
+        "Scope the review to guest users only and set reviewers to users review their own access"
+      ],
+      "answer": 3,
+      "explanation": "Self-review by guests, with scope limited to guest users, asks each guest to attest to their own need for access."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "What does Auto apply results to resource do?",
+      "options": [
+        "It approves every user who didn't respond and sends a completion report to the creator",
+        "It removes access for denied users automatically when the review ends",
+        "It sends decisions to each reviewer's manager",
+        "It deletes the review after it completes"
+      ],
+      "answer": 1,
+      "explanation": "With auto apply enabled, results are applied when an instance completes or is stopped. Otherwise an administrator must apply them manually."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "The setting If reviewers don't respond is Remove access, and Auto apply results to resource is enabled. What risk should the administrator consider?",
+      "options": [
+        "The reviewers' own access to the resource is removed automatically because they failed to complete the review in time",
+        "All access to the resource could be revoked if reviewers fail to respond",
+        "The review stops without applying anything",
+        "Only guest users are affected"
+      ],
+      "answer": 1,
+      "explanation": "Combining remove-on-no-response with auto apply can strip every unreviewed user's access. Microsoft warns about this, and the same applies to Take recommendations."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "How does the No sign-in within 30 days decision helper work?",
+      "options": [
+        "Users who didn't sign in interactively in the last 30 days are removed automatically by the system when the review ends, without any reviewer decision",
+        "Only non-interactive sign-ins are counted",
+        "Users who signed in within 30 days are recommended for denial",
+        "Users who signed in during the previous 30 days are recommended for approval and others for denial, whether sign-ins were interactive or not"
+      ],
+      "answer": 3,
+      "explanation": "The helper uses last sign-in activity in the last 30 days, interactive or non-interactive, and shows the last sign-in date next to the recommendation."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Which decision helper recommends denying users who are far from the group's other members in the reporting structure, and what does it need?",
+      "options": [
+        "No sign-in within 30 days, which needs Entra ID P1 and Microsoft Defender for Identity",
+        "User-to-group affiliation, which needs Microsoft Entra ID Governance",
+        "Manager review, which needs Entra ID P2",
+        "Fallback reviewer, which needs no license"
+      ],
+      "answer": 1,
+      "explanation": "User-to-group affiliation scores users by average distance in the reporting structure, and users with low affiliation get a deny recommendation. It requires an Entra ID Governance license."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A review must include only users inactive for at least 90 days. A guest was invited 20 days ago. What happens?",
+      "options": [
+        "The guest is in scope and flagged for denial because no sign-ins are recorded yet",
+        "The guest is in scope and approved automatically",
+        "The guest isn't in scope, because recently created users are excluded until they've existed for the inactivity period",
+        "The review fails to start"
+      ],
+      "answer": 2,
+      "explanation": "Recently created users are ignored in inactive-user reviews so they can sign in at least once. The inactivity period can be up to 730 days."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Reviewers deny a guest user. The administrator wants the guest blocked from signing in and removed from the tenant later. What should be configured?",
+      "options": [
+        "Set If reviewers don't respond to Remove access, enable auto apply for all guests, and scope the review to everyone in the group",
+        "On a guest-only review, set the denied guest action to block sign-in for 30 days and then remove the user from the tenant",
+        "Enable Justification required",
+        "Use auto apply with a manager as reviewer"
+      ],
+      "answer": 1,
+      "explanation": "For reviews scoped to guest users only, you can choose to block denied guests for 30 days and then delete them. Otherwise only their membership in the resource is removed."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "What does the Justification required setting do?",
+      "options": [
+        "It requires the creator to justify the review before it starts",
+        "It requires reviewers to provide a reason when approving or denying",
+        "It requires guests to justify their sign-ins",
+        "It forces reviewers to follow recommendations"
+      ],
+      "answer": 1,
+      "explanation": "With the setting enabled, reviewers must give a reason for each approval or denial."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "When are reminder emails sent to reviewers if Reminders is enabled?",
+      "options": [
+        "Daily, starting on the first day of the review, until the reviewer responds",
+        "One day before the review ends",
+        "Only to reviewers who haven't responded, at the end",
+        "Halfway through the review, whether or not they've finished"
+      ],
+      "answer": 3,
+      "explanation": "Reminders go to all reviewers halfway through the review period, no matter if they've finished."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "An administrator removes a user from a group while a review is in progress. What happens to the review?",
+      "options": [
+        "The review still includes the user, because access is captured as a snapshot at the start of each instance; the change appears in the next recurrence",
+        "The user disappears from the review immediately because membership is evaluated continuously, and their earlier decision is discarded and recorded as not reviewed",
+        "The review restarts automatically",
+        "The review is canceled"
+      ],
+      "answer": 0,
+      "explanation": "Access reviews take a snapshot at the beginning of each instance, and changes made during the review are reflected in the next cycle."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A user is flagged for removal because of membership through a nested group. What does applying the results do?",
+      "options": [
+        "It removes only direct group membership; the user stays in the nested group and keeps access through it",
+        "It also removes the user from the nested group so they lose access completely, including access granted through other nested groups",
+        "It removes the nested group from the parent group",
+        "It fails and cancels the review"
+      ],
+      "answer": 0,
+      "explanation": "Nested groups are flattened in group reviews, but membership through a nested group isn't removed, so such users retain access."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A group synced from on-premises Active Directory is reviewed, and denied users are still members after applying results. Why?",
+      "options": [
+        "Auto apply must be enabled for synced groups and the Entra Connect sync cycle must run",
+        "Entra ID Governance is required for synced groups",
+        "Results can't change groups that originate on-premises, so apply the changes in the on-premises directory",
+        "Denied users must be removed within 30 days"
+      ],
+      "answer": 2,
+      "explanation": "A synced group can't be managed in Entra ID, so applying results has no effect. Download the results and change the group in the on-premises directory."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Reviewers deny users in a dynamic membership group. What happens when the results are applied?",
+      "options": [
+        "The denied users are removed from the group and the dynamic rule is excluded for them",
+        "The group is converted to assigned membership",
+        "The membership rule is edited automatically",
+        "Nothing changes; dynamic groups are managed by rules, so users remain while they match"
+      ],
+      "answer": 3,
+      "explanation": "Access review decisions don't change membership in dynamic groups. Users remain members as long as they satisfy the rule."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "An administrator stops an in-progress access review early. What is true?",
+      "options": [
+        "Reviewers can continue until the original end date, and decisions are applied then",
+        "The review resets and restarts immediately",
+        "All pending decisions are approved automatically",
+        "Reviewers can no longer respond, and the review can't be restarted"
+      ],
+      "answer": 3,
+      "explanation": "Stop applies to a specific instance, and a stopped review can't be restarted. To stop a recurring series, edit its end date."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "An auditor needs last quarter's decisions from a recurring review as a file. What should the administrator do?",
+      "options": [
+        "Open Review history, choose the instance, and download the results as a CSV file",
+        "Export the sign-in logs for the group owners and the audit logs for the review",
+        "Re-run the review and take a screenshot",
+        "Request the file from Microsoft support"
+      ],
+      "answer": 0,
+      "explanation": "Results of each completed instance are available from Review history, and the Download button produces a CSV file."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Auto apply wasn't enabled, and the review duration has ended. How do you apply the decisions?",
+      "options": [
+        "Select Reset on the instance, which applies the decisions again",
+        "Wait; results apply automatically after 7 days",
+        "Open Review history under Series, select the instance, and select Apply",
+        "Delete the review"
+      ],
+      "answer": 2,
+      "explanation": "Without auto apply, you apply results manually. Denied users are then removed within minutes, and the status moves through Applying to Result applied."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A review of an application whose access is granted through group assignments denies several users. What happens when results are applied?",
+      "options": [
+        "They are removed from the application and from every group that is assigned to it, losing all related access",
+        "The group assignment is removed from the application",
+        "Results can't be applied to applications",
+        "Members of the assigned groups aren't removed, so they keep access through the group"
+      ],
+      "answer": 3,
+      "explanation": "Reviews of applications that use group assignment don't remove members of those groups, so they retain access through the group relationship."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A recurring review has separate Current and Series settings. What is the difference?",
+      "options": [
+        "Changes under Current also apply to past instances and to the whole series, including future recurrences and reviewers",
+        "Changes under Series affect only the next recurrence",
+        "Changes under Current affect only the active instance, while changes under Series affect all future recurrences",
+        "There is no difference"
+      ],
+      "answer": 2,
+      "explanation": "Current updates apply to the running instance. Series updates apply to future recurrences, and fallback reviewers can't be removed once added."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Which roles can create access reviews for Microsoft Entra roles in Privileged Identity Management?",
+      "options": [
+        "Identity Governance Administrator or User Administrator",
+        "Security Administrator or Security Reader",
+        "Global Administrator or Privileged Role Administrator",
+        "Groups Administrator or Application Administrator"
+      ],
+      "answer": 2,
+      "explanation": "Reviews of Microsoft Entra roles require Global Administrator or Privileged Role Administrator, because role assignments are privileged."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "You review a Global Administrator role and want to include users who can only activate it on demand. Which assignment type scope should you choose?",
+      "options": [
+        "Eligible assignments, or all active and eligible assignments",
+        "Active assignments only, because eligible users can't use the role",
+        "Permanent assignments only",
+        "Only role-assignable groups"
+      ],
+      "answer": 0,
+      "explanation": "Eligible users can activate the role themselves, so reviewing eligible assignments matters. Choosing all active and eligible assignments covers every assignment."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "Where do you configure recurring reviews of access package assignments?",
+      "options": [
+        "On the catalog's settings page for all access packages in the catalog",
+        "In the Conditional Access policy for My Access",
+        "On the assignment policy of the access package in entitlement management",
+        "In the Authentication methods policy"
+      ],
+      "answer": 2,
+      "explanation": "Reviews of access package assignments are enabled when creating or editing an assignment policy, and each policy can have its own schedule."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "An access review of PIM for Groups uses group owners as reviewers. Which owners are assigned, and what is required?",
+      "options": [
+        "Eligible and active owners, with no fallback reviewer needed because both types are included",
+        "Only eligible owners, with a fallback reviewer optional",
+        "Only active owners are assigned, and at least one fallback reviewer must be specified",
+        "No owners; selected users are mandatory"
+      ],
+      "answer": 2,
+      "explanation": "In PIM for Groups reviews, only active owners are reviewers, and a fallback reviewer is mandatory because eligible owners aren't included."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A review of a team with shared channels includes B2B direct connect users. When are these users included?",
+      "options": [
+        "Only in multi-stage reviews",
+        "Only in single-stage reviews of the team; multi-stage reviews and All Microsoft 365 groups with guest users don't include them",
+        "In every review type, including All Microsoft 365 groups with guest users, multi-stage reviews and role reviews in PIM",
+        "Only when the guests review themselves"
+      ],
+      "answer": 1,
+      "explanation": "B2B direct connect users and teams are only included in single-stage reviews of the team, and not in reviews of all Microsoft 365 groups with guest users."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "In a team review, reviewers are set to Users review their own access. Who reviews the B2B direct connect users?",
+      "options": [
+        "Each B2B direct connect user reviews themselves in your tenant after accepting an invitation",
+        "Their managers in their home tenant",
+        "No one; they are skipped",
+        "The owner of the team, who receives an email asking them to review"
+      ],
+      "answer": 3,
+      "explanation": "B2B direct connect users can't review their own access in your tenant, so the team owner is asked to review them."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "A multi-stage review's first stage has all its decisions, but the stage duration hasn't ended. How can you move to the second stage sooner?",
+      "options": [
+        "Reset the review, which skips to the next stage immediately",
+        "Use Stop current stage on the Results page",
+        "Delete the first stage",
+        "Wait until the series ends"
+      ],
+      "answer": 1,
+      "explanation": "When decisions are in but the stage duration remains, Stop current stage triggers the next stage."
+    },
+    {
+      "topic": "access-reviews",
+      "q": "For access reviews of applications, what is the sign-in recommendation based on?",
+      "options": [
+        "The user's last sign-in to the tenant, interactive or non-interactive",
+        "The user's last password change",
+        "The user's last sign-in to the application, rather than to the tenant",
+        "The user's last MFA registration"
+      ],
+      "answer": 2,
+      "explanation": "For group reviews the 30-day recommendation uses tenant sign-ins, but application reviews use the user's last sign-in to the app."
+    }
+  ]
+}

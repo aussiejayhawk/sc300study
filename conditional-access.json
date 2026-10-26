@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "conditional-access",
+      "q": "Which license is required to use Conditional Access policies, and which additional license is needed to use Entra ID Protection risk conditions in them?",
+      "options": [
+        "Entra ID Free for policies, with Entra ID P1 and Microsoft Defender for Identity for risk conditions",
+        "Entra ID P2, with Entra ID Governance for risk conditions",
+        "Entra ID P1, with Microsoft Defender for Identity for risk conditions",
+        "Entra ID P1 (or Microsoft 365 Business Premium), with Entra ID P2 for risk conditions"
+      ],
+      "answer": 3,
+      "explanation": "Conditional Access needs Entra ID P1, and Microsoft 365 Business Premium includes it. Using user risk or sign-in risk from ID Protection in a policy requires Entra ID P2."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A user is in scope of two Conditional Access policies: one requires MFA and the other requires a compliant device. What must the user do?",
+      "options": [
+        "Satisfy only the policy that was created first",
+        "Satisfy both policies by completing MFA and using a compliant device",
+        "Satisfy only the more restrictive of the two policies",
+        "Satisfy either policy, because multiple policies are combined with OR"
+      ],
+      "answer": 1,
+      "explanation": "When several policies apply, all of their requirements must be satisfied, and a block in any policy overrides grants elsewhere. Assignments inside one policy are combined with AND."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Before enforcing a new policy that requires MFA for all users, an administrator wants to see which sign-ins would be affected without impacting anyone. What should the administrator do?",
+      "options": [
+        "Set the policy to Report-only and review the Report-only tab in the sign-in logs",
+        "Turn the policy On for a pilot group of users and monitor help desk tickets for failed sign-ins",
+        "Run the What If tool, which enforces the policy for a test user",
+        "Set the policy to Off and review the Conditional Access audit logs"
+      ],
+      "answer": 0,
+      "explanation": "Report-only mode evaluates policies for real sign-ins and records the result, but doesn't enforce controls. What If simulates a sign-in but doesn't show real traffic impact."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "When several grant requirements remain unsatisfied after phase 1 of policy evaluation, which control is the user prompted for first?",
+      "options": [
+        "Device marked as compliant",
+        "Terms of use",
+        "Multifactor authentication",
+        "Password change"
+      ],
+      "answer": 2,
+      "explanation": "After the block check in phase 2, users are prompted in a set order: MFA first, then compliant device, hybrid joined device, approved client app, app protection policy, password change, terms of use and custom controls."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A policy requires MFA for all users on all resources. Which accounts should you exclude to avoid a tenant-wide lockout if the policy is misconfigured?",
+      "options": [
+        "All Global Administrators and every user who holds a privileged role",
+        "The Microsoft Entra Connect server",
+        "Guest users",
+        "Emergency access (break-glass) accounts"
+      ],
+      "answer": 3,
+      "explanation": "Microsoft recommends excluding emergency access accounts from Conditional Access policies so administrators can recover from misconfigurations. Excluding all admins would defeat the purpose of the policy."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Which built-in role is the least-privileged option for creating and managing Conditional Access policies?",
+      "options": [
+        "Security Reader",
+        "Conditional Access Administrator",
+        "Authentication Policy Administrator",
+        "Application Administrator"
+      ],
+      "answer": 1,
+      "explanation": "Conditional Access Administrator can create and manage policies and named locations. Security Reader is read-only, and Authentication Policy Administrator manages the Authentication methods policy."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A policy requiring MFA is assigned to a security group. A user who already holds a valid token is then added to the group. What happens?",
+      "options": [
+        "The policy applies once the user gets a new token, because groups and roles are evaluated at token issuance",
+        "The policy applies immediately and prompts the user, because group membership is evaluated continuously",
+        "The policy never applies to users who were already signed in, even after a token refresh",
+        "The policy applies only after an administrator revokes the user's sessions manually"
+      ],
+      "answer": 0,
+      "explanation": "Policies that target groups or roles are evaluated when a token is issued, so existing tokens aren't affected retroactively. Microsoft recommends triggering evaluation at PIM role or group activation."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You need MFA for Exchange Online, SharePoint Online and Teams, and you want to avoid issues caused by service dependencies. How should you target them?",
+      "options": [
+        "Target Exchange Online only, because it covers the dependencies",
+        "Create a separate policy for each of the three apps",
+        "Target the Office 365 app group instead of individual apps",
+        "Target Microsoft Graph only"
+      ],
+      "answer": 2,
+      "explanation": "The Office 365 app grouping targets Microsoft 365 services together and avoids dependency gaps between related services, such as Teams relying on Exchange and SharePoint."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Security information registration must be allowed only from the corporate network. Which Conditional Access configuration should you use?",
+      "options": [
+        "Target All resources and require a compliant device from any location in the tenant",
+        "Target the Register security information user action, include any location, exclude trusted locations, and block access",
+        "Target the Microsoft Entra admin center and block access",
+        "Use security defaults with a country-based named location"
+      ],
+      "answer": 1,
+      "explanation": "The Register security information user action applies controls to the registration experience. Combining it with a location condition that excludes trusted locations and a block grant restricts registration to the corporate network."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Which grant control is the only one available when the target is the user action Register or join devices?",
+      "options": [
+        "Require device to be marked as compliant",
+        "Require Microsoft Entra hybrid joined device",
+        "Require app protection policy",
+        "Require multifactor authentication"
+      ],
+      "answer": 3,
+      "explanation": "For Register or join devices, only Require multifactor authentication is available, because other controls depend on a device identity that doesn't exist yet."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A policy that targets All resources excludes a single application. Which statement is correct?",
+      "options": [
+        "Certain low-privilege scopes, such as User.Read and basic profile scopes, are excluded from enforcement so applications keep working",
+        "All Microsoft Graph calls, including those that read mail and files, are excluded from enforcement",
+        "The exclusion is ignored for tokens that native clients request",
+        "The policy no longer applies to any other resource"
+      ],
+      "answer": 0,
+      "explanation": "When an app is excluded from an All resources policy, baseline scopes for reading profile and group information are also excluded to avoid blocking sign-in. This doesn't exempt broader data access."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A line-of-business resource doesn't appear in the Conditional Access app picker, and you must apply MFA to it. What are your options?",
+      "options": [
+        "Use security defaults for that resource only, because they can be scoped to single applications",
+        "Create a named location for the resource",
+        "Target All resources, or add the missing service principal and then target it",
+        "Nothing; resources that are missing from the picker can't be protected"
+      ],
+      "answer": 2,
+      "explanation": "Resources that aren't individually targetable can be covered with All resources, or you can add the missing service principal with Microsoft Graph or PowerShell so it can be selected."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You need stronger authentication only when users open specific sensitive SharePoint sites, not for the whole application. Which Conditional Access target should you use?",
+      "options": [
+        "The Office 365 app group",
+        "An authentication context",
+        "A user action",
+        "A filter for devices"
+      ],
+      "answer": 1,
+      "explanation": "Authentication contexts let apps such as SharePoint trigger Conditional Access only for specific sensitive resources or actions, adding protection without affecting the whole app."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Why do Conditional Access policies that require MFA or a compliant device effectively block legacy authentication clients?",
+      "options": [
+        "They always connect from untrusted locations and are therefore blocked by the default location policy",
+        "They don't support TLS 1.2",
+        "Exchange Online blocks them by default",
+        "They can't perform MFA or pass device state information"
+      ],
+      "answer": 3,
+      "explanation": "Legacy authentication clients don't support MFA and don't pass device state, so grant controls that depend on them can't be satisfied. A dedicated block policy is the clearest way to stop them."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You must block legacy authentication for all users except emergency access accounts. Which client apps selections should you make?",
+      "options": [
+        "Exchange ActiveSync clients and Other clients, with Block access",
+        "Browser and Mobile apps and desktop clients, with Block access",
+        "Exchange ActiveSync clients only, with Require MFA",
+        "Other clients only, with Require device to be marked as compliant"
+      ],
+      "answer": 0,
+      "explanation": "Legacy protocols fall under Exchange ActiveSync clients and Other clients. Because they can't satisfy MFA or device controls, the policy should use the Block grant."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A named location defined by countries must determine location by GPS coordinates instead of IP address. What is required?",
+      "options": [
+        "Users' devices must be Microsoft Entra joined and enrolled in Intune",
+        "Each user needs an Entra ID P2 license",
+        "Users must have the Microsoft Authenticator app installed on their mobile device",
+        "Each device needs the Global Secure Access client"
+      ],
+      "answer": 2,
+      "explanation": "GPS-based country locations rely on the Authenticator app reporting the device's location, which the system collects about every hour. Jailbroken devices aren't considered valid."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "What is the maximum number of IP ranges you can add to a single named location?",
+      "options": [
+        "195",
+        "2,000",
+        "500",
+        "5,000"
+      ],
+      "answer": 1,
+      "explanation": "A named location can hold up to 2,000 IP ranges, and you can configure up to 195 named locations. Only CIDR masks greater than /8 are allowed."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "An administrator marks the corporate public IP range as a trusted location. Which statement is correct?",
+      "options": [
+        "Policies can include or exclude it, and sign-ins from it improve ID Protection's risk accuracy",
+        "Trusted locations automatically skip MFA in every policy and every sign-in risk evaluation",
+        "A trusted location can be deleted at any time without other changes",
+        "Trusted locations apply only to Exchange Online"
+      ],
+      "answer": 0,
+      "explanation": "Trusted marking is a signal that policies can use and that ID Protection uses for risk calculation. A trusted location can't be deleted until you first remove the trusted designation."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A policy blocks access from every country except those where the company operates, but sign-ins from IP addresses that don't map to any country are still allowed. What should you select?",
+      "options": [
+        "Mark the country location as trusted and select Any location in the policy",
+        "Switch the location to a GPS-based country list",
+        "Add the IPv6 ranges to the named location",
+        "Include unknown countries/regions in the named location"
+      ],
+      "answer": 3,
+      "explanation": "Some IP addresses can't be mapped to a country or region. The Include unknown countries/regions option captures them so a country-based policy applies to them too."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Why shouldn't the device platform condition be your only control for blocking a platform?",
+      "options": [
+        "It supports only Windows and macOS, so other platforms can't be evaluated at all",
+        "It requires Entra ID P2",
+        "The platform is derived from information such as user agent strings, which can be changed",
+        "It applies only to guest users"
+      ],
+      "answer": 2,
+      "explanation": "Conditional Access identifies the platform from unverified information such as user agent strings, so combine it with stronger controls like device compliance."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You want to block access from any device platform other than Android, iOS, Windows, macOS and Linux, for example ChromeOS. How should you configure the policy?",
+      "options": [
+        "Include ChromeOS under device platforms and require MFA, because ChromeOS can be selected directly",
+        "Include any device, exclude the supported platforms, and set the grant control to Block",
+        "Use the Other clients condition with Block access",
+        "Include Linux and macOS and require an app protection policy"
+      ],
+      "answer": 1,
+      "explanation": "Unsupported platforms can't be selected directly, so you include any device, exclude the supported platforms, and block everything left."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A policy requires a compliant device for all users, but privileged access workstations tagged with a specific extension attribute must be exempt. Which condition should you use?",
+      "options": [
+        "A filter for devices that excludes devices matching the attribute rule",
+        "Device platforms set to exclude Windows, which exempts all workstations in the tenant",
+        "A named location for the workstation network",
+        "Client apps set to Browser"
+      ],
+      "answer": 0,
+      "explanation": "Filter for devices targets or excludes devices by attributes such as extension attributes, trust type or compliance, which fits exempting a tagged group of workstations."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Users may access an app from either a Microsoft Entra hybrid joined device or an Intune-compliant device. How should you configure the grant controls?",
+      "options": [
+        "Select both controls and choose Require all the selected controls, which is the default",
+        "Create two policies, each requiring one of the controls",
+        "Select Require multifactor authentication as the alternative",
+        "Select both controls and choose Require one of the selected controls"
+      ],
+      "answer": 3,
+      "explanation": "Within one policy, Require one of the selected controls is an OR. Two separate policies would both apply, so users would have to satisfy both."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A new policy must protect Exchange Online data on unmanaged iOS and Android devices. Which grant control does Microsoft recommend for new policies instead of Require approved client app?",
+      "options": [
+        "Require device to be marked as compliant only",
+        "Require Microsoft Entra hybrid joined device",
+        "Require app protection policy",
+        "Require terms of use"
+      ],
+      "answer": 2,
+      "explanation": "Microsoft is retiring Require approved client app, which moves to a read-only state after June 30, 2026, and recommends Require app protection policy for new policies."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You need a policy that makes users secure their account when ID Protection reports high user risk. Which configuration fits?",
+      "options": [
+        "Sign-in risk set to Low with Block access for all resources, which needs only Entra ID P1",
+        "User risk set to High with the grant control Require password change, which needs Entra ID P2",
+        "Device platform set to Windows with Require device to be marked as compliant",
+        "A location condition with Require terms of use"
+      ],
+      "answer": 1,
+      "explanation": "A user risk policy typically requires a password change (with MFA) for high risk. Using ID Protection risk conditions requires Entra ID P2."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Which statement about the Require Microsoft Entra hybrid joined device grant control is correct?",
+      "options": [
+        "It supports only domain-joined Windows devices and doesn't treat Edge InPrivate sessions as hybrid joined",
+        "It supports macOS and iOS devices that are registered in Microsoft Entra ID",
+        "It is satisfied by any Microsoft Entra registered device",
+        "It requires Entra ID P2"
+      ],
+      "answer": 0,
+      "explanation": "The control is limited to domain-joined Windows devices, both current and down-level, and an InPrivate session isn't recognized as hybrid joined."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Users on Chrome are repeatedly blocked by a policy that requires a compliant device, although their Windows PCs are compliant. What is needed for device-based Conditional Access in Chrome?",
+      "options": [
+        "A client certificate installed manually in every browser profile",
+        "Use InPrivate mode so device identity is ignored",
+        "Disable the device platform condition",
+        "Chrome 111 or later with the CloudApAuthEnabled policy enabled"
+      ],
+      "answer": 3,
+      "explanation": "Chrome must pass the device identity to Entra ID. Microsoft documents Chrome 111 or later with CloudApAuthEnabled enabled for device-based Conditional Access."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "When you select multiple grant controls in a Conditional Access policy, what is the default behavior?",
+      "options": [
+        "Require one of the selected controls",
+        "Require the first control that the user can satisfy",
+        "Require all the selected controls",
+        "Require only the control with the highest priority"
+      ],
+      "answer": 2,
+      "explanation": "The default is Require all the selected controls (AND). Switch to Require one of the selected controls when you want OR logic."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "What is the default sign-in frequency for users in Microsoft Entra ID?",
+      "options": [
+        "A fixed window of 30 days",
+        "A rolling window of 90 days",
+        "A rolling window of 24 hours",
+        "A rolling window of 180 days"
+      ],
+      "answer": 1,
+      "explanation": "By default, users are asked for credentials on a rolling 90-day window. The sign-in frequency session control can shorten or lengthen this for specific scenarios."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Contractors use personal PCs, and you don't want their browser sessions to survive closing the browser. Which session control should you use, and what must the policy target?",
+      "options": [
+        "Persistent browser session set to Never persistent, with All resources targeted",
+        "Sign-in frequency set to 90 days with Exchange Online targeted, which ends sessions at browser close",
+        "App enforced restrictions, with SharePoint Online targeted",
+        "Token protection, with the Browser client app selected"
+      ],
+      "answer": 0,
+      "explanation": "Persistent browser session controls whether the browser keeps the session after closing. It requires All resources, and it overrides the Stay signed in setting in company branding."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Users on unmanaged devices should have limited, view-only web access to SharePoint Online and Exchange Online. Which session control passes device information to those apps to restrict the experience?",
+      "options": [
+        "Sign-in frequency",
+        "Persistent browser session",
+        "Customize continuous access evaluation",
+        "Use app enforced restrictions"
+      ],
+      "answer": 3,
+      "explanation": "App enforced restrictions work only with Exchange Online and SharePoint Online, which use the passed device information to grant full or limited access."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You must block downloads of sensitive documents to unmanaged devices in non-Microsoft SaaS apps and monitor risky sessions. Which control should you use?",
+      "options": [
+        "App enforced restrictions, which cover all non-Microsoft SaaS apps",
+        "Token protection",
+        "Conditional Access App Control using Microsoft Defender for Cloud Apps",
+        "Sign-in frequency set to Every time"
+      ],
+      "answer": 2,
+      "explanation": "Conditional Access App Control routes sessions through Defender for Cloud Apps, which can block download, cut, copy and print, monitor risky behavior and require labeling. App enforced restrictions cover only Exchange and SharePoint."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Which of these is a critical event that continuous access evaluation can use to revoke access in near real time?",
+      "options": [
+        "A new application is added to the tenant",
+        "A user account is disabled or deleted",
+        "A device is renamed",
+        "A user's display name changes"
+      ],
+      "answer": 1,
+      "explanation": "CAE critical events include user disabled or deleted, password change or reset, MFA enabled, an admin revoking tokens, and elevated user risk. CAE sessions can use tokens valid up to 28 hours."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "CAE with strictly enforced location policies is enabled. Users behind a proxy whose egress IP differs between Entra ID and the resource provider lose access. What is the cause?",
+      "options": [
+        "Strict enforcement blocks access when the IP address the resource provider sees isn't in the allowed ranges",
+        "CAE doesn't support location policies, so the block comes from the proxy",
+        "Token lifetimes are limited to one hour for proxy users",
+        "The proxy IP addresses must be marked as unknown countries"
+      ],
+      "answer": 0,
+      "explanation": "With strict location enforcement, IP address mismatches between Entra ID and the resource provider, such as split-tunnel or proxy routing, can cause access to be denied."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Which statement about the token protection session control is correct?",
+      "options": [
+        "It protects browser sessions on any operating system and replaces refresh token protections",
+        "It requires only Entra ID Free",
+        "It supports native desktop applications and doesn't support browser-based applications",
+        "It replaces continuous access evaluation"
+      ],
+      "answer": 2,
+      "explanation": "Token protection binds sign-in session tokens to the device, and it applies to supported native apps accessing resources such as Exchange Online and SharePoint Online. It complements CAE rather than replacing it."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "You want a risky user to reauthenticate at every sign-in until they remediate. Which session control should the high user risk policy use?",
+      "options": [
+        "Persistent browser session set to Never",
+        "Sign-in frequency set to 1 hour",
+        "App enforced restrictions, which cover all non-Microsoft SaaS apps",
+        "Sign-in frequency set to Every time"
+      ],
+      "answer": 3,
+      "explanation": "Combining high user risk with Require password change and Sign-in frequency set to Every time forces reauthentication on each sign-in. Use Every time sparingly to avoid prompt fatigue."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "Which Conditional Access conditions require Microsoft Entra ID P2?",
+      "options": [
+        "User risk and sign-in risk from ID Protection",
+        "Device platforms and client apps",
+        "Network locations, filters for devices and device platforms combined",
+        "Authentication strengths and session controls"
+      ],
+      "answer": 0,
+      "explanation": "Risk-based conditions use Entra ID Protection and need P2. Platforms, client apps, locations and device filters work with P1."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A deployment pipeline's single-tenant service principal must be able to sign in only from known egress IP addresses. Which approach works?",
+      "options": [
+        "A policy for All users on All resources that requires MFA and a compliant device for each sign-in",
+        "A policy that targets the service principal directly as a workload identity, with Workload Identities Premium, blocking outside allowed locations",
+        "A policy assigned to a group that contains the service principal",
+        "A user-scoped policy that requires a compliant device"
+      ],
+      "answer": 1,
+      "explanation": "Conditional Access for workload identities needs Workload Identities Premium and must target single-tenant service principals directly, not through groups. Block is the only grant available, and managed identities aren't covered."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "A user reports being prompted for MFA unexpectedly. Which tool lets you simulate the sign-in and see which policies apply, including session controls?",
+      "options": [
+        "Report-only mode",
+        "The Authentication methods activity report",
+        "Conditional Access App Control",
+        "The What If tool"
+      ],
+      "answer": 3,
+      "explanation": "What If simulates a sign-in with chosen user, app and conditions and shows the policies and controls that would apply. Report-only evaluates real sign-ins instead."
+    },
+    {
+      "topic": "conditional-access",
+      "q": "An administrator accidentally deletes a Conditional Access policy. Which statement is correct?",
+      "options": [
+        "Deleted policies can't be recovered, so export the policy JSON before deleting",
+        "Deleted policies can be restored for 7 days",
+        "Deleted policies and named locations can be restored within a 30-day soft-delete period",
+        "Only Microsoft support can restore deleted policies"
+      ],
+      "answer": 2,
+      "explanation": "Conditional Access policies and named locations are soft-deleted for 30 days and can be restored in that window."
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "questions": [
+    {
+      "topic": "external-identities",
+      "q": "What is the default Guest user access setting in the external collaboration settings of a Microsoft Entra tenant?",
+      "options": [
+        "Guests have the same access as members",
+        "Guest access is restricted to their own directory objects only",
+        "Guests can enumerate all users and groups but cannot edit them",
+        "Guests have limited access to properties and memberships of directory objects"
+      ],
+      "answer": 3,
+      "explanation": "The default is limited access, which stops guests from enumerating users, groups and other directory resources. The most restrictive option confines them to their own profile, and the most inclusive gives them member-level access."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You want only User Administrators and a few trusted employees to be able to invite guests, without giving those employees an administrator role that has wider privileges. What should you do?",
+      "options": [
+        "Select 'Member users and users assigned to specific admin roles can invite guest users' and assign the Guest Inviter role",
+        "Select 'Only users assigned to specific admin roles can invite guest users' and assign the Guest Inviter role to the employees",
+        "Select 'No one in the organization can invite guest users including admins' and assign the Guest Inviter role",
+        "Keep the default invite setting and assign the Guest Inviter role"
+      ],
+      "answer": 1,
+      "explanation": "Guest Inviter lets individual users invite guests even when invitations are limited to admin roles. Letting all members invite, or blocking everyone, doesn't meet the requirement."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A company wants to invite guests only from the partner domains contoso.com, fabrikam.com and litware.com. Which setting should you configure?",
+      "options": [
+        "Collaboration restrictions set to allow invitations only to the specified domains",
+        "Collaboration restrictions set to deny invitations to the specified domains, listing every other domain",
+        "Guest user access restrictions set to the most restrictive option",
+        "Guest invite restrictions set to only users assigned to specific admin roles"
+      ],
+      "answer": 0,
+      "explanation": "An allow list in collaboration restrictions limits invitations to the listed domains. Guest user access controls what guests can see, and invite restrictions control who can invite."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which statement about allow and block lists for B2B invitations is correct?",
+      "options": [
+        "You can configure both lists, and the allow list takes precedence",
+        "Existing guests from a newly blocked domain are removed automatically",
+        "You can configure either an allow list or a block list but not both, and switching discards the existing list",
+        "The list also restricts file sharing in SharePoint and OneDrive"
+      ],
+      "answer": 2,
+      "explanation": "Only one type of list is allowed per organization, and switching types discards the current configuration. The list works independently from SharePoint and OneDrive domain lists and doesn't affect users who already redeemed."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A block list for gmail.com is saved. One Gmail guest redeemed an invitation last month, and another Gmail invitation is still pending. What happens?",
+      "options": [
+        "Both guests lose access immediately",
+        "Both guests keep access and the pending invitation can still be redeemed",
+        "The redeemed guest is blocked, but the pending invitation can still be redeemed",
+        "The redeemed guest keeps access, but the pending invitation can't be redeemed"
+      ],
+      "answer": 3,
+      "explanation": "The domain list doesn't apply to external users who already redeemed their invitations. A pending invitation to a blocked domain fails when the user tries to redeem it."
+    },
+    {
+      "topic": "external-identities",
+      "q": "An administrator finds that the option 'Allow external users to remove themselves from your organization' is unavailable in external collaboration settings. What is the cause?",
+      "options": [
+        "Privacy information hasn't been added to the tenant",
+        "The tenant lacks Entra ID P2 licensing",
+        "The setting can be changed only by using Microsoft Graph",
+        "Guest invite restrictions are set to no one can invite"
+      ],
+      "answer": 0,
+      "explanation": "External user leave settings can be configured only after privacy information has been added to the tenant properties. Otherwise the setting stays unavailable."
+    },
+    {
+      "topic": "external-identities",
+      "q": "What are the initial default cross-tenant access settings for B2B collaboration and B2B direct connect?",
+      "options": [
+        "Both are blocked until an administrator enables them",
+        "Both are enabled for every external Microsoft Entra organization",
+        "B2B collaboration is enabled in both directions, and B2B direct connect is blocked",
+        "B2B collaboration is blocked inbound only, and B2B direct connect is enabled"
+      ],
+      "answer": 2,
+      "explanation": "By default, B2B collaboration with other Entra organizations is enabled and B2B direct connect is blocked in both directions. MFA and device claims from other organizations are also not trusted by default."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Contoso wants Fabrikam users to use Contoso Teams shared channels without being created as guests. Both tenants use the default cross-tenant access settings. What is required?",
+      "options": [
+        "Contoso must invite each Fabrikam user as a guest",
+        "Contoso must allow inbound and Fabrikam must allow outbound B2B direct connect for each other's organization",
+        "Contoso must enable inbound B2B direct connect, and Fabrikam needs no changes",
+        "Fabrikam must enable cross-tenant synchronization into Contoso"
+      ],
+      "answer": 1,
+      "explanation": "B2B direct connect is built on mutual trust, so both organizations must configure it in their organizational settings. Allowing it on only one side doesn't enable sharing."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Partner users always complete MFA in their home tenant, but your Conditional Access policy requires MFA for guests, so they are prompted twice. What should you configure?",
+      "options": [
+        "Outbound access settings that allow the partner's users",
+        "An allow list that includes the partner's domain",
+        "Guest user access set to the most restrictive option",
+        "Inbound trust settings for the partner organization that accept MFA claims"
+      ],
+      "answer": 3,
+      "explanation": "Inbound trust settings let your Conditional Access policies accept MFA claims already satisfied in the partner's home tenant. Your MFA policy still applies, but users aren't challenged again."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which built-in role is the least-privileged option for configuring cross-tenant access settings?",
+      "options": [
+        "Security Administrator",
+        "Guest Inviter",
+        "Application Administrator",
+        "Groups Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Microsoft documents at least Security Administrator (or a custom role) for managing cross-tenant access settings. Guest Inviter only allows inviting guests."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You plan to configure trust settings and apply cross-tenant access settings to specific users, groups and applications of a partner. Which license is required?",
+      "options": [
+        "Microsoft Entra ID P2 in both tenants",
+        "No license, because these are Free features",
+        "Microsoft Entra ID P1 in the tenant that you configure",
+        "Microsoft Entra ID Governance in the partner tenant"
+      ],
+      "answer": 2,
+      "explanation": "Trust settings and user, group or application scoping need Entra ID P1 in the tenant being configured. For B2B direct connect, which needs mutual trust, both tenants need P1."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which statement about default and organizational cross-tenant access settings is correct?",
+      "options": [
+        "Default settings always override organizational settings",
+        "Organizational settings take precedence over default settings for that organization",
+        "Organizational settings can be added for up to 100 organizations only",
+        "Organizational settings apply only to B2B direct connect"
+      ],
+      "answer": 1,
+      "explanation": "Default settings apply to every external organization that has no custom entry, and organizational settings override them. There is no limit to the number of organizations you can add."
+    },
+    {
+      "topic": "external-identities",
+      "q": "An administrator tries to block inbound access for all external users and groups in cross-tenant access settings, while leaving access to all applications allowed. What happens?",
+      "options": [
+        "The configuration is rejected with a warning, because user and group settings can't conflict with application settings",
+        "It is saved, and the application setting overrides the user setting",
+        "It is saved, and the user setting overrides the application setting",
+        "It is saved but applies only to B2B direct connect"
+      ],
+      "answer": 0,
+      "explanation": "Access settings for users and groups must match those for applications, and conflicting settings aren't allowed. Blocking all external users inbound requires blocking all applications as well."
+    },
+    {
+      "topic": "external-identities",
+      "q": "When default cross-tenant access is blocked for applications, partner users can't complete MFA registration in your tenant. Which application must be allowed so MFA registration can work?",
+      "options": [
+        "Microsoft Graph",
+        "Azure Portal",
+        "Office 365 Exchange Online",
+        "Microsoft App Access Panel (0000000c-0000-0000-c000-000000000000)"
+      ],
+      "answer": 3,
+      "explanation": "Conditional Access policies that require MFA can prevent MFA registration unless the Microsoft App Access Panel is allowed in the outbound (home tenant) and inbound (resource tenant) settings. The Entra Terms of Use app must be allowed similarly for ToU consent."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You want corporate Windows devices to block sign-ins with accounts from unknown tenants and also protect against token infiltration, without relying on a corporate proxy. What should you use?",
+      "options": [
+        "A tenant restrictions v2 policy signaled only by corporate proxy header injection",
+        "A tenant restrictions v2 policy signaled to the devices by Windows Group Policy",
+        "A tenant restrictions v1 allowlist on the corporate proxy",
+        "Outbound cross-tenant access settings that block all external organizations"
+      ],
+      "answer": 1,
+      "explanation": "Windows Group Policy signaling supports both authentication plane and data plane protection, as does universal tenant restrictions through Global Secure Access. Proxy header injection gives authentication plane protection only, and outbound settings are independent of tenant restrictions."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Contoso wants to synchronize its users into Fabrikam by using cross-tenant synchronization. Where is the synchronization configuration created, and what must Fabrikam do?",
+      "options": [
+        "It's created in Fabrikam, the target tenant, and Contoso must allow outbound synchronization",
+        "It's created in either tenant, and the other tenant needs no changes",
+        "It's created in Contoso, the source tenant, and Fabrikam must allow inbound user synchronization in its cross-tenant access settings",
+        "It's created in Contoso, and Fabrikam must install a provisioning agent"
+      ],
+      "answer": 2,
+      "explanation": "Cross-tenant synchronization is configured in the source tenant. The target tenant must select 'Allow user synchronization into this tenant' in its inbound cross-tenant sync settings."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which cross-tenant access setting is required for cross-tenant synchronization so synchronized users don't see a consent prompt?",
+      "options": [
+        "Automatic redemption, selected on the source tenant (outbound) and the target tenant (inbound)",
+        "Trusting MFA claims in the target tenant",
+        "Setting guest user access to the same access as members",
+        "Enabling email one-time passcode in the source tenant"
+      ],
+      "answer": 0,
+      "explanation": "Automatic redemption is required for cross-tenant synchronization. The consent prompt and invitation email are suppressed only when it is selected on both sides."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which licensing requirement applies to the source tenant when you use cross-tenant synchronization in the same Microsoft cloud?",
+      "options": [
+        "Microsoft Entra ID P2 for each administrator in the target tenant",
+        "Microsoft Entra ID Governance for every user in the target tenant",
+        "No license is needed in either tenant",
+        "Microsoft Entra ID P1 for each user who is synchronized"
+      ],
+      "answer": 3,
+      "explanation": "Each synchronized user needs an Entra ID P1 license in the source (home) tenant. The target tenant uses the External ID MAU billing model."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Fabrikam, the target tenant, has only Entra ID Free licenses and wants to enable automatic redemption for users synchronized from Contoso. What is required?",
+      "options": [
+        "Microsoft Entra ID P1 licenses for every synchronized user in the target tenant",
+        "At least one Microsoft Entra ID P1 license in the target tenant",
+        "A Microsoft Entra ID Governance license in the target tenant",
+        "Nothing, because automatic redemption is free in every tenant"
+      ],
+      "answer": 1,
+      "explanation": "The target tenant needs at least one Entra ID P1 license to enable automatic redemption, and it is billed for synchronized external users under the monthly active user model. The per-user P1 requirement is in the source tenant."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Contoso plans to use cross-tenant synchronization to provision both its employees and its guest users into Fabrikam. What is the limitation?",
+      "options": [
+        "Only guest users can be provisioned",
+        "Any user type can be provisioned if the target allows it",
+        "Only internal member users from the source tenant can be provisioned, not guests",
+        "Only users who hold a Microsoft Entra role can be provisioned"
+      ],
+      "answer": 2,
+      "explanation": "Cross-tenant synchronization provisions only internal member users of the source tenant into the target tenant. Guests in the source tenant aren't synchronized."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A team asks to change how often cross-tenant synchronization runs to every 5 minutes. What should you tell them?",
+      "options": [
+        "You can set the interval to 5 minutes in the synchronization configuration",
+        "You can set it only by using Microsoft Graph PowerShell",
+        "It runs only when you start provisioning on demand",
+        "The provisioning interval is fixed and can't be configured"
+      ],
+      "answer": 3,
+      "explanation": "Cross-tenant synchronization is based on the Entra provisioning engine, and the time between cycles isn't configurable. On-demand provisioning can be used to test a single user."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A partner wants its employees to sign in with their Google Workspace corporate accounts when they redeem invitations to your tenant. Which federation option should you use?",
+      "options": [
+        "SAML/WS-Fed identity provider federation for the partner's domain",
+        "Google federation",
+        "Email one-time passcode federation",
+        "Cross-tenant synchronization"
+      ],
+      "answer": 0,
+      "explanation": "Google federation is designed specifically for Gmail users. To federate with Google Workspace domains, use SAML/WS-Fed identity provider federation."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You set up SAML/WS-Fed federation with a partner that has its own identity provider but no Microsoft Entra presence. What must you still create for the partner's users?",
+      "options": [
+        "Nothing, because federated users get access automatically",
+        "Local member accounts with passwords",
+        "B2B guest accounts in your directory, by inviting them",
+        "A cross-tenant synchronization configuration"
+      ],
+      "answer": 2,
+      "explanation": "Federation provides the authentication path but doesn't replace the need for B2B guest accounts. The partner's users still need to be invited and must redeem their invitations."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which role is the least-privileged option for setting up federation with Google, Facebook or a SAML/WS-Fed identity provider?",
+      "options": [
+        "Guest Inviter",
+        "External Identity Provider Administrator",
+        "Application Administrator",
+        "User Administrator"
+      ],
+      "answer": 1,
+      "explanation": "Microsoft documents at least the External Identity Provider Administrator role for configuring these identity providers."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You want guests who lack a Microsoft Entra account to authenticate with an emailed passcode instead of creating or using a Microsoft account. What should you do?",
+      "options": [
+        "Disable Microsoft account as a fallback identity provider in the redemption order, and keep email one-time passcode enabled",
+        "Add consumer email domains to a block list",
+        "Remove Google federation",
+        "Restrict guest invitations to admin roles"
+      ],
+      "answer": 0,
+      "explanation": "Configurable redemption lets you turn off the Microsoft account fallback. At least one fallback identity provider must always remain active, so email one-time passcode must stay enabled."
+    },
+    {
+      "topic": "external-identities",
+      "q": "After you disable Microsoft accounts as a fallback identity provider, what happens to existing guests who already sign in with Microsoft accounts?",
+      "options": [
+        "They are blocked immediately",
+        "They are switched automatically to one-time passcode at the next sign-in",
+        "They must be deleted and reinvited",
+        "They keep signing in with Microsoft accounts until you reset their redemption status"
+      ],
+      "answer": 3,
+      "explanation": "The new redemption settings apply to new redemptions. Existing guests continue as before until their redemption status is reset."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A tenant administrator asks whether guests can still sign in when they have no Microsoft Entra, Google or federated account. Which statement about email one-time passcode is correct?",
+      "options": [
+        "It must be enabled separately for each guest user",
+        "It is turned on by default for new tenants and authenticates guests who can't use other methods",
+        "It replaces SAML federation for users in federated domains",
+        "It is available only to tenants with Entra ID P1"
+      ],
+      "answer": 1,
+      "explanation": "Email one-time passcode is a fallback for guests who can't be authenticated through other means and is on by default for new tenants. It doesn't replace federation for federated domains."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A guest opens a direct link to your app but signs in with an alias of the email address that was invited, and redemption fails. What should the guest do?",
+      "options": [
+        "Create a new Microsoft account with the alias",
+        "Ask an administrator to convert the guest to a member",
+        "Use the redemption link in the original invitation email",
+        "Wait for Google federation to be enabled"
+      ],
+      "answer": 2,
+      "explanation": "Guests who use an alias of the invited email address must redeem through the redemption link in the invitation email. Direct-link redemption doesn't handle aliases."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A company needs to invite 200 partner users as guests at once from the Microsoft Entra admin center. What should the administrator do?",
+      "options": [
+        "Use Bulk invite users with the downloaded CSV template and keep its version row and columns",
+        "Upload a CSV that adds custom columns such as department",
+        "Create a self-service sign-up user flow for the 200 users",
+        "Configure cross-tenant synchronization with the partner"
+      ],
+      "answer": 0,
+      "explanation": "Bulk invite uses a CSV template whose first row holds the version number. Extra columns are ignored, so stay with the template and download the latest version."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which Microsoft Graph invitation property lets you reinvite a guest while retaining their object ID, group memberships and app assignments?",
+      "options": [
+        "sendInvitationMessage set to true",
+        "invitedUserType set to Member",
+        "inviteRedirectUrl set to the app's URL",
+        "resetRedemption set to true"
+      ],
+      "answer": 3,
+      "explanation": "Setting resetRedemption to true resets the redemption status of an existing guest. It requires the existing user's ID in the request."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A developer calls the Microsoft Graph invitations API with only the invitee's email address. Which statement is correct?",
+      "options": [
+        "The user is created as a Member by default",
+        "Inviting as Member requires only the Guest Inviter role",
+        "The user is created as a Guest by default, and inviting as Member requires a company administrator",
+        "External users can never be invited as Member"
+      ],
+      "answer": 2,
+      "explanation": "invitedUserType defaults to Guest. An administrator with sufficient rights can invite the user as Member, but Guest Inviter doesn't grant that."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which built-in role lets a user invite guests while having little other privilege?",
+      "options": [
+        "Reports Reader",
+        "Guest Inviter",
+        "Security Reader",
+        "Directory Readers"
+      ],
+      "answer": 1,
+      "explanation": "Guest Inviter is designed for inviting guests without giving a higher-privileged administrator role. It works even when invitations are limited to admin roles."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A guest changed their email address and can no longer redeem the original invitation. Which role can reset the guest's redemption status, among these?",
+      "options": [
+        "Helpdesk Administrator",
+        "Guest Inviter",
+        "Groups Administrator",
+        "Security Administrator"
+      ],
+      "answer": 0,
+      "explanation": "Microsoft lists Helpdesk Administrator or User Administrator as the least-privileged roles for resetting redemption status. Guest Inviter allows inviting but not resetting."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You want to give guests a direct link to an application instead of an invitation email, and the link must take them to your tenant. What should the link include?",
+      "options": [
+        "A one-time passcode",
+        "The guest's home tenant ID",
+        "Your tenant ID or domain name",
+        "The ID of the guest's sponsor"
+      ],
+      "answer": 2,
+      "explanation": "Use a tenant-specific URL so guests are directed to your tenant. Without it, they might land in their home tenant or the global endpoint."
+    },
+    {
+      "topic": "external-identities",
+      "q": "How are external guests in a workforce tenant billed for Microsoft Entra External ID?",
+      "options": [
+        "One Microsoft Entra ID P1 license per guest account",
+        "By monthly active users, with the first 50,000 free, and the tenant must be linked to an Azure subscription",
+        "A fixed fee per invitation sent",
+        "Free for every premium feature, without a subscription"
+      ],
+      "answer": 1,
+      "explanation": "External ID uses the monthly active user (MAU) billing model, and its core offering is free for the first 50,000 MAU. The workforce tenant must be linked to an Azure subscription for correct billing."
+    },
+    {
+      "topic": "external-identities",
+      "q": "Which guest features are not covered by the 50,000 free MAU allowance?",
+      "options": [
+        "Conditional Access for guests",
+        "Entra ID Protection for guests",
+        "Multifactor authentication for guests",
+        "Entra ID Governance for guests and Global Secure Access for guests"
+      ],
+      "answer": 3,
+      "explanation": "The free allowance applies to external users using Entra ID P1 and P2 features. It doesn't extend to Entra ID Governance for guests or Global Secure Access for guests."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You need a Conditional Access policy that requires MFA only for B2B collaboration guest users, not for employees. How should you scope the policy?",
+      "options": [
+        "Include Guest or external users and select the B2B collaboration guest users type",
+        "Include All users and exclude the Guest Inviter role",
+        "Include a dynamic group of users whose userType is Member",
+        "Include directory roles that contain B2B guest users"
+      ],
+      "answer": 0,
+      "explanation": "The Guest or external users selector lets you target user types such as B2B collaboration guest users, B2B collaboration member users, B2B direct connect users and service provider users."
+    },
+    {
+      "topic": "external-identities",
+      "q": "A Conditional Access policy requires a compliant device for all users. Guests are blocked even though their own organization manages their devices. How should you resolve this?",
+      "options": [
+        "Require guests to enroll their devices in your Intune tenant",
+        "Trust the partner's compliant-device claims in cross-tenant settings, or exclude those guests from the policy",
+        "Add the guests to a role-assignable group",
+        "Enable email one-time passcode for the guests"
+      ],
+      "answer": 1,
+      "explanation": "Your tenant can't evaluate compliance of a partner's devices, so access is blocked unless you trust the partner's device claims or exclude the guests from the device-based policy."
+    },
+    {
+      "topic": "external-identities",
+      "q": "You enabled MFA trust for a partner, but its users still can't meet access requirements, and a Microsoft Entra ID Protection MFA registration policy includes all users. What should you do?",
+      "options": [
+        "Disable MFA trust for the partner",
+        "Require partner users to register MFA in your tenant",
+        "Exclude external users from the ID Protection MFA registration policy",
+        "Increase the sign-in frequency for guests"
+      ],
+      "answer": 2,
+      "explanation": "Microsoft advises excluding external users from the ID Protection MFA registration policy when you trust their MFA. When both exist, external users can't satisfy the requirements."
+    },
+    {
+      "topic": "external-identities",
+      "q": "What happens in your directory when a partner's user accesses a Teams shared channel through B2B direct connect?",
+      "options": [
+        "A guest user object is created",
+        "A member user object is created",
+        "A contact object is created",
+        "No user object is created, because the user authenticates entirely through their home organization"
+      ],
+      "answer": 3,
+      "explanation": "B2B direct connect lets users access shared resources, such as Teams shared channels, without being added to your directory as guests."
+    }
+  ]
+}
