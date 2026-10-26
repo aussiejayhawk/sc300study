@@ -1,0 +1,56 @@
+I'm studying for the Microsoft SC-300 (Identity and Access Administrator) exam. I need you to write a large pool of original practice questions as JSON files for a study app I use.
+
+SOURCES
+First, read the current official SC-300 study guide ("skills measured") and the relevant Microsoft Learn / Entra documentation, and base every question on what the docs currently say. Entra features, licensing and portal names change often, so use current terminology (Microsoft Entra ID, not Azure AD). Do not reproduce or imitate real exam or braindump questions; write original ones.
+
+OUTPUT FORMAT
+Produce one JSON file per topic (downloadable file if you can, otherwise a single code block per topic). Each file must be valid JSON in exactly this shape, with no comments and no extra keys:
+
+{
+  "questions": [
+    {
+      "topic": "<topic id from the list below>",
+      "q": "Question text?",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "answer": 1,
+      "explanation": "Why the correct option is right and, briefly, why the most tempting wrong option is wrong."
+    }
+  ]
+}
+
+Rules for the fields:
+- "answer" is the ZERO-BASED index of the correct option (0 = first option).
+- Exactly 4 options per question, exactly one correct.
+- "topic" must be exactly one of these ids:
+  hybrid-identity-sync
+  groups-and-administrative-units
+  external-identities
+  mfa-and-authentication-methods
+  sspr-and-password-protection
+  conditional-access
+  identity-protection
+  app-registrations-and-consent
+  managed-identities
+  entitlement-management
+  access-reviews
+  privileged-identity-management
+- Do NOT include "domains" or "topics" keys; the app already has them.
+- Use plain text only: no markdown, no HTML, and straight quotes escaped properly for JSON.
+
+QUALITY BAR
+- Write 40 questions per topic (480 total), starting with the first topic and continuing in the order listed. If you hit a length limit, stop at a clean file boundary and tell me which topic to resume from.
+- Roughly 60% scenario-based ("A company has... You need to... What should you do?"), 25% "which feature/setting/role/licence" questions, 15% concept or troubleshooting questions.
+- Distractors must be plausible: real Entra features or settings that are close but wrong for the scenario, not obviously silly options.
+- Spread the correct answer evenly across positions 0-3 within each file. Don't let it cluster.
+- Cover the full breadth of each topic: licensing requirements (Free/P1/P2/Governance), required admin roles and least privilege, limits and gotchas, portal vs PowerShell/Graph where relevant, and common misconceptions.
+- Vary difficulty: about 30% easy, 50% medium, 20% hard.
+- No two questions in a file may test the exact same fact. Question text must be unique, since the app de-duplicates on it.
+- Keep each explanation to 1-3 sentences, and make it teach the concept, not just restate the answer.
+
+SELF-CHECK BEFORE YOU FINISH EACH FILE
+1. The JSON parses.
+2. Every "answer" index is valid for its options.
+3. Every "topic" id is from the list.
+4. Facts match current Microsoft documentation. Remove or fix anything you are unsure about instead of guessing.
+
+Start with the topic hybrid-identity-sync.
