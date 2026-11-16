@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Implement authentication and access management",
+      "weight": 0.275
+    }
+  ],
+  "topics": [
+    {
+      "id": "mfa-and-authentication-methods",
+      "name": "MFA and authentication methods",
+      "domain": "Implement authentication and access management",
+      "url": "https://learn.microsoft.com/entra/identity/authentication/concept-authentication-methods",
+      "tip": "Review authentication methods policy, strengths, registration campaigns, FIDO2, passkeys and Authenticator."
+    }
+  ],
   "questions": [
     {
       "topic": "mfa-and-authentication-methods",

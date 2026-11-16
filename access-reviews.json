@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Plan and implement identity governance",
+      "weight": 0.225
+    }
+  ],
+  "topics": [
+    {
+      "id": "access-reviews",
+      "name": "Access reviews",
+      "domain": "Plan and implement identity governance",
+      "url": "https://learn.microsoft.com/entra/id-governance/access-reviews-overview",
+      "tip": "Review review scopes, reviewers, auto-apply and recommendations, and licensing."
+    }
+  ],
   "questions": [
     {
       "topic": "access-reviews",

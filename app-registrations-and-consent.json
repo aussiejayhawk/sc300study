@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Plan and implement workload identities",
+      "weight": 0.225
+    }
+  ],
+  "topics": [
+    {
+      "id": "app-registrations-and-consent",
+      "name": "App registrations and consent",
+      "domain": "Plan and implement workload identities",
+      "url": "https://learn.microsoft.com/entra/identity-platform/quickstart-register-app",
+      "tip": "Review app vs service principal, permission types, admin consent workflow, and consent policies."
+    }
+  ],
   "questions": [
     {
       "topic": "app-registrations-and-consent",

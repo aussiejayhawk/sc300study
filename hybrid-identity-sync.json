@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Implement identities in Microsoft Entra ID",
+      "weight": 0.275
+    }
+  ],
+  "topics": [
+    {
+      "id": "hybrid-identity-sync",
+      "name": "Hybrid identity and sync",
+      "domain": "Implement identities in Microsoft Entra ID",
+      "url": "https://learn.microsoft.com/entra/identity/hybrid/connect/whatis-azure-ad-connect-v2",
+      "tip": "Review Entra Connect Sync vs Cloud Sync, sign-in methods (PHS, PTA, federation), sync scope and filtering, and writeback."
+    }
+  ],
   "questions": [
     {
       "topic": "hybrid-identity-sync",

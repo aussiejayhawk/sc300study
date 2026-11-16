@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Implement authentication and access management",
+      "weight": 0.275
+    }
+  ],
+  "topics": [
+    {
+      "id": "identity-protection",
+      "name": "Identity Protection",
+      "domain": "Implement authentication and access management",
+      "url": "https://learn.microsoft.com/entra/id-protection/overview-identity-protection",
+      "tip": "Review user and sign-in risk, risk-based policies, remediation, and risk detections by licence."
+    }
+  ],
   "questions": [
     {
       "topic": "identity-protection",

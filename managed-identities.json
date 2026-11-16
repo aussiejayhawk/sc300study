@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Plan and implement workload identities",
+      "weight": 0.225
+    }
+  ],
+  "topics": [
+    {
+      "id": "managed-identities",
+      "name": "Managed identities",
+      "domain": "Plan and implement workload identities",
+      "url": "https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview",
+      "tip": "Review system- vs user-assigned identities, lifecycle, role assignment, and token acquisition."
+    }
+  ],
   "questions": [
     {
       "topic": "managed-identities",

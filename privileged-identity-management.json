@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Plan and implement identity governance",
+      "weight": 0.225
+    }
+  ],
+  "topics": [
+    {
+      "id": "privileged-identity-management",
+      "name": "Privileged Identity Management",
+      "domain": "Plan and implement identity governance",
+      "url": "https://learn.microsoft.com/entra/id-governance/privileged-identity-management/pim-configure",
+      "tip": "Review eligible vs active, activation settings, approval, PIM for Groups, and alerts."
+    }
+  ],
   "questions": [
     {
       "topic": "privileged-identity-management",

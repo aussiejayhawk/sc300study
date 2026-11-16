@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Implement identities in Microsoft Entra ID",
+      "weight": 0.275
+    }
+  ],
+  "topics": [
+    {
+      "id": "groups-and-administrative-units",
+      "name": "Groups and administrative units",
+      "domain": "Implement identities in Microsoft Entra ID",
+      "url": "https://learn.microsoft.com/entra/identity/role-based-access-control/administrative-units",
+      "tip": "Review group types, dynamic membership rules, role-assignable groups, and scoping roles with administrative units."
+    }
+  ],
   "questions": [
     {
       "topic": "groups-and-administrative-units",

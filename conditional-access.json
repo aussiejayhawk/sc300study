@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Implement authentication and access management",
+      "weight": 0.275
+    }
+  ],
+  "topics": [
+    {
+      "id": "conditional-access",
+      "name": "Conditional Access",
+      "domain": "Implement authentication and access management",
+      "url": "https://learn.microsoft.com/entra/identity/conditional-access/overview",
+      "tip": "Review signals, grant and session controls, report-only mode, named locations, and policy conflicts."
+    }
+  ],
   "questions": [
     {
       "topic": "conditional-access",

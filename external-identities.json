@@ -1,4 +1,19 @@
 {
+  "domains": [
+    {
+      "name": "Implement identities in Microsoft Entra ID",
+      "weight": 0.275
+    }
+  ],
+  "topics": [
+    {
+      "id": "external-identities",
+      "name": "External Identities (B2B)",
+      "domain": "Implement identities in Microsoft Entra ID",
+      "url": "https://learn.microsoft.com/entra/external-id/what-is-b2b",
+      "tip": "Review B2B collaboration vs direct connect, cross-tenant access settings, invitation settings, and guest lifecycle."
+    }
+  ],
   "questions": [
     {
       "topic": "external-identities",
